@@ -68,6 +68,11 @@ namespace mg_edit
             }
         }
 
+        // Gets all positions for entity
+        public List<(double, double)> GetPositions()
+        {
+            return positions;
+        }
 
         // Set spawning tick
         public void SetSpawningTick(int spawningTick)
