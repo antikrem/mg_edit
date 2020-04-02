@@ -77,6 +77,101 @@ namespace mg_edit
 
         }
 
+        // Expands a template line
+        private string ExpandTemplate(string line)
+        {
+            var vec = line.Split(' ');
+
+            string body = this.templates[vec[0].Substring(1)];
+
+            for (int i = 1; i < vec.Length; i++)
+            {
+                body = body.Replace("%" + i.ToString(), vec[i]);
+            }
+
+            return body;
+        }
+
+        // Loads level's load table as string, with all comments removed and templates expanded
+        public string GetLevelLoadTable()
+        {
+            string loadTable = "";
+
+            using (StreamReader file = new StreamReader(targetFolder + LOAD_TABLE_FILE))
+            {
+                string ln;
+
+                while ((ln = file.ReadLine()) != null)
+                {
+                    // Trim string, indenting is irrelevent
+                    ln = ln.Trim();
+
+                    // Ignore empty string
+                    if (ln.Length == 0)
+                    {
+                        // Pass
+                    }
+                    // Ignore comment
+                    else if (ln.Length >= 2 && ln[0] == '/' && ln[1] == '/')
+                    {
+                        // Pass
+                    }
+                    else if (ln[0] == '#')
+                    {
+                        loadTable = loadTable + this.ExpandTemplate(ln) + "\n";
+                    }
+                    else
+                    {
+                        loadTable = loadTable + ln + "\n";
+                    }
+
+                }
+
+            }
+
+            return loadTable;
+        }
+
+        // Loads entities 
+        public void LoadEntities()
+        {
+            // Get level's load table
+            var loadTable = GetLevelLoadTable().Split('\n');
+
+            // Variables used in parsing
+            List<int> cycles = new List<int>();
+            // List of entities being updated
+            List<Entity> ents = new List<Entity>();
+
+            foreach (string line in loadTable)
+            {
+                var vec = line.Split('\n');
+
+                // Look for starting cycle 
+                if (line.StartsWith("@cycle"))
+                {
+                    cycles.Clear();
+                    for (int i = 0; i < vec.Length; i++)
+                    {
+                        cycles.Add(Int32.Parse(vec[i]));
+                    }
+                }
+                // Look for an ent declaration
+                else if (line.StartsWith("ent"))
+                {
+
+                }
+                // Sets flags on which component to update
+                else if (line.StartsWith("+"))
+                {
+
+                }
+                // Conduct update to component
+
+
+            }
+        }
+
         // Constructor sets the target folder
         private LoadParser(string targetFolder)
         {
