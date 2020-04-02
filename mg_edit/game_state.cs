@@ -17,6 +17,8 @@ namespace mg_edit
         static public double GAMESPACE_HEIGHT = 1080;
         static public double GAMESPACE_PADDING = 200;
 
+        // Default load location for levels
+
         // Current tick
         int tick = 0;
 
@@ -34,14 +36,38 @@ namespace mg_edit
                 );
         }
 
+        // Updates this gamestate to represent a level
+        // returns false on failture
+        public bool LoadLevel(string level)
+        {
+            LoadParser loader = LoadParser.CreateLevelLoader(level);
+
+            // Check for bad loader
+            if (loader is null)
+            {
+                goto load_fail;
+            }
+
+            // Load all templates
+            loader.LoadTemplates();
+
+            // Sucessfully loaded
+            return true;
+
+        load_fail:
+            Console.WriteLine("Failed to load level " + level);
+            return false;
+            
+        }
+
         // Private constructor
         private GameState()
         {
-
+            this.LoadLevel("level/");
         }
 
         // Accessor for singleton instance
-        public GameState Get()
+        public static GameState Get()
         {
             if (instance == null)
             {
