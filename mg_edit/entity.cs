@@ -16,7 +16,7 @@ namespace mg_edit
         private int spawningTick = 0;
 
         // Starting position
-        private (double, double) startingPosition;
+        private (double, double) startingPosition = (0,0);
 
         // List of points specifying position
         private List<(double, double)> positions = new List<(double, double)>();
@@ -27,6 +27,18 @@ namespace mg_edit
         private double speed;
         private double angle;
 
+        // Constructs with known starting tick
+        public Entity(int spawningTick)
+        {
+            this.spawningTick = spawningTick;
+        }
+
+        // Sets starting position
+        public void SetPosition(double x, double y)
+        {
+            startingPosition = (x, y);
+        }
+
         // Sets starting velocity
         public void SetVelocity(double x, double y)
         {
@@ -34,9 +46,14 @@ namespace mg_edit
         }
 
         // Sets starting polar components
-        public void SetPolar(double mag, double ang)
+        public void SetPolarSpeed(double mag)
         {
             this.speed = mag;
+        }
+
+        // Sets starting polar components
+        public void SetPolarAngle(double ang)
+        {
             this.angle = ang;
         }
 

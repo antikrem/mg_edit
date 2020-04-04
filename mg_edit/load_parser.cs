@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using mg_edit.Components;
 
 namespace mg_edit
 {
@@ -35,7 +34,6 @@ namespace mg_edit
             if (name != "" && contents != "")
             {
                 templates[name] = contents;
-
             }
         }
 
@@ -62,6 +60,7 @@ namespace mg_edit
                     // Check for declaraction
                     else if (ln[0] == '[' && ln[ln.Length - 1] == ']')
                     {
+                        // Add last template and setup for next template
                         AddTemplate(templateName, templateContents);
                         templateName = ln.Substring(1, ln.Length - 2);
                         templateContents = "";
@@ -72,6 +71,9 @@ namespace mg_edit
                         templateContents = templateContents + ln + '\n';
                     }
                 }
+
+                // Need to add last template
+                AddTemplate(templateName, templateContents);
 
             }
 
@@ -91,6 +93,8 @@ namespace mg_edit
 
             return body;
         }
+
+
 
         // Loads level's load table as string, with all comments removed and templates expanded
         public string GetLevelLoadTable()
@@ -112,7 +116,7 @@ namespace mg_edit
                         // Pass
                     }
                     // Ignore comment
-                    else if (ln.Length >= 2 && ln[0] == '/' && ln[1] == '/')
+                    else if (ln.StartsWith("//"))
                     {
                         // Pass
                     }
@@ -132,6 +136,23 @@ namespace mg_edit
             return loadTable;
         }
 
+        // Translates a component name to correct Component type
+        static private Component TranslateToComponentType(string line)
+        {
+            string name = line.Substring(1).Split(' ')[0];
+            switch (name)
+            {
+                case "position":
+                    return new ComponentPosition();
+
+                case "movement":
+                    return new ComponentMovement();
+
+                default:
+                    return null;
+            }
+        }
+
         // Loads entities 
         public void LoadEntities()
         {
@@ -143,31 +164,48 @@ namespace mg_edit
             // List of entities being updated
             List<Entity> ents = new List<Entity>();
 
+            // Current component 
+            Component component = null;
+
             foreach (string line in loadTable)
             {
-                var vec = line.Split('\n');
+                var vec = line.Split(' ');
 
                 // Look for starting cycle 
                 if (line.StartsWith("@cycle"))
                 {
                     cycles.Clear();
-                    for (int i = 0; i < vec.Length; i++)
+                    for (int i = 1; i < vec.Length; i++)
                     {
                         cycles.Add(Int32.Parse(vec[i]));
                     }
                 }
+
                 // Look for an ent declaration
                 else if (line.StartsWith("ent"))
                 {
-
+                    cycles.ForEach(cycle => ents.Add(new Entity(cycle)));
                 }
+
                 // Sets flags on which component to update
                 else if (line.StartsWith("+"))
                 {
-
+                    component = TranslateToComponentType(line);
+                    if (component is Object)
+                    {
+                        string[] parameters = line.Split(' ').Skip(1).ToArray();
+                        ents.ForEach(ent => component.Initialise(parameters, ent));
+                    }
                 }
+                
                 // Conduct update to component
-
+                else if (line.StartsWith("->"))
+                {
+                    if (component is Object)
+                    {
+                        ents.ForEach(ent => component.UpdateEntity(line, ent));
+                    }
+                }
 
             }
         }

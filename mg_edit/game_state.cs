@@ -43,13 +43,13 @@ namespace mg_edit
             LoadParser loader = LoadParser.CreateLevelLoader(level);
 
             // Check for bad loader
-            if (loader is null)
-            {
-                goto load_fail;
-            }
+            if (loader is null) goto load_fail;
 
             // Load all templates
             loader.LoadTemplates();
+
+            // Load entities
+            loader.LoadEntities();
 
             // Sucessfully loaded
             return true;
