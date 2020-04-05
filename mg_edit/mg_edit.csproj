@@ -65,9 +65,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Components\component.cs" />
-    <Compile Include="Components\component_movement.cs" />
-    <Compile Include="Components\component_position.cs" />
+    <Compile Include="Components\component_creator.cs" />
+    <Compile Include="Components\component_movement_creator.cs" />
+    <Compile Include="Components\component_position_creator.cs" />
+    <Compile Include="Components\component_static_movement.cs" />
     <Compile Include="Movement\movement_system.cs" />
     <Compile Include="entity.cs" />
     <Compile Include="game_state.cs" />
