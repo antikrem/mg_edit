@@ -25,28 +25,10 @@ namespace mg_edit
             this.spawningTick = spawningTick;
         }
 
-        // Sets starting position
-        public void SetPosition(double x, double y)
+        // Gets internal movement system
+        public MovementSystem getMovementSystem()
         {
-            movementSystem.SetPosition(x, y);
-        }
-
-        // Sets starting velocity
-        public void SetVelocity(double x, double y)
-        {
-            movementSystem.SetVelocity(x, y);
-        }
-
-        // Sets starting polar components
-        public void SetPolarSpeed(double mag)
-        {
-            movementSystem.SetPolarSpeed(mag);
-        }
-
-        // Sets starting polar components
-        public void SetPolarAngle(double ang)
-        {
-            movementSystem.SetPolarAngle(ang);
+            return movementSystem;
         }
 
         // Computes all positions this entity takes
