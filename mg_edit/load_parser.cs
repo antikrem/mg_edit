@@ -137,16 +137,16 @@ namespace mg_edit
         }
 
         // Translates a component name to correct Component type
-        static private Component TranslateToComponentType(string line)
+        static private ComponentCreator TranslateToComponentType(string line)
         {
             string name = line.Substring(1).Split(' ')[0];
             switch (name)
             {
                 case "position":
-                    return new ComponentPosition();
+                    return new ComponentPositionCreator();
 
                 case "movement":
-                    return new ComponentMovement();
+                    return new ComponentMovementCreator();
 
                 default:
                     return null;
@@ -165,7 +165,7 @@ namespace mg_edit
             List<Entity> ents = new List<Entity>();
 
             // Current component 
-            Component component = null;
+            ComponentCreator component = null;
 
             foreach (string line in loadTable)
             {
