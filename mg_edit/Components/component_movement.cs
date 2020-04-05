@@ -11,23 +11,53 @@ namespace mg_edit.Components
 
         // Static methods for updating entity
 
-        private static void SetSpeed(string[] parameters, Entity entity)
+        // Set cartesian speed of entity
+        private static void SetPolarSpeed(string[] parameters, Entity entity)
         {
-            entity.SetPolarSpeed(double.Parse(parameters[0]));
-
+            entity.getMovementSystem().SetPolarSpeed(double.Parse(parameters[0]));
         }
 
-        private static void SetAngle(string[] parameters, Entity entity)
+        // Set cartesian angle of entity
+        private static void SetPolarAngle(string[] parameters, Entity entity)
         {
-            entity.SetPolarAngle(double.Parse(parameters[0]));
+            entity.getMovementSystem().SetPolarAngle(double.Parse(parameters[0]));
         }
 
-        //private static void 
+        // Set cartesian speed change of entity
+        private static void SetPolarSpeedChange(string[] parameters, Entity entity)
+        {
+            entity.getMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
+        }
+
+        // Set cartesian angle change of entity
+        private static void SetPolarAngleChange(string[] parameters, Entity entity)
+        {
+            entity.getMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
+        }
+
+        // Set cartesian speed cap of entity
+        private static void SetPolarSpeedCap(string[] parameters, Entity entity)
+        {
+            entity.getMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
+        }
+
+        // Set cartesian angle cap of entity
+        private static void SetPolarAngleCap(string[] parameters, Entity entity)
+        {
+            entity.getMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
+        }
 
         public ComponentMovement()
         {
-            AddFunction("set_speed", SetSpeed, 1);
-            AddFunction("set_angle", SetAngle, 1);
+            AddFunction("set_speed", SetPolarSpeed, 1);
+            AddFunction("set_angle", SetPolarAngle, 1);
+
+            AddFunction("set_speed_change", SetPolarSpeedChange, 1);
+            AddFunction("set_angle_change", SetPolarAngle, 1);
+
+            AddFunction("set_speed_cap", SetPolarSpeedCap, 1);
+            AddFunction("set_angle_cap", SetPolarAngleCap, 1);
+
         }
 
         
