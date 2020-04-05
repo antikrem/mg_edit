@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace mg_edit
 {
     // Base class used to represent a Component
-    abstract class Component
+    abstract class ComponentCreator
     {
         // Look up for correct string handler
         private Dictionary<string, (int, Delegate)> lookup = new Dictionary<string, (int, Delegate)>();

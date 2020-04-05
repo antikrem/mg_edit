@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mg_edit.Components
 {
-    class ComponentMovement : Component
+    class ComponentMovementCreator : ComponentCreator
     {
 
         // Static methods for updating entity
@@ -47,7 +47,7 @@ namespace mg_edit.Components
             entity.GetMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
         }
 
-        public ComponentMovement()
+        public ComponentMovementCreator()
         {
             AddFunction("set_speed", SetPolarSpeed, 1);
             AddFunction("set_angle", SetPolarAngle, 1);
