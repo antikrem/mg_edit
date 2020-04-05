@@ -65,6 +65,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Components\component.cs" />
+    <Compile Include="Components\component_movement.cs" />
+    <Compile Include="Components\component_position.cs" />
+    <Compile Include="Movement\movement_system.cs" />
     <Compile Include="entity.cs" />
     <Compile Include="game_state.cs" />
     <Compile Include="load_parser.cs" />

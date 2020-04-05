@@ -26,6 +26,12 @@ namespace mg_edit.Movement
         // Starting velocity polar
         private (double, double) velocityPolar = (0, 0);
 
+        // Velocity for components of polar aspect
+        private (double, double) polarChange = (0, 0);
+
+        // Caps for velocity polar
+        private (double, double) polarCap = (double.PositiveInfinity, double.PositiveInfinity);
+
         // Sets starting position
         public void SetPosition(double x, double y)
         {
@@ -48,6 +54,30 @@ namespace mg_edit.Movement
         public void SetPolarAngle(double ang)
         {
             this.velocityPolar = (this.velocityPolar.Item1, ang);
+        }
+
+        // Sets starting polar components change
+        public void SetPolarSpeedChange(double mag)
+        {
+            this.polarChange = (mag, this.polarChange.Item2);
+        }
+
+        // Sets starting polar components change
+        public void SetPolarAngleChange(double ang)
+        {
+            this.polarChange = (this.polarChange.Item1, ang);
+        }
+
+        // Sets starting polar components cap
+        public void SetPolarSpeedCap(double mag)
+        {
+            this.polarCap = (mag, this.polarCap.Item2);
+        }
+
+        // Sets starting polar components cap
+        public void SetPolarAngleCap(double ang)
+        {
+            this.polarCap = (this.polarCap.Item1, ang);
         }
 
 

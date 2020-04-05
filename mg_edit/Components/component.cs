@@ -36,7 +36,7 @@ namespace mg_edit
             line = line.Substring(1);
             string executer = line.Substring(1, line.IndexOf('(') - 1);
 
-            string parametersCombined = line.Substring(line.IndexOf('(')+1, line.Length - 2 - line.IndexOf('('));
+            string parametersCombined = line.Substring(line.IndexOf('(') + 1, line.Length - 2 - line.IndexOf('('));
             string[] parameters = parametersCombined.Split(',');
 
             // Check for correct length of parameters

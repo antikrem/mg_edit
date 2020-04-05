@@ -64,11 +64,30 @@ namespace mg_edit
             guideLines.Add(this.DrawLine(1920, 0, 0, 0));
         }
 
+        // Draw a single entity
+        private void DrawEntity(Entity entity)
+        {
+            var positions = entity.GetPositions();
+            // Draw from last position to current
+            for (int i = 1; i < positions.Count; i++)
+            {
+                this.DrawLine(positions[i - 1].Item1, positions[i - 1].Item2, positions[i].Item1, positions[i].Item2);
+            }
+        }
+
         // Draw all active entities
+        public void DrawAllActiveEntities()
+        {
+            var activeEntities = GameState.Get().GetActiveEntities();
+
+        }
 
         // Prepares the base window
         public MainWindow()
         {
+            // Initialise application
+            GameState.Get();
+
             InitializeComponent();
 
             // Set up guidelines
