@@ -14,37 +14,37 @@ namespace mg_edit.Components
         // Set cartesian speed of entity
         private static void SetPolarSpeed(string[] parameters, Entity entity)
         {
-            entity.getMovementSystem().SetPolarSpeed(double.Parse(parameters[0]));
+            entity.GetMovementSystem().SetPolarSpeed(double.Parse(parameters[0]));
         }
 
         // Set cartesian angle of entity
         private static void SetPolarAngle(string[] parameters, Entity entity)
         {
-            entity.getMovementSystem().SetPolarAngle(double.Parse(parameters[0]));
+            entity.GetMovementSystem().SetPolarAngle(double.Parse(parameters[0]));
         }
 
         // Set cartesian speed change of entity
         private static void SetPolarSpeedChange(string[] parameters, Entity entity)
         {
-            entity.getMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
+            entity.GetMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
         }
 
         // Set cartesian angle change of entity
         private static void SetPolarAngleChange(string[] parameters, Entity entity)
         {
-            entity.getMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
+            entity.GetMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
         }
 
         // Set cartesian speed cap of entity
         private static void SetPolarSpeedCap(string[] parameters, Entity entity)
         {
-            entity.getMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
+            entity.GetMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
         }
 
         // Set cartesian angle cap of entity
         private static void SetPolarAngleCap(string[] parameters, Entity entity)
         {
-            entity.getMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
+            entity.GetMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
         }
 
         public ComponentMovement()

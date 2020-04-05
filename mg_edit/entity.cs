@@ -26,7 +26,7 @@ namespace mg_edit
         }
 
         // Gets internal movement system
-        public MovementSystem getMovementSystem()
+        public MovementSystem GetMovementSystem()
         {
             return movementSystem;
         }
