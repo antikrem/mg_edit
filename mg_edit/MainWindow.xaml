@@ -23,7 +23,8 @@
                 <ColumnDefinition Width="453*"/>
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
-            <ScrollBar Grid.Column="0" Grid.Row="0"
+            <ScrollBar x:Name="LevelMasterScroll"  
+                Grid.Column="0" Grid.Row="0"
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal"
                 Height="30" Grid.ColumnSpan="1"

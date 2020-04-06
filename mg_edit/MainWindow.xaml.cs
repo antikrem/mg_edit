@@ -130,6 +130,9 @@ namespace mg_edit
         // Updates tick and redraws
         public void UpdateScroll(object sender, RoutedEventArgs e)
         {
+            double value = LevelMasterScroll.Value;
+            GameState.Get().SetTick((int)(value * GameState.Get().GetLevelTotalLength()));
+
             UpdateEntityView();
         }
 

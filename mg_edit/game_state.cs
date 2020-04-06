@@ -17,7 +17,12 @@ namespace mg_edit
         static public double GAMESPACE_HEIGHT = 540;
         static public double GAMESPACE_PADDING = 200;
 
-        // Default load location for levels
+
+        // Additional padding to end of level
+        private const int LEVEL_LENGTH_PADDING = 200;
+
+        // Length of level in ticks
+        private int levelLength = LEVEL_LENGTH_PADDING;
 
         // Current tick
         int tick = 0;
@@ -55,6 +60,9 @@ namespace mg_edit
             this.enemies = loader.GetEntities();
             this.UpdateAllEntities();
 
+            // Set level length
+            this.levelLength = loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
+
             // Sucessfully loaded
             return true;
 
@@ -87,6 +95,18 @@ namespace mg_edit
             enemies.ForEach(enemy => enemy.UpdatePositions());
         }
 
+        // Sets ticks into level
+        public void SetTick(int tick)
+        {
+            this.tick = tick;
+        }
+
+        // Gets total level length
+        public int GetLevelTotalLength()
+        {
+            return this.levelLength;
+        } 
+
         // Get all entities that are spawned this tick
         public List<Entity> GetActiveEntities()
         {
@@ -94,8 +114,8 @@ namespace mg_edit
 
             foreach (var enemy in enemies)
             {
-                if (enemy.GetSpawningTick() >= this.tick &&
-                    enemy.GetSpawningTick() + enemy.GetLifetime() <= this.tick)
+                if (enemy.GetSpawningTick() <= this.tick &&
+                    this.tick <= enemy.GetSpawningTick() + enemy.GetLifetime() )
                 {
                     visibleEnemies.Add(enemy);
                 }
