@@ -217,6 +217,16 @@ namespace mg_edit
             return ents;
         }
 
+        // Returns length of level
+        public int GetLevelLength()
+        {
+            int levelLength = 0;
+
+            this.ents.ForEach(ent => levelLength = Math.Max(levelLength, ent.GetSpawningTick() + ent.GetLifetime()));
+
+            return levelLength;
+        }
+
         // Constructor sets the target folder
         private LoadParser(string targetFolder)
         {
