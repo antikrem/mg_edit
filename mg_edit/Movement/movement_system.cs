@@ -80,8 +80,6 @@ namespace mg_edit.Movement
             this.polarCap = (this.polarCap.Item1, ang);
         }
 
-
-
         // Computes all positions and returns
         public List<(double, double)> GetPositions() {
             List<(double, double)> positions = new List<(double, double)>();
@@ -92,8 +90,14 @@ namespace mg_edit.Movement
             // Acceleration as cartesian
             var (AcelX, AcelY) = accelerationCartesian;
 
-            // Velocity as polar
+            // Speed as polar
             var (mag, ang) = velocityPolar;
+
+            // Speed change as polar
+            var (magChange, angChange) = polarChange;
+
+            // Cap on polar speed change
+            var (magCap, angCap) = polarCap;
 
             // Running x,y position
             var (x, y) = startingPosition;
@@ -104,8 +108,21 @@ namespace mg_edit.Movement
                 (tick < MAXIMUM_POSITION_COUNT) && GameState.IsInGameSpace(x, y);
                 tick++)
             {
-                x = x + velX;
-                y = y + velY;
+                // update cartesian velocity
+                velX += AcelX;
+                velY += AcelY;
+
+                // update polar velocity
+                mag = MathHelper.Clamp(mag + magChange, -magCap, magCap);
+                ang += angChange;
+
+                x = x
+                    + velocityCartesian.Item1
+                    + MathHelper.ToCartesian(mag, ang).Item1;
+
+                y = y
+                    + velocityCartesian.Item2
+                    + MathHelper.ToCartesian(mag, ang).Item2;
 
                 positions.Add((x, y));
             }
