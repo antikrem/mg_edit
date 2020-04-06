@@ -69,10 +69,16 @@ namespace mg_edit
 
         // Drawing related functions
 
+        // Adds line to this entities line list
+        public void AddLine(Line line)
+        {
+            this.drawnLines.Add(line);
+        }
+
         // Returns reference to all lines
         public List<Line> GetLines()
         {
-            return drawnLines;
+            return this.drawnLines;
         }
 
         // Clears entity of drawn lines
