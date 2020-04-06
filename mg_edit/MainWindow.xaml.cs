@@ -27,10 +27,8 @@ namespace mg_edit
         {
             // Applies a linear mapping from gamespace to canvas space
             return (
-                    CenterCanvas.Width / (GameState.GAMESPACE_WIDTH + 2 * GameState.GAMESPACE_PADDING) * x
-                        + (GameState.GAMESPACE_PADDING * CenterCanvas.Width) / (GameState.GAMESPACE_WIDTH + 2 * GameState.GAMESPACE_PADDING),
-                    CenterCanvas.Height / (GameState.GAMESPACE_HEIGHT + 2 * GameState.GAMESPACE_PADDING) * y
-                        + (GameState.GAMESPACE_PADDING * CenterCanvas.Height) / (GameState.GAMESPACE_HEIGHT + 2 * GameState.GAMESPACE_PADDING)
+                    (CenterCanvas.Width * x) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_WIDTH)) + CenterCanvas.Width / 2,
+                    (CenterCanvas.Height * y) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_HEIGHT)) + CenterCanvas.Height / 2
                 );
         }
 
@@ -58,10 +56,12 @@ namespace mg_edit
 
             guideLines.Clear();
 
-            guideLines.Add(this.DrawLine(0, 0, 0, 1080));
-            guideLines.Add(this.DrawLine(0, 1080, 1920, 1080));
-            guideLines.Add(this.DrawLine(1920, 1080, 1920, 0));
-            guideLines.Add(this.DrawLine(1920, 0, 0, 0));
+            // Guidelines form a rectangle with each corner
+            guideLines.Add(this.DrawLine(GameState.GAMESPACE_WIDTH, GameState.GAMESPACE_HEIGHT, GameState.GAMESPACE_WIDTH, -GameState.GAMESPACE_HEIGHT));
+            guideLines.Add(this.DrawLine(GameState.GAMESPACE_WIDTH, -GameState.GAMESPACE_HEIGHT, -GameState.GAMESPACE_WIDTH, -GameState.GAMESPACE_HEIGHT));
+            guideLines.Add(this.DrawLine(-GameState.GAMESPACE_WIDTH, -GameState.GAMESPACE_HEIGHT, -GameState.GAMESPACE_WIDTH, GameState.GAMESPACE_HEIGHT));
+            guideLines.Add(this.DrawLine(-GameState.GAMESPACE_WIDTH, GameState.GAMESPACE_HEIGHT, GameState.GAMESPACE_WIDTH, GameState.GAMESPACE_HEIGHT));
+
         }
 
         // Draw a single entity

@@ -12,9 +12,9 @@ namespace mg_edit
     {
         static private GameState instance = null;
 
-        // Static gamespace size
-        static public double GAMESPACE_WIDTH = 1920;
-        static public double GAMESPACE_HEIGHT = 1080;
+        // Static gamespace size, gamespace is origin centered 
+        static public double GAMESPACE_WIDTH = 960;
+        static public double GAMESPACE_HEIGHT = 540;
         static public double GAMESPACE_PADDING = 200;
 
         // Default load location for levels
@@ -29,10 +29,10 @@ namespace mg_edit
         public static bool IsInGameSpace(double x, double y)
         {
             // Check point is in box
-            return (-GAMESPACE_PADDING < x
-                && x < GAMESPACE_PADDING + GAMESPACE_WIDTH
-                && -GAMESPACE_PADDING < y
-                && y < GAMESPACE_PADDING + GAMESPACE_HEIGHT
+            return (-(GAMESPACE_PADDING + GAMESPACE_WIDTH) < x
+                && x < (GAMESPACE_PADDING + GAMESPACE_WIDTH)
+                && -(GAMESPACE_PADDING + GAMESPACE_HEIGHT) < y
+                && y < (GAMESPACE_PADDING + GAMESPACE_HEIGHT)
                 );
         }
 
@@ -49,7 +49,11 @@ namespace mg_edit
             loader.LoadTemplates();
 
             // Load entities
-            loader.LoadEntities();
+            loader.LoadLevel();
+
+            // Load entities
+            this.enemies = loader.GetEntities();
+            this.UpdateAllEntities();
 
             // Sucessfully loaded
             return true;
