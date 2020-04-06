@@ -26,7 +26,8 @@
             <ScrollBar Grid.Column="0" Grid.Row="0"
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal"
-                Height="30" Grid.ColumnSpan="1"/>
+                Height="30" Grid.ColumnSpan="1"
+                Scroll="UpdateScroll"/>
             <Button Grid.Column="1" Grid.Row="0"
                 Content="Play"/>
         </Grid>

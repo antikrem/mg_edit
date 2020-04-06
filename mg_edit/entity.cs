@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using mg_edit.Movement;
 
+using System.Windows.Shapes;
+
 namespace mg_edit
 {
     // Represents an enemy entity in the game
@@ -18,6 +20,9 @@ namespace mg_edit
 
         // List of points specifying position
         private List<(double, double)> positions = new List<(double, double)>();
+
+        // List of lines drawn into center canvas
+        private List<Line> drawnLines = new List<Line>();
 
         // Constructs with known starting tick
         public Entity(int spawningTick)
@@ -60,6 +65,20 @@ namespace mg_edit
         public int GetLifetime()
         {
             return this.positions.Count;
+        }
+
+        // Drawing related functions
+
+        // Returns reference to all lines
+        public List<Line> GetLines()
+        {
+            return drawnLines;
+        }
+
+        // Clears entity of drawn lines
+        public void ClearLines()
+        {
+            drawnLines.Clear();
         }
     }
 }
