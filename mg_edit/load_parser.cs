@@ -12,6 +12,9 @@ namespace mg_edit
         private const string TEMPLATE_FILE = "template_table.txt";
         private const string LOAD_TABLE_FILE = "load_table.txt";
 
+        // Ents loaded from level
+        List<Entity> ents = new List<Entity>();
+
         // Current folder being loaded from
         private string targetFolder = "";
 
@@ -153,16 +156,14 @@ namespace mg_edit
             }
         }
 
-        // Loads entities 
-        public void LoadEntities()
+        // Loads level 
+        public void LoadLevel()
         {
             // Get level's load table
             var loadTable = GetLevelLoadTable().Split('\n');
 
             // Variables used in parsing
             List<int> cycles = new List<int>();
-            // List of entities being updated
-            List<Entity> ents = new List<Entity>();
 
             // Current component 
             ComponentCreator component = null;
@@ -208,6 +209,12 @@ namespace mg_edit
                 }
 
             }
+        }
+
+        // Return loaded entities
+        public List<Entity> GetEntities()
+        {
+            return ents;
         }
 
         // Constructor sets the target folder
