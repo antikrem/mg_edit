@@ -90,7 +90,7 @@ namespace mg_edit
             // Draw from last position to current
             for (int i = 1; i < positions.Count; i++)
             {
-                this.DrawLine(positions[i - 1].Item1, positions[i - 1].Item2, positions[i].Item1, positions[i].Item2);
+                entity.AddLine(this.DrawLine(positions[i - 1].Item1, positions[i - 1].Item2, positions[i].Item1, positions[i].Item2));
             }
         }
 
