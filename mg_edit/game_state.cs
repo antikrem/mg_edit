@@ -84,10 +84,7 @@ namespace mg_edit
         // Updates all entities
         public void UpdateAllEntities()
         {
-            foreach (var enemy in enemies)
-            {
-                enemy.UpdatePositions();
-            }
+            enemies.ForEach(enemy => enemy.UpdatePositions());
         }
 
         // Get all entities that are spawned this tick
