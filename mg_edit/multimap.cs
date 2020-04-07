@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace mg_edit
+{
+    class MultiMap<Key, Value>
+    {
+        // Internal hashmap that is the backbone
+        private Dictionary<Key, List<Value>> internalMap = new Dictionary<Key, List<Value>>();
+
+        // Adds new element to given key
+        public void Add(Key key, Value value)
+        {
+            if (!internalMap.ContainsKey(key))
+            {
+                internalMap[key] = new List<Value>();
+            }
+            internalMap[key].Add(value);
+        }
+
+        // Gets reference to list at given key
+        // Returns null if key does not exist
+        public List<Value> Get(Key key)
+        {
+            if (!internalMap.ContainsKey(key))
+            {
+                return null;
+            }
+            return internalMap[key];
+
+        }
+    }
+}
