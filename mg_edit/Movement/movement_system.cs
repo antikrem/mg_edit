@@ -18,6 +18,9 @@ namespace mg_edit.Movement
         // Multimap storing all static movement commands
         private MultiMap<int, MovementQuanta> movementCommands = new MultiMap<int, MovementQuanta>();
 
+        // List of currently active movement commands
+        private List<MovementQuanta> activeQuanta = new List<MovementQuanta>();
+
 
         // Returns reference to starting state of movement system
         public MovementState GetStartingState()
@@ -36,7 +39,8 @@ namespace mg_edit.Movement
             // List of positions per tick, starting at 0
             List<(double, double)> positions = new List<(double, double)>();
 
-            // Modified Movement state
+            // Reset state
+            activeQuanta.Clear();
             MovementState movementState = new MovementState(startingState);
 
             // Set starting position
@@ -47,7 +51,22 @@ namespace mg_edit.Movement
                 (tick < MAXIMUM_POSITION_COUNT) && GameState.IsInGameSpace(movementState.Position);
                 tick++)
             {
+
+                // Update active quanta
+                if (movementCommands.Has(tick))
+                {
+                    movementCommands.Get(tick).ForEach(
+                        quanta => { activeQuanta.Add(quanta); quanta.StartingTick = tick; }
+                    );
+                }
+
+                // Updates against static quanta
+                activeQuanta.ForEach(quanta => quanta.UpdateExecution(tick - quanta.StartingTick, movementState));
+
                 movementState.UpdateState();
+
+                // Delete all executed quanta
+                activeQuanta.RemoveAll(quanta => !quanta.IsExecuting(tick - quanta.StartingTick));
 
                 positions.Add(movementState.Position);
             }

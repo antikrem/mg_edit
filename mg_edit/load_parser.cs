@@ -151,6 +151,9 @@ namespace mg_edit
                 case "movement":
                     return new ComponentMovementCreator();
 
+                case "staticMovement":
+                    return new ComponentStaticMovementCreator();
+
                 default:
                     return null;
             }
