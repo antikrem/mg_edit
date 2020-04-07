@@ -21,6 +21,12 @@ namespace mg_edit
             internalMap[key].Add(value);
         }
 
+        // Returns true if multimap contains key
+        public bool Has(Key key)
+        {
+            return internalMap.ContainsKey(key);
+        }
+
         // Gets reference to list at given key
         // Returns null if key does not exist
         public List<Value> Get(Key key)
@@ -30,7 +36,6 @@ namespace mg_edit
                 return null;
             }
             return internalMap[key];
-
         }
     }
 }
