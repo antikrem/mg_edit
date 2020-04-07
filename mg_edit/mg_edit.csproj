@@ -72,6 +72,7 @@
     <Compile Include="math_helper.cs" />
     <Compile Include="Movement\movement_polar_turn.cs" />
     <Compile Include="Movement\movement_quanta.cs" />
+    <Compile Include="Movement\movement_state.cs" />
     <Compile Include="Movement\movement_system.cs" />
     <Compile Include="entity.cs" />
     <Compile Include="game_state.cs" />

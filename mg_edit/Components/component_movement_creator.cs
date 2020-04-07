@@ -14,37 +14,37 @@ namespace mg_edit.Components
         // Set cartesian speed of entity
         private static void SetPolarSpeed(string[] parameters, Entity entity)
         {
-            entity.GetMovementSystem().SetPolarSpeed(double.Parse(parameters[0]));
+            entity.GetStartingMovementState().Speed = double.Parse(parameters[0]);
         }
 
         // Set cartesian angle of entity
         private static void SetPolarAngle(string[] parameters, Entity entity)
         {
-            entity.GetMovementSystem().SetPolarAngle(double.Parse(parameters[0]));
+            entity.GetStartingMovementState().Angle = double.Parse(parameters[0]);
         }
 
         // Set cartesian speed change of entity
         private static void SetPolarSpeedChange(string[] parameters, Entity entity)
         {
-            entity.GetMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
+            entity.GetStartingMovementState().SpeedChange = double.Parse(parameters[0]);
         }
 
         // Set cartesian angle change of entity
         private static void SetPolarAngleChange(string[] parameters, Entity entity)
         {
-            entity.GetMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
+            entity.GetStartingMovementState().AngleChange = double.Parse(parameters[0]);
         }
 
         // Set cartesian speed cap of entity
         private static void SetPolarSpeedCap(string[] parameters, Entity entity)
         {
-            entity.GetMovementSystem().SetPolarSpeedChange(double.Parse(parameters[0]));
+            entity.GetStartingMovementState().SpeedCap = double.Parse(parameters[0]);
         }
 
         // Set cartesian angle cap of entity
         private static void SetPolarAngleCap(string[] parameters, Entity entity)
         {
-            entity.GetMovementSystem().SetPolarAngleChange(double.Parse(parameters[0]));
+            entity.GetStartingMovementState().AngleCap = double.Parse(parameters[0]);
         }
 
         public ComponentMovementCreator()

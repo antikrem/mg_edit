@@ -12,119 +12,44 @@ namespace mg_edit.Movement
         // A hard cap on number of positions, to avoid infinite loops
         private const int MAXIMUM_POSITION_COUNT = 100000;
 
-        // Variables related to entity movement
+        // Starting state of player
+        private MovementState startingState = new MovementState();
 
-        // Starting position
-        private (double, double) startingPosition = (0, 0);
+        // Multimap storing all static movement commands
+        private MultiMap<int, MovementQuanta> movementCommands = new MultiMap<int, MovementQuanta>();
 
-        // Starting velocity cartesian
-        private (double, double) velocityCartesian = (0, 0);
 
-        // Starting acceleration cartesian
-        private (double, double) accelerationCartesian = (0, 0);
-
-        // Starting velocity polar
-        private (double, double) velocityPolar = (0, 0);
-
-        // Velocity for components of polar aspect
-        private (double, double) polarChange = (0, 0);
-
-        // Caps for velocity polar
-        private (double, double) polarCap = (double.PositiveInfinity, double.PositiveInfinity);
-
-        // Sets starting position
-        public void SetPosition(double x, double y)
+        // Returns reference to starting state of movement system
+        public MovementState GetStartingState()
         {
-            startingPosition = (x, y);
+            return startingState;
         }
 
-        // Sets cartesian velocity
-        public void SetVelocity(double x, double y)
+        // Adds a new polar command at given tick
+        public void AddMovementCommand(int key, MovementQuanta command)
         {
-            velocityCartesian = (x, y);
-        }
-
-        // Sets starting polar components
-        public void SetPolarSpeed(double mag)
-        {
-            this.velocityPolar = (mag, this.velocityPolar.Item2);
-        }
-
-        // Sets starting polar components
-        public void SetPolarAngle(double ang)
-        {
-            this.velocityPolar = (this.velocityPolar.Item1, ang);
-        }
-
-        // Sets starting polar components change
-        public void SetPolarSpeedChange(double mag)
-        {
-            this.polarChange = (mag, this.polarChange.Item2);
-        }
-
-        // Sets starting polar components change
-        public void SetPolarAngleChange(double ang)
-        {
-            this.polarChange = (this.polarChange.Item1, ang);
-        }
-
-        // Sets starting polar components cap
-        public void SetPolarSpeedCap(double mag)
-        {
-            this.polarCap = (mag, this.polarCap.Item2);
-        }
-
-        // Sets starting polar components cap
-        public void SetPolarAngleCap(double ang)
-        {
-            this.polarCap = (this.polarCap.Item1, ang);
+            movementCommands.Add(key, command);
         }
 
         // Computes all positions and returns
         public List<(double, double)> GetPositions() {
+            // List of positions per tick, starting at 0
             List<(double, double)> positions = new List<(double, double)>();
 
-            // Velocity as cartesian
-            var (velX, velY) = velocityCartesian;
+            // Modified Movement state
+            MovementState movementState = new MovementState(startingState);
 
-            // Acceleration as cartesian
-            var (AcelX, AcelY) = accelerationCartesian;
-
-            // Speed as polar
-            var (mag, ang) = velocityPolar;
-
-            // Speed change as polar
-            var (magChange, angChange) = polarChange;
-
-            // Cap on polar speed change
-            var (magCap, angCap) = polarCap;
-
-            // Running x,y position
-            var (x, y) = startingPosition;
-            positions.Add(startingPosition);
+            // Set starting position
+            positions.Add(movementState.Position);
 
             // Iterate while in gamepace and below tick max
             for (int tick = 0;
-                (tick < MAXIMUM_POSITION_COUNT) && GameState.IsInGameSpace(x, y);
+                (tick < MAXIMUM_POSITION_COUNT) && GameState.IsInGameSpace(movementState.Position);
                 tick++)
             {
-                // update cartesian velocity
-                velX += AcelX;
-                velY += AcelY;
+                movementState.UpdateState();
 
-                // update polar velocity
-                mag = MathHelper.Clamp(mag + magChange, -magCap, magCap);
-                ang += angChange;
-
-                x = x
-                    + velocityCartesian.Item1
-                    + MathHelper.ToCartesian(mag, ang).Item1;
-
-                y = y
-                    + velocityCartesian.Item2
-                    + MathHelper.ToCartesian(mag, ang).Item2;
-
-                positions.Add((x, y));
+                positions.Add(movementState.Position);
             }
 
             return positions;

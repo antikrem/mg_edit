@@ -31,14 +31,15 @@ namespace mg_edit
         private List<Entity> enemies = new List<Entity>();
 
         // Returns if this position is in the played game state 
-        public static bool IsInGameSpace(double x, double y)
+        public static bool IsInGameSpace((double, double) position)
         {
             // Check point is in box
-            return (-(GAMESPACE_PADDING + GAMESPACE_WIDTH) < x
-                && x < (GAMESPACE_PADDING + GAMESPACE_WIDTH)
-                && -(GAMESPACE_PADDING + GAMESPACE_HEIGHT) < y
-                && y < (GAMESPACE_PADDING + GAMESPACE_HEIGHT)
-                );
+            return (
+                -(GAMESPACE_PADDING + GAMESPACE_WIDTH) < position.Item1
+                && position.Item1 < (GAMESPACE_PADDING + GAMESPACE_WIDTH)
+                && -(GAMESPACE_PADDING + GAMESPACE_HEIGHT) < position.Item2
+                && position.Item2 < (GAMESPACE_PADDING + GAMESPACE_HEIGHT)
+            );
         }
 
         // Updates this gamestate to represent a level

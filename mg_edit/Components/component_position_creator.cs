@@ -11,7 +11,7 @@ namespace mg_edit.Components
         // Sets position
         override public void Initialise(string[] parameters, Entity ent)
         {
-            ent.GetMovementSystem().SetPosition(Int32.Parse(parameters[0]), Int32.Parse(parameters[1]));
+            ent.GetStartingMovementState().Position = (Int32.Parse(parameters[0]), Int32.Parse(parameters[1]));
         }
 
         public ComponentPositionCreator()

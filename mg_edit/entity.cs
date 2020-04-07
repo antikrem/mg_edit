@@ -36,6 +36,12 @@ namespace mg_edit
             return movementSystem;
         }
 
+        // Get starting movement state
+        public MovementState GetStartingMovementState()
+        {
+            return movementSystem.GetStartingState();
+        }
+
         // Computes all positions this entity takes
         public List<(double, double)> UpdatePositions()
         {
