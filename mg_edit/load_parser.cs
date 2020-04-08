@@ -168,6 +168,9 @@ namespace mg_edit
             // Variables used in parsing
             List<int> cycles = new List<int>();
 
+            // Ents being loaded and modified
+            List<Entity> modifiedEnts = new List<Entity>();
+
             // Current component 
             ComponentCreator component = null;
 
@@ -188,7 +191,10 @@ namespace mg_edit
                 // Look for an ent declaration
                 else if (line.StartsWith("ent"))
                 {
-                    cycles.ForEach(cycle => ents.Add(new Entity(cycle)));
+                    // Push current ents and clear list
+                    ents.AddRange(modifiedEnts);
+                    modifiedEnts.Clear();
+                    cycles.ForEach(cycle => modifiedEnts.Add(new Entity(cycle)));
                 }
 
                 // Sets flags on which component to update
@@ -198,7 +204,7 @@ namespace mg_edit
                     if (component is Object)
                     {
                         string[] parameters = line.Split(' ').Skip(1).ToArray();
-                        ents.ForEach(ent => component.Initialise(parameters, ent));
+                        modifiedEnts.ForEach(ent => component.Initialise(parameters, ent));
                     }
                 }
                 
@@ -207,11 +213,13 @@ namespace mg_edit
                 {
                     if (component is Object)
                     {
-                        ents.ForEach(ent => component.UpdateEntity(line, ent));
+                        modifiedEnts.ForEach(ent => component.UpdateEntity(line, ent));
                     }
                 }
 
             }
+
+            ents.AddRange(modifiedEnts);
         }
 
         // Return loaded entities
