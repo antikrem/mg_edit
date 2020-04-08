@@ -126,8 +126,8 @@ namespace mg_edit
         public void SetMarkerPosition((double, double) position)
         {
             marker.Margin = new System.Windows.Thickness(
-                position.Item1,
-                position.Item2,
+                position.Item1 - MARKER_RADIUS,
+                position.Item2 - MARKER_RADIUS,
                 0,
                 0
             );
