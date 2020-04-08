@@ -70,6 +70,7 @@
     <Compile Include="Components\component_position_creator.cs" />
     <Compile Include="Components\component_static_movement_creator.cs" />
     <Compile Include="math_helper.cs" />
+    <Compile Include="Movement\movement_polar_accelerate_to.cs" />
     <Compile Include="Movement\movement_polar_turn.cs" />
     <Compile Include="Movement\movement_quanta.cs" />
     <Compile Include="Movement\movement_state.cs" />

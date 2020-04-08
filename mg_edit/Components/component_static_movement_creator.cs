@@ -22,11 +22,21 @@ namespace mg_edit.Components
             );
         }
 
+        private static void AddPolarAccelerateTo(string[] parameters, Entity entity)
+        {
+            entity.GetMovementSystem().AddMovementCommand(
+                Int32.Parse(parameters[0]),
+                new MovementPolarAccelerateTo(
+                    Double.Parse(parameters[2]),
+                    Int32.Parse(parameters[1])
+                )
+            );
+        }
 
         public ComponentStaticMovementCreator()
         {
             AddFunction("add_polar_turn", AddPolarTurn, 3);
-            
+            AddFunction("add_polar_accelerate_to", AddPolarAccelerateTo, 3);
 
         }
 
