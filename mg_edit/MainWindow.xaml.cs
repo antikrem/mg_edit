@@ -30,12 +30,12 @@ namespace mg_edit
         private HashSet<Entity> drawnEntities = new HashSet<Entity>();
 
         // Translates a point in game space to canvas space
-        private (double, double) TranslateToCanvasSpace(double x, double y)
+        private (double, double) TranslateToCanvasSpace((double, double) pos)
         {
             // Applies a linear mapping from gamespace to canvas space
             return (
-                    (CenterCanvas.Width * x) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_WIDTH)) + CenterCanvas.Width / 2,
-                    (CenterCanvas.Height * y) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_HEIGHT)) + CenterCanvas.Height / 2
+                    (CenterCanvas.Width * pos.Item1) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_WIDTH)) + CenterCanvas.Width / 2,
+                    (CenterCanvas.Height * -pos.Item2) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_HEIGHT)) + CenterCanvas.Height / 2
                 );
         }
 
@@ -44,8 +44,8 @@ namespace mg_edit
         {
             var line = new Line();
             line.Stroke = System.Windows.Media.Brushes.Black;
-            (line.X1, line.Y1) = this.TranslateToCanvasSpace(x1, y1);
-            (line.X2, line.Y2) = this.TranslateToCanvasSpace(x2, y2);
+            (line.X1, line.Y1) = this.TranslateToCanvasSpace((x1, y1));
+            (line.X2, line.Y2) = this.TranslateToCanvasSpace((x2, y2));
             line.HorizontalAlignment = HorizontalAlignment.Left;
             line.VerticalAlignment = VerticalAlignment.Center;
             line.StrokeThickness = 2;
@@ -76,6 +76,8 @@ namespace mg_edit
         {
             entity.GetLines().ForEach(line => CenterCanvas.Children.Remove(line));
             entity.ClearLines();
+            // Remove marker
+            CenterCanvas.Children.Remove(entity.GetMarker());
         }
 
         // Takes an entity that is drawn and undraws it
@@ -91,6 +93,7 @@ namespace mg_edit
             drawnEntities.Add(entity);
             var positions = entity.GetPositions();
             // Draw from last position to current
+            // Add each line segment
             for (int i = 1; i < positions.Count; i += LINE_RESOLUTION)
             {
                 int a = Math.Max(0, i - LINE_RESOLUTION);
@@ -102,6 +105,8 @@ namespace mg_edit
                     )
                 );
             }
+            // Add marker
+            CenterCanvas.Children.Add(entity.GetMarker());
         }
 
         // Draw all active entities
@@ -135,6 +140,15 @@ namespace mg_edit
             // Update view
             toDraw.ToList().ForEach(entity => DrawEntity(entity));
             toRemove.ToList().ForEach(entity => UndrawEntity(entity));
+
+            // Update markers
+            int tick = GameState.Get().Tick;
+            GameState.Get().GetActiveEntities().ForEach(
+                ent => {
+                    (double, double) pos = this.TranslateToCanvasSpace(ent.GetPosition(tick));
+                    ent.SetMarkerPosition(pos);
+                }
+            );
         }
 
         // Updates tick and redraws

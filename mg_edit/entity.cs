@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using mg_edit.Movement;
 
 using System.Windows.Shapes;
+using System.Windows.Media;
 
 namespace mg_edit
 {
@@ -24,8 +25,22 @@ namespace mg_edit
         // List of lines drawn into center canvas
         private List<Line> drawnLines = new List<Line>();
 
-        // Constructs with known starting tick
-        public Entity(int spawningTick)
+        // Circle radius
+        private const int MARKER_RADIUS = 10;
+
+        // Canvas element relating to circle of current 
+        // Entity position
+        readonly Ellipse marker = new Ellipse()
+        {
+            Width = 2 * MARKER_RADIUS,
+            Height = 2 * MARKER_RADIUS,
+            Stroke = Brushes.Red,
+            StrokeThickness = 3
+        };
+
+
+    // Constructs with known starting tick
+    public Entity(int spawningTick)
         {
             this.spawningTick = spawningTick;
         }
@@ -53,6 +68,14 @@ namespace mg_edit
         public List<(double, double)> GetPositions()
         {
             return positions;
+        }
+
+        // Gets position at a given tick 
+        // Will throw exception if bad tick
+        public (double, double) GetPosition(int tick)
+        {
+            // Gets position, bit fuzzy on edges
+            return positions[Math.Max(0, tick - spawningTick - 1)];
         }
 
         // Set spawning tick
@@ -91,6 +114,23 @@ namespace mg_edit
         public void ClearLines()
         {
             drawnLines.Clear();
+        }
+
+        // Gets reference to internal ellipse
+        public Ellipse GetMarker()
+        {
+            return marker;
+        }
+
+        // Set marker position
+        public void SetMarkerPosition((double, double) position)
+        {
+            marker.Margin = new System.Windows.Thickness(
+                position.Item1,
+                position.Item2,
+                0,
+                0
+            );
         }
     }
 }
