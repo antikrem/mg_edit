@@ -25,7 +25,7 @@ namespace mg_edit
         private int levelLength = LEVEL_LENGTH_PADDING;
 
         // Current tick
-        int tick = 0;
+        public int Tick {get; set;}
 
         // List of current enemies
         private List<Entity> enemies = new List<Entity>();
@@ -96,12 +96,6 @@ namespace mg_edit
             enemies.ForEach(enemy => enemy.UpdatePositions());
         }
 
-        // Sets ticks into level
-        public void SetTick(int tick)
-        {
-            this.tick = tick;
-        }
-
         // Gets total level length
         public int GetLevelTotalLength()
         {
@@ -115,8 +109,8 @@ namespace mg_edit
 
             foreach (var enemy in enemies)
             {
-                if (enemy.GetSpawningTick() <= this.tick &&
-                    this.tick <= enemy.GetSpawningTick() + enemy.GetLifetime() )
+                if (enemy.GetSpawningTick() <= this.Tick &&
+                    this.Tick <= enemy.GetSpawningTick() + enemy.GetLifetime() )
                 {
                     visibleEnemies.Add(enemy);
                 }

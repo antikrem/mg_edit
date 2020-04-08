@@ -20,6 +20,9 @@ namespace mg_edit
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Resolution of drawn lines
+        private const int LINE_RESOLUTION = 5;
+
         // List of guidelines
         private List<Line> guideLines = new List<Line>();
         
@@ -88,9 +91,16 @@ namespace mg_edit
             drawnEntities.Add(entity);
             var positions = entity.GetPositions();
             // Draw from last position to current
-            for (int i = 1; i < positions.Count; i++)
+            for (int i = 1; i < positions.Count; i += LINE_RESOLUTION)
             {
-                entity.AddLine(this.DrawLine(positions[i - 1].Item1, positions[i - 1].Item2, positions[i].Item1, positions[i].Item2));
+                int a = Math.Max(0, i - LINE_RESOLUTION);
+                int b = i;
+                entity.AddLine(
+                    this.DrawLine(
+                        positions[a].Item1, positions[a].Item2, 
+                        positions[b].Item1, positions[b].Item2
+                    )
+                );
             }
         }
 
@@ -131,7 +141,8 @@ namespace mg_edit
         public void UpdateScroll(object sender, RoutedEventArgs e)
         {
             double value = LevelMasterScroll.Value;
-            GameState.Get().SetTick((int)(value * GameState.Get().GetLevelTotalLength()));
+            GameState.Get().Tick = (int)(value * GameState.Get().GetLevelTotalLength());
+            TickLabel.Content = GameState.Get().Tick;
 
             UpdateEntityView();
         }
