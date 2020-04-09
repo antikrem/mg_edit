@@ -76,7 +76,7 @@ namespace mg_edit
         // Private constructor
         private GameState()
         {
-            this.LoadLevel("level/");
+            
         }
 
         // Accessor for singleton instance
