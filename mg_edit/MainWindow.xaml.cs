@@ -23,6 +23,9 @@ namespace mg_edit
         // Resolution of drawn lines
         private const int LINE_RESOLUTION = 5;
 
+        // Seek length of minor scroll
+        private const double MINOR_SCROLL_WIDTH = 500;
+
         // List of guidelines
         private List<Line> guideLines = new List<Line>();
         
@@ -126,6 +129,18 @@ namespace mg_edit
             drawnEntities.Clear();
         }
 
+        // Redraws active entity list box
+        public void RedrawActiveList()
+        {
+            ActiveListBox.Items.Clear();
+            GameState.Get().GetActiveEntities().ForEach(
+                ent => {
+                    ActiveListBox.Items.Add(ent);
+                }
+            );
+
+        }
+
         // Computes difference in current entities, 
         // Deletes stuff thats not drawn, draws new stuff
         public void UpdateEntityView()
@@ -141,6 +156,12 @@ namespace mg_edit
             toDraw.ToList().ForEach(entity => DrawEntity(entity));
             toRemove.ToList().ForEach(entity => UndrawEntity(entity));
 
+            // Redraw list box is an entity passed into/out of view
+            if (toDraw.Count + toRemove.Count > 0)
+            {
+                RedrawActiveList();
+            }
+
             // Update markers
             int tick = GameState.Get().Tick;
             GameState.Get().GetActiveEntities().ForEach(
@@ -154,11 +175,22 @@ namespace mg_edit
         // Updates tick and redraws
         public void UpdateScroll(object sender, RoutedEventArgs e)
         {
-            double value = LevelMasterScroll.Value;
-            GameState.Get().Tick = (int)(value * GameState.Get().GetLevelTotalLength());
+            double major = LevelMasterScroll.Value * GameState.Get().GetLevelTotalLength();
+            double minor = LevelMinorScroll.Value * MINOR_SCROLL_WIDTH;
+            GameState.Get().Tick = (int)(major + minor);
             TickLabel.Content = GameState.Get().Tick;
 
             UpdateEntityView();
+        }
+
+        // Function handler to load level
+        public void LoadLevel(object sender, RoutedEventArgs e)
+        {
+            // Load from default
+            GameState.Get().LoadLevel("level/");
+
+            // Draw level
+            this.UpdateScroll(null, null);
         }
 
         // Prepares the base window
