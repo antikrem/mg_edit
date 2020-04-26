@@ -11,8 +11,6 @@ namespace mg_edit.Movement
         private readonly int duration;
         private readonly double endingSpeed;
 
-        private bool firstTick = true;
-
         // Constructor for a MovementPolarTurn
         public MovementPolarAccelerateTo(double endingSpeed, int duration)
         {
@@ -29,12 +27,12 @@ namespace mg_edit.Movement
         // Update movement system parameters
         public override void UpdateExecution(int tick, MovementState movementState)
         {
-            if (firstTick)
+            if (tick == 0)
             {
                 double rate = (endingSpeed - movementState.Speed) / duration;
                 movementState.SpeedChange = rate;
             }
-            else if (tick == duration)
+            else if (tick  == duration)
             {
                 movementState.SpeedChange = 0;
             }
