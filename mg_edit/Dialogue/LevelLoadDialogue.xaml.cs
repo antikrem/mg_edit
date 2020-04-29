@@ -22,7 +22,7 @@ namespace mg_edit.Dialogue
     public partial class LevelLoadDialogue : Window
     {
         // Set to not null when a valid value is set
-        String Path { get; set; } = null;
+        public string Path { get; set; } = null;
 
         public LevelLoadDialogue()
         {
