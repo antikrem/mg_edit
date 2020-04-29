@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mg_edit.Helper
 {
-    
 
     class INIParser : IDisposable
     {

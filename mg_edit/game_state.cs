@@ -1,9 +1,6 @@
-﻿using mg_edit.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using mg_edit.TextEdit;
 
 namespace mg_edit
 {
@@ -17,7 +14,6 @@ namespace mg_edit
         static public double GAMESPACE_WIDTH = 960;
         static public double GAMESPACE_HEIGHT = 540;
         static public double GAMESPACE_PADDING = 200;
-
 
         // Additional padding to end of level
         private const int LEVEL_LENGTH_PADDING = 200;
