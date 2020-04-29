@@ -8,7 +8,8 @@
         Title="mg_edit" 
         Height="1080" Width="1920"
         WindowState="Maximized"
-        WindowStyle="None">
+        WindowStyle="None"
+        Closing="HandleClose">
     <Grid>
         <Canvas x:Name="CenterCanvas" 
             HorizontalAlignment="Left" VerticalAlignment="Top"

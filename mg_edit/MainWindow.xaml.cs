@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using mg_edit.Dialogue;
+using mg_edit.TextEdit;
 
 namespace mg_edit
 {
@@ -26,6 +19,9 @@ namespace mg_edit
 
         // Seek length of minor scroll
         private const double MINOR_SCROLL_WIDTH = 500;
+
+        // Side window used as text editor
+        private TextEditWindow textEditWindow = new TextEditWindow();
 
         // List of guidelines
         private List<Line> guideLines = new List<Line>();
@@ -199,8 +195,18 @@ namespace mg_edit
 
                 // Draw level
                 this.UpdateScroll(null, null);
+
+                // Update sidebar with level
+                this.textEditWindow.UpdateText(levelLoadDialogue.Path);
             }
             
+        }
+
+        // Handler for when this window is closed
+        void HandleClose(object sender, CancelEventArgs e)
+        {
+            // Close side window
+            this.textEditWindow.Close();
         }
 
         // Prepares the base window
@@ -216,6 +222,11 @@ namespace mg_edit
 
             // Draw all entities that are currently active and visible
             this.UpdateEntityView();
+
+            // Create side text editor
+            this.Show();
+            this.textEditWindow.Owner = this;
+            this.textEditWindow.Show();
         }
     }
 }

@@ -9,8 +9,8 @@ namespace mg_edit
     // Parser for a level 
     class LoadParser
     {
-        private const string TEMPLATE_FILE = "template_table.txt";
-        private const string LOAD_TABLE_FILE = "load_table.txt";
+        public const string TEMPLATE_FILE = "template_table.txt";
+        public const string LOAD_TABLE_FILE = "load_table.txt";
 
         // Ents loaded from level
         List<Entity> ents = new List<Entity>();
