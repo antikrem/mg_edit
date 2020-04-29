@@ -32,15 +32,22 @@ namespace mg_edit.Helper
             }
         }
 
+        // Adds a string value to a given section/key
+        // Can create new sections if required
+        private void AddEntry(string section, string key, string value)
+        {
+            this.AddSection(section);
+            store[section][key] = value;
+        }
+
         // Adds new entry from a properly formmated input line
-        private void AddEntry(string section, string line) {
+        private void AddEntryFromLine(string section, string line) {
             // Add a new section
             this.AddSection(section);
 
             //otherwise parse line
             int offset;
 		    if ((offset = line.IndexOf(INI_DELIMITER)) > 0) {
-
 			    store[section][line.Substring(0, offset).Trim()] 
 				    = line.Substring(offset + 1, line.Length - offset - 1);
 		    }
@@ -63,7 +70,7 @@ namespace mg_edit.Helper
                 }
                 else
                 {
-                    this.AddEntry(section, line);
+                    this.AddEntryFromLine(section, line);
                 }
                     
             }
@@ -99,6 +106,42 @@ namespace mg_edit.Helper
             File.WriteAllLines(filepath, lines);
         }
 
+        // Checks if given section/key/value combination exists
+        public bool Has(string section, string key)
+        {
+            return store.ContainsKey(section) && store[section].ContainsKey(key);
+        }
+
+        // Returns a string for a given section and key
+        // Will return the default if key not found
+        // Will also set value to the default
+        string Get(string section, string key, string backup)
+        {
+            if (this.Has(section, key)) {
+                return store[section][key];
+            }
+            else
+            {
+                AddEntry(section, key, backup);
+                return backup;
+            }
+        }
+
+        // Returns a string for a given key, looks at default section
+        // Will return the default if key not found
+        // Will also set value to the default
+        string Get(string key, string backup)
+        {
+            if (this.Has("", key))
+            {
+                return store[""][key];
+            }
+            else
+            {
+                AddEntry("", key, backup);
+                return backup;
+            }
+        }
 
     }
 }
