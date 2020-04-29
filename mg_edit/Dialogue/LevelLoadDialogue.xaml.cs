@@ -49,7 +49,7 @@ namespace mg_edit.Dialogue
             }
 
             // Check path is valid
-            string trialPath = "campaigns/" + CampaignTextBox.Text + "/" + level.ToString();
+            string trialPath = "campaigns/" + CampaignTextBox.Text + "/" + level.ToString() + "/";
 
             if (!Directory.Exists(trialPath))
             {
