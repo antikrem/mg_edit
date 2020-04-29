@@ -143,5 +143,16 @@ namespace mg_edit.Helper
             }
         }
 
+        // Sets a value
+        public void Set(string section, string key, string value)
+        {
+            AddEntry(section, key, value);
+        }
+
+        // Sets a value
+        public void Set(string key, string value)
+        {
+            AddEntry("", key, value);
+        }
     }
 }
