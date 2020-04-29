@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mg_edit.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,7 +77,6 @@ namespace mg_edit
         // Private constructor
         private GameState()
         {
-            
         }
 
         // Accessor for singleton instance
@@ -110,7 +110,7 @@ namespace mg_edit
             foreach (var enemy in enemies)
             {
                 if (enemy.GetSpawningTick() <= this.Tick &&
-                    this.Tick <= enemy.GetSpawningTick() + enemy.GetLifetime() )
+                    this.Tick <= enemy.GetSpawningTick() + enemy.GetLifetime())
                 {
                     visibleEnemies.Add(enemy);
                 }

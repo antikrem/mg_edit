@@ -57,6 +57,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogue\LevelLoadDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,6 +73,9 @@
     <Compile Include="Components\component_movement_creator.cs" />
     <Compile Include="Components\component_position_creator.cs" />
     <Compile Include="Components\component_static_movement_creator.cs" />
+    <Compile Include="Dialogue\LevelLoadDialogue.xaml.cs">
+      <DependentUpon>LevelLoadDialogue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\ini_parser.cs" />
     <Compile Include="math_helper.cs" />
     <Compile Include="Movement\movement_polar_accelerate_to.cs" />

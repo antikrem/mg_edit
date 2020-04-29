@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using mg_edit.Dialogue;
 
 namespace mg_edit
 {
@@ -186,11 +187,20 @@ namespace mg_edit
         // Function handler to load level
         public void LoadLevel(object sender, RoutedEventArgs e)
         {
-            // Load from default
-            GameState.Get().LoadLevel("level/");
+            // Set up path 
+            var levelLoadDialogue = new LevelLoadDialogue();
+            levelLoadDialogue.ShowDialog();
 
-            // Draw level
-            this.UpdateScroll(null, null);
+            // If valid load level
+            if (levelLoadDialogue.Path is string)
+            {
+                // Load from default
+                GameState.Get().LoadLevel(levelLoadDialogue.Path);
+
+                // Draw level
+                this.UpdateScroll(null, null);
+            }
+            
         }
 
         // Prepares the base window
