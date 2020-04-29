@@ -9,7 +9,7 @@ namespace mg_edit.Helper
 {
     
 
-    class INIParser
+    class INIParser : IDisposable
     {
         const char INI_DELIMITER = '=';
         const char COMMENT_DELIMITER = ';';
@@ -69,5 +69,36 @@ namespace mg_edit.Helper
             }
 
         }
+
+        // Closes this parser and updates underlying file
+        public void Dispose()
+        {
+            List<string> lines = new List<string>();
+
+            // Add default section
+            if (store.ContainsKey(""))
+            {
+                foreach (var entry in store[""])
+                {
+                    lines.Add(entry.Key + "=" + entry.Value);
+                }
+                lines.Add("");
+            }
+
+            // Go through non default sections
+            foreach (var section in store.ToList().Where(i => i.Key != ""))
+            {
+                lines.Add("[" + section.Key + "]");
+                foreach (var entry in section.Value)
+                {
+                    lines.Add(entry.Key + "=" + entry.Value);
+                }
+                lines.Add("");
+            }
+
+            File.WriteAllLines(filepath, lines);
+        }
+
+
     }
 }
