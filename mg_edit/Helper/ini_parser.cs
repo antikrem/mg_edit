@@ -115,7 +115,7 @@ namespace mg_edit.Helper
         // Returns a string for a given section and key
         // Will return the default if key not found
         // Will also set value to the default
-        string Get(string section, string key, string backup)
+        public string Get(string section, string key, string backup)
         {
             if (this.Has(section, key)) {
                 return store[section][key];
@@ -130,7 +130,7 @@ namespace mg_edit.Helper
         // Returns a string for a given key, looks at default section
         // Will return the default if key not found
         // Will also set value to the default
-        string Get(string key, string backup)
+        public string Get(string key, string backup)
         {
             if (this.Has("", key))
             {
