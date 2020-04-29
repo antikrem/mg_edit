@@ -1,0 +1,17 @@
+﻿<Window x:Class="mg_edit.Dialogue.LevelLoadDialogue"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mg_edit.Dialogue"
+        mc:Ignorable="d"
+        Title="LevelLoadDialogue" Height="201.526" Width="199.704">
+    <Grid Margin="0,0,2,0">
+        <Label Content="Load Level:" Height="25" Margin="1,0,9,0" VerticalAlignment="Top"/>
+        <Label Content="Campaign:" Height="25" Margin="1,25,9,0" VerticalAlignment="Top"/>
+        <TextBox x:Name = "CampaignTextBox" Text="" Height="25" Margin="3,50,3,0" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+        <Label Content="Level:" Height="25" Margin="1,75,9,0" VerticalAlignment="Top"/>
+        <TextBox x:Name = "LevelTextBox" Text="" Height="25" Margin="3,100,3,0" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+        <Button Content="Load Level" Height="25" Margin="10,135,10,0" VerticalAlignment="Top" Click="HandleLevelLoad"/>
+    </Grid>
+</Window>
