@@ -21,7 +21,7 @@ namespace mg_edit
         private const double MINOR_SCROLL_WIDTH = 500;
 
         // Side window used as text editor
-        private TextEditWindow textEditWindow = new TextEditWindow();
+        private TextEditWindow textEditWindow;
 
         // List of guidelines
         private List<Line> guideLines = new List<Line>();
@@ -129,10 +129,10 @@ namespace mg_edit
         // Redraws active entity list box
         public void RedrawActiveList()
         {
-            ActiveListBox.Items.Clear();
+            textEditWindow.ActiveListBox.Items.Clear();
             GameState.Get().GetActiveEntities().ForEach(
                 ent => {
-                    ActiveListBox.Items.Add(ent);
+                    textEditWindow.ActiveListBox.Items.Add(ent);
                 }
             );
 
@@ -180,8 +180,21 @@ namespace mg_edit
             UpdateEntityView();
         }
 
+        // Loads level from GameState's load table
+        public void LoadLevel()
+        {
+            // Load from default
+            GameState.Get().LoadLevel();
+
+            // Draw level
+            this.UpdateScroll(null, null);
+
+            // Update sidebar with level
+            this.textEditWindow.UpdateText(GameState.Get().LevelFolder);
+        }
+
         // Function handler to load level
-        public void LoadLevel(object sender, RoutedEventArgs e)
+        public void LoadLevelButtonHandle(object sender, RoutedEventArgs e)
         {
             // Set up path 
             var levelLoadDialogue = new LevelLoadDialogue();
@@ -190,14 +203,8 @@ namespace mg_edit
             // If valid load level
             if (levelLoadDialogue.Path is string)
             {
-                // Load from default
-                GameState.Get().LoadLevel(levelLoadDialogue.Path);
-
-                // Draw level
-                this.UpdateScroll(null, null);
-
-                // Update sidebar with level
-                this.textEditWindow.UpdateText(levelLoadDialogue.Path);
+                GameState.Get().LevelFolder = levelLoadDialogue.Path;
+                this.LoadLevel();
             }
             
         }
@@ -225,7 +232,7 @@ namespace mg_edit
 
             // Create side text editor
             this.Show();
-            this.textEditWindow.Owner = this;
+            this.textEditWindow = new TextEditWindow(this);
             this.textEditWindow.Show();
         }
     }

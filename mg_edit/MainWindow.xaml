@@ -19,11 +19,7 @@
         <Button Content="Load Level" 
                 HorizontalAlignment="Right" VerticalAlignment="Top" 
                 Height="50" Width="100" 
-                Click="LoadLevel"/>
-
-        <ListBox x:Name="ActiveListBox" 
-                 HorizontalAlignment="Left" VerticalAlignment="Top" 
-                 Height="140" Width="424"/>
+                Click="LoadLevelButtonHandle"/>
 
         <Grid VerticalAlignment ="Bottom" Height="35">
             <Grid.ColumnDefinitions>

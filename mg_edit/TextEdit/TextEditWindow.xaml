@@ -5,11 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mg_edit.TextEdit"
         mc:Ignorable="d"
-        Title="Level Load Table" Height="614.254" Width="800">
+        Title="Level Load Table" Height="615" Width="800">
     <Grid>
+        <Grid Height="160" VerticalAlignment="Top" Margin="0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <DockPanel 
+                Grid.Column="0" Grid.Row="0" Background="Black" LastChildFill ="True"
+                Grid.RowSpan="3">
+                <ListBox x:Name="ActiveListBox" 
+                HorizontalAlignment="Left" 
+                HorizontalContentAlignment="Stretch"
+                Background="Red" 
+                Width="{Binding ActualWidth, ElementName=parentElementName}"
+                Margin="0 0 20 0"/>
+            </DockPanel>
+
+            <Button Grid.Column="1" Grid.Row="0" Content="Reload" Click="ReloadLevel"/>
+        </Grid>
+
+
         <TextBox x:Name="LevelTextBox" 
-                 Margin="0,0,0,0"
+                 Margin="0,160,0,0"
                  VerticalScrollBarVisibility="Visible"
                  />
+
     </Grid>
 </Window>

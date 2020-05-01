@@ -17,9 +17,14 @@ namespace mg_edit.TextEdit
 {
     public partial class TextEditWindow : Window
     {
-        public TextEditWindow()
+
+        MainWindow mainWindow;
+
+        public TextEditWindow(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.Owner = mainWindow;
+            this.mainWindow = mainWindow;
         }
 
         // Updates this text editor video with a given text file
@@ -27,6 +32,13 @@ namespace mg_edit.TextEdit
         {
             string contents = File.ReadAllText(filepath + LoadParser.LOAD_TABLE_FILE);
             LevelTextBox.AppendText(contents);
+        }
+
+        // Reloads the level
+        // Saves current file
+        public void ReloadLevel(object sender, RoutedEventArgs e)
+        {
+            mainWindow.LoadLevel();
         }
 
     }
