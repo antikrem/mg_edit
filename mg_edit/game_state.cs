@@ -24,6 +24,9 @@ namespace mg_edit
         // Current tick
         public int Tick {get; set;}
 
+        // Current level path
+        public string LevelFolder { get; set; } = null;
+
         // List of current enemies
         private List<Entity> enemies = new List<Entity>();
 
@@ -40,10 +43,15 @@ namespace mg_edit
         }
 
         // Updates this gamestate to represent a level
-        // returns false on failture
-        public bool LoadLevel(string level)
+        // returns false on failure
+        public bool LoadLevel()
         {
-            LoadParser loader = LoadParser.CreateLevelLoader(level);
+            if (LevelFolder is null)
+            {
+                return false;
+            }
+
+            LoadParser loader = LoadParser.CreateLevelLoader(LevelFolder);
 
             // Check for bad loader
             if (loader is null) goto load_fail;
@@ -65,7 +73,7 @@ namespace mg_edit
             return true;
 
         load_fail:
-            Console.WriteLine("Failed to load level " + level);
+            Console.WriteLine("Failed to load level " + LevelFolder);
             return false;
             
         }
