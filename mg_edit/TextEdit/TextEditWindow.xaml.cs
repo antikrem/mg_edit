@@ -31,6 +31,7 @@ namespace mg_edit.TextEdit
         // Updates this text editor video with a given text file
         public void UpdateText(string filepath)
         {
+            LevelTextBox.Clear();
             string contents = File.ReadAllText(filepath + LoadParser.LOAD_TABLE_FILE);
             LevelTextBox.AppendText(contents);
         }
@@ -39,7 +40,7 @@ namespace mg_edit.TextEdit
         // Saves current file
         public void ReloadLevel(object sender, RoutedEventArgs e)
         {
-            mainWindow.LoadLevel();
+            mainWindow.ReloadLevel(LevelTextBox.Text);
         }
 
         // Loads the level

@@ -18,6 +18,9 @@ namespace mg_edit
         // Current folder being loaded from
         private string targetFolder = "";
 
+        // Body of level, unfolded
+        public string LoadTableBody { get; set; }
+
         // Map of templates
         private Dictionary<string, string> templates = new Dictionary<string, string>();
 
@@ -97,41 +100,34 @@ namespace mg_edit
             return body;
         }
 
-
-
         // Loads level's load table as string, with all comments removed and templates expanded
-        public string GetLevelLoadTable()
+        public string GetExpandedLevelLoadTable()
         {
             string loadTable = "";
+            var lines = LoadTableBody.Split('\n').ToList();
 
-            using (StreamReader file = new StreamReader(targetFolder + LOAD_TABLE_FILE))
+            // Trim lines, indenting is irrevelent
+            lines = lines.Select(line => line.Trim().Replace("\r", "")).ToList();
+
+            foreach (string ln in lines)
             {
-                string ln;
-
-                while ((ln = file.ReadLine()) != null)
+                // Ignore empty string
+                if (ln.Length == 0)
                 {
-                    // Trim string, indenting is irrelevent
-                    ln = ln.Trim();
-
-                    // Ignore empty string
-                    if (ln.Length == 0)
-                    {
-                        // Pass
-                    }
-                    // Ignore comment
-                    else if (ln.StartsWith("//"))
-                    {
-                        // Pass
-                    }
-                    else if (ln[0] == '#')
-                    {
-                        loadTable = loadTable + this.ExpandTemplate(ln) + "\n";
-                    }
-                    else
-                    {
-                        loadTable = loadTable + ln + "\n";
-                    }
-
+                    // Pass
+                }
+                // Ignore comment
+                else if (ln.StartsWith("//"))
+                {
+                    // Pass
+                }
+                else if (ln[0] == '#')
+                {
+                    loadTable = loadTable + this.ExpandTemplate(ln) + "\n";
+                }
+                else
+                {
+                    loadTable = loadTable + ln + "\n";
                 }
 
             }
@@ -159,11 +155,20 @@ namespace mg_edit
             }
         }
 
+        // Load level's load table body to memory
+        public void LoadLevelLoadTableFromFile()
+        {
+            LoadTableBody = File.ReadAllText(targetFolder + LOAD_TABLE_FILE);
+        }
+
         // Loads level 
         public void LoadLevel()
         {
+            // Reset ents
+            ents.Clear();
+
             // Get level's load table
-            var loadTable = GetLevelLoadTable().Split('\n');
+            var loadTable = GetExpandedLevelLoadTable().Split('\n');
 
             // Variables used in parsing
             List<int> cycles = new List<int>();
@@ -253,7 +258,7 @@ namespace mg_edit
         // Creates an instance of LoadParser
         // Takes targetFolder to search for load files
         // returns null on failure
-        public static LoadParser CreateLevelLoader(string targetFolder)
+        public static LoadParser CreateLevelLoaderFromFile(string targetFolder)
         {
             LoadParser loader = new LoadParser(targetFolder);
             return loader.IsValidConstruction() ? loader : null;

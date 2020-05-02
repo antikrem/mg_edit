@@ -27,6 +27,9 @@ namespace mg_edit
         // Current level path
         public string LevelFolder { get; set; } = null;
 
+        // Last load parser
+        LoadParser loader = null;
+
         // List of current enemies
         private List<Entity> enemies = new List<Entity>();
 
@@ -46,18 +49,18 @@ namespace mg_edit
         // returns false on failure
         public bool LoadLevel()
         {
-            if (LevelFolder is null)
-            {
-                return false;
-            }
+            if (LevelFolder is null) return false;
 
-            LoadParser loader = LoadParser.CreateLevelLoader(LevelFolder);
+            loader = LoadParser.CreateLevelLoaderFromFile(LevelFolder);
 
             // Check for bad loader
-            if (loader is null) goto load_fail;
+            if (loader is null)  return false;
 
             // Load all templates
             loader.LoadTemplates();
+
+            // Load level to load file
+            loader.LoadLevelLoadTableFromFile();
 
             // Load entities
             loader.LoadLevel();
@@ -71,11 +74,26 @@ namespace mg_edit
 
             // Sucessfully loaded
             return true;
-
-        load_fail:
-            Console.WriteLine("Failed to load level " + LevelFolder);
-            return false;
             
+        }
+
+        // Reloads the level with just the updated level body
+        public bool ReloadLevel(string loadLoadTable)
+        {
+            // Set load table body
+            loader.LoadTableBody = loadLoadTable;
+
+            // Load updated level
+            loader.LoadLevel();
+
+            // Load entities
+            this.enemies = loader.GetEntities();
+            this.UpdateAllEntities();
+
+            // Set level length
+            this.levelLength = loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
+
+            return true;
         }
 
         // Private constructor
