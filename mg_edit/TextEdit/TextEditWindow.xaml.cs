@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using mg_edit.Dialogue;
 
 namespace mg_edit.TextEdit
 {
@@ -39,6 +40,21 @@ namespace mg_edit.TextEdit
         public void ReloadLevel(object sender, RoutedEventArgs e)
         {
             mainWindow.LoadLevel();
+        }
+
+        // Loads the level
+        public void LoadLevel(object sender, RoutedEventArgs e)
+        {
+            // Set up path 
+            var levelLoadDialogue = new LevelLoadDialogue();
+            levelLoadDialogue.ShowDialog();
+
+            // If valid load level
+            if (levelLoadDialogue.Path is string)
+            {
+                GameState.Get().LevelFolder = levelLoadDialogue.Path;
+                mainWindow.LoadLevel();
+            }
         }
 
     }

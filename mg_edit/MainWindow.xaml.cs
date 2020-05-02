@@ -193,22 +193,6 @@ namespace mg_edit
             this.textEditWindow.UpdateText(GameState.Get().LevelFolder);
         }
 
-        // Function handler to load level
-        public void LoadLevelButtonHandle(object sender, RoutedEventArgs e)
-        {
-            // Set up path 
-            var levelLoadDialogue = new LevelLoadDialogue();
-            levelLoadDialogue.ShowDialog();
-
-            // If valid load level
-            if (levelLoadDialogue.Path is string)
-            {
-                GameState.Get().LevelFolder = levelLoadDialogue.Path;
-                this.LoadLevel();
-            }
-            
-        }
-
         // Handler for when this window is closed
         void HandleClose(object sender, CancelEventArgs e)
         {
