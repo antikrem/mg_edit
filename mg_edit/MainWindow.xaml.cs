@@ -180,6 +180,24 @@ namespace mg_edit
             UpdateEntityView();
         }
 
+        // Resets scroll so that the right shuffle is centered
+        public void ResetShuffle(object sender, RoutedEventArgs e)
+        {
+            int Tick = GameState.Get().Tick;
+            // Work out how right shuffle should be
+            double minor = MINOR_SCROLL_WIDTH / 2;
+
+            if (Tick < minor)
+            {
+                minor = Tick;
+            }
+
+            double major = Tick - minor;
+
+            LevelMasterScroll.Value = major / GameState.Get().GetLevelTotalLength();
+            LevelMinorScroll.Value = minor / MINOR_SCROLL_WIDTH;
+        }
+
         // Loads level from GameState's load table
         public void LoadLevel()
         {
