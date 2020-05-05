@@ -12,6 +12,8 @@ namespace mg_edit
         public const string TEMPLATE_FILE = "template_table.txt";
         public const string LOAD_TABLE_FILE = "load_table.txt";
 
+        public const string PARAMETER_TOKEN = "PARAMETERS";
+
         // Ents loaded from level
         List<Entity> ents = new List<Entity>();
 
@@ -22,7 +24,10 @@ namespace mg_edit
         public string LoadTableBody { get; set; }
 
         // Map of templates
-        private Dictionary<string, string> templates = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> templates = new Dictionary<string, string>();
+
+        // Map of template name 
+        private readonly Dictionary<string, List<string>> templateParameters = new Dictionary<string, List<string>>();
 
         // Check if string is trivial
         static bool IsTrivialString(string line)
@@ -35,10 +40,20 @@ namespace mg_edit
         }
 
         // Adds a template, ignores empty strings
-        private void AddTemplate(string name, string contents)
+        private void AddTemplate(string name, string contents, string lastLine)
         {
             if (name != "" && contents != "")
             {
+                // Check lastline for proper start
+                if (lastLine.Length > 2 
+                    && lastLine[0] == '/' && lastLine[1] == '/'
+                    && lastLine.Substring(2).Trim().StartsWith(PARAMETER_TOKEN))
+                {
+                    templateParameters[name] = new List<string>(lastLine.Substring(2).Trim().Split(' '));
+                    templateParameters[name].RemoveAt(0);
+
+                }
+
                 templates[name] = contents;
             }
         }
@@ -51,6 +66,8 @@ namespace mg_edit
 
             using (StreamReader file = new StreamReader(targetFolder + TEMPLATE_FILE))
             {
+                string lastln = "";
+                string parameterln = "";
                 string ln;
 
                 while ((ln = file.ReadLine()) != null)
@@ -67,7 +84,8 @@ namespace mg_edit
                     else if (ln[0] == '[' && ln[ln.Length - 1] == ']')
                     {
                         // Add last template and setup for next template
-                        AddTemplate(templateName, templateContents);
+                        AddTemplate(templateName, templateContents, parameterln);
+                        parameterln = lastln;
                         templateName = ln.Substring(1, ln.Length - 2);
                         templateContents = "";
                     }
@@ -76,10 +94,11 @@ namespace mg_edit
                     {
                         templateContents = templateContents + ln + '\n';
                     }
+                    lastln = ln;
                 }
 
                 // Need to add last template
-                AddTemplate(templateName, templateContents);
+                AddTemplate(templateName, templateContents, parameterln);
 
             }
 
