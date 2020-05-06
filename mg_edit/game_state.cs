@@ -24,6 +24,9 @@ namespace mg_edit
         // Current tick
         public int Tick {get; set;}
 
+        // Current cursor position in game space
+        public (double, double) CursorPosition { get; set; } = (0.0, 0.0);
+
         // Current level path
         public string LevelFolder { get; set; } = null;
 

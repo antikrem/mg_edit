@@ -11,12 +11,15 @@
         WindowStyle="None"
         Closing="HandleClose">
     <Grid>
-        <Canvas x:Name="CenterCanvas" 
-            HorizontalAlignment="Left" VerticalAlignment="Top"
-            Height="1080" Width="1920">
-        </Canvas>
+        <Label x:Name="CursorLabel" 
+            Content="(0,0)" 
+            VerticalAlignment="Top" HorizontalAlignment="Left"
+            Panel.ZIndex="2"
+            Width="400" Height="30"/>
 
-        <Grid VerticalAlignment ="Bottom" Height="35">
+        <Grid 
+            VerticalAlignment ="Bottom" Height="35" 
+            Panel.ZIndex="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="450*"/>
                 <ColumnDefinition Width="450*"/>
@@ -48,5 +51,16 @@
             <Button Grid.Column="3" Grid.Row="0"
                 Content="Play"/>
         </Grid>
+
+        <Canvas x:Name="CenterCanvas" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Height="1080" Width="1920"
+            Panel.ZIndex="1">
+            <ListBox 
+                Height="1080" Width="1920"
+                MouseDown="UpdateCanvasCursorClick"/>
+
+        </Canvas>
+
     </Grid>
 </Window>

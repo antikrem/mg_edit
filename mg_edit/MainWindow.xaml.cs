@@ -4,8 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Shapes;
-using mg_edit.Dialogue;
 using mg_edit.TextEdit;
+using System.Windows.Media;
+using System.Windows.Input;
 
 namespace mg_edit
 {
@@ -23,6 +24,12 @@ namespace mg_edit
         // Side window used as text editor
         private TextEditWindow textEditWindow;
 
+        // Size of cursor
+        private const double CURSOR_RADIUS = 6;
+
+        // Marker for cursor
+        private Ellipse cursorMarker = null;
+
         // List of guidelines
         private List<Line> guideLines = new List<Line>();
         
@@ -36,6 +43,16 @@ namespace mg_edit
             return (
                     (CenterCanvas.Width * pos.Item1) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_WIDTH)) + CenterCanvas.Width / 2,
                     (CenterCanvas.Height * -pos.Item2) / (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_HEIGHT)) + CenterCanvas.Height / 2
+                );
+        }
+
+        // Translates a point in canvas space to game space
+        private (double, double) TranslateToGameSpace((double, double) pos)
+        {
+            // Applies a linear mapping from canvas space to gamespace
+            return (
+                    (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_WIDTH)) * (pos.Item1 - CenterCanvas.Width / 2) / CenterCanvas.Width,
+                    (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_HEIGHT)) * (pos.Item2 - CenterCanvas.Height / 2) / CenterCanvas.Height
                 );
         }
 
@@ -167,6 +184,46 @@ namespace mg_edit
                     ent.SetMarkerPosition(pos);
                 }
             );
+        }
+
+        // Draw marker for user click
+        // Returns position in game space
+        public (double, double) SetMarker((double, double) position)
+        {
+            if (cursorMarker is null)
+            {
+                cursorMarker = new Ellipse()
+                {
+                    Width = 2 * CURSOR_RADIUS,
+                    Height = 2 * CURSOR_RADIUS,
+                    Stroke = Brushes.Green,
+                    StrokeThickness = 2
+                };
+                CenterCanvas.Children.Add(cursorMarker);
+            }
+
+            cursorMarker.Margin = new System.Windows.Thickness(
+                    position.Item1 - CURSOR_RADIUS,
+                    position.Item2 - CURSOR_RADIUS,
+                    0,
+                    0
+                );
+
+            position = TranslateToGameSpace(position);
+
+            CursorLabel.Content = "(" + position.Item1.ToString() + ", " + position.Item2.ToString() + ")";
+        
+            // Set gamestate's position
+            GameState.Get().CursorPosition = position;
+
+            return position;
+        }
+
+        // Event handler for canvas click
+        public void UpdateCanvasCursorClick(object sender, MouseButtonEventArgs e)
+        {
+            var pos = e.GetPosition(CenterCanvas);
+            SetMarker((pos.X, pos.Y));
         }
 
         // Updates tick and redraws
