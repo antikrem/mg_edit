@@ -31,7 +31,7 @@ namespace mg_edit
         public string LevelFolder { get; set; } = null;
 
         // Last load parser
-        LoadParser loader = null;
+        public LoadParser Loader { get; set; } = null;
 
         // List of current enemies
         private List<Entity> enemies = new List<Entity>();
@@ -54,26 +54,26 @@ namespace mg_edit
         {
             if (LevelFolder is null) return false;
 
-            loader = LoadParser.CreateLevelLoaderFromFile(LevelFolder);
+            Loader = LoadParser.CreateLevelLoaderFromFile(LevelFolder);
 
             // Check for bad loader
-            if (loader is null)  return false;
+            if (Loader is null)  return false;
 
             // Load all templates
-            loader.LoadTemplates();
+            Loader.LoadTemplates();
 
             // Load level to load file
-            loader.LoadLevelLoadTableFromFile();
+            Loader.LoadLevelLoadTableFromFile();
 
             // Load entities
-            loader.LoadLevel();
+            Loader.LoadLevel();
 
             // Load entities
-            this.enemies = loader.GetEntities();
+            this.enemies = Loader.GetEntities();
             this.UpdateAllEntities();
 
             // Set level length
-            this.levelLength = loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
+            this.levelLength = Loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
 
             // Sucessfully loaded
             return true;
@@ -84,17 +84,17 @@ namespace mg_edit
         public bool ReloadLevel(string loadLoadTable)
         {
             // Set load table body
-            loader.LoadTableBody = loadLoadTable;
+            Loader.LoadTableBody = loadLoadTable;
 
             // Load updated level
-            loader.LoadLevel();
+            Loader.LoadLevel();
 
             // Load entities
-            this.enemies = loader.GetEntities();
+            this.enemies = Loader.GetEntities();
             this.UpdateAllEntities();
 
             // Set level length
-            this.levelLength = loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
+            this.levelLength = Loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
 
             return true;
         }
