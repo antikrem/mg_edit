@@ -40,7 +40,16 @@ namespace mg_edit.TextEdit
         // Saves current file
         public void ReloadLevel(object sender, RoutedEventArgs e)
         {
-            mainWindow.ReloadLevel(LevelTextBox.Text);
+            // Check if a loader exists 
+            if (GameState.Get().Loader is object)
+            {
+                mainWindow.ReloadLevel(LevelTextBox.Text);
+            }
+            else
+            {
+                LoadLevel(sender, e);
+            }
+            
         }
 
         // Loads the level
