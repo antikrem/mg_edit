@@ -36,8 +36,7 @@ namespace mg_edit.TextEdit
             LevelTextBox.AppendText(contents);
         }
 
-        // Reloads the level
-        // Saves current file
+        // Handle to reload the level
         public void ReloadLevel(object sender, RoutedEventArgs e)
         {
             // Check if a loader exists 
@@ -52,7 +51,7 @@ namespace mg_edit.TextEdit
             
         }
 
-        // Loads the level
+        // Handle to load a level
         public void LoadLevel(object sender, RoutedEventArgs e)
         {
             // Set up path 
@@ -65,6 +64,13 @@ namespace mg_edit.TextEdit
                 GameState.Get().LevelFolder = levelLoadDialogue.Path;
                 mainWindow.LoadLevel();
             }
+        }
+
+        // Handle to save current file
+        public void SaveLevel(object sender, RoutedEventArgs e)
+        {
+            ReloadLevel(null, null);
+            GameState.Get().Loader.SaveLevel();
         }
 
     }

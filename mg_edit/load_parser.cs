@@ -262,6 +262,12 @@ namespace mg_edit
             return levelLength;
         }
 
+        // Saves level to internal load file
+        public void SaveLevel()
+        {
+            File.WriteAllText(targetFolder + LOAD_TABLE_FILE, LoadTableBody);
+        }
+
         // Constructor sets the target folder
         private LoadParser(string targetFolder)
         {
