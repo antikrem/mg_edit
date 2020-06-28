@@ -73,5 +73,20 @@ namespace mg_edit.TextEdit
             GameState.Get().Loader.SaveLevel();
         }
 
+        // Handle to begin adding template dialogue
+        public void AddTemplate(object sender, RoutedEventArgs e)
+        {
+            // Shoe dialogue
+            var templateInstancer = new TemplateInstanceDialogue(this);
+            AddTemplateButton.IsEnabled = false;
+            templateInstancer.Show();
+        }
+
+        // Renables add template button
+        public void ReenableAddTemplateButton()
+        {
+            AddTemplateButton.IsEnabled = true;
+        }
+
     }
 }
