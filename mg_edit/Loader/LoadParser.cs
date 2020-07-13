@@ -22,7 +22,7 @@ namespace mg_edit.Loader
         // Current folder being loaded from
         private string targetFolder = "";
 
-        // Body of level, unfolded
+        // Body of level
         public string LoadTableBody { get; set; }
 
         // Map of templates
@@ -193,8 +193,7 @@ namespace mg_edit.Loader
 
             // Variables used in parsing
             List<int> cycles = new List<int>();
-
-
+            
             // Current Entity definition being worked on
             Loadable loadable = null;
 
@@ -208,6 +207,8 @@ namespace mg_edit.Loader
                 // Look for starting cycle 
                 if (line.StartsWith("@cycle"))
                 {
+                    // Clear old loadable
+                    loadable = null;
                     cycles.Clear();
                     for (int i = 1; i < vec.Length; i++)
                     {
@@ -244,6 +245,17 @@ namespace mg_edit.Loader
                     }
                 }
 
+                // Update script
+                else if (line.StartsWith("<<"))
+                {
+                    // Either extend or generate new script
+                    if (!(loadable is Script))
+                    {
+                        loadable = new Script(cycles);
+                        loadables.Add(loadable);
+                    }
+                    ((Script)loadable).Extend(line.Substring(2));
+                }
             }
 
 
