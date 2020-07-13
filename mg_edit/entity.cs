@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using mg_edit.Movement;
+using mg_edit.Loader;
 
 using System.Windows.Shapes;
 using System.Windows.Media;
@@ -16,7 +17,7 @@ namespace mg_edit
         // Spawning tick
         private int spawningTick = 0;
 
-        // Movement object to control movement state
+        // Movement object reflected from Definition
         MovementSystem movementSystem = new MovementSystem();
 
         // List of points specifying position
@@ -38,10 +39,10 @@ namespace mg_edit
             StrokeThickness = 3
         };
 
-
-    // Constructs with known starting tick
-    public Entity(int spawningTick)
+        // Constructs from within an entity definition
+        public Entity(MovementSystem movementSystem, int spawningTick)
         {
+            this.movementSystem = movementSystem;
             this.spawningTick = spawningTick;
         }
 
