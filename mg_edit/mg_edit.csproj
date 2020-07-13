@@ -39,6 +39,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,10 +59,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogue\TemplateInstanceDialogue.xaml.cs">
+      <DependentUpon>TemplateInstanceDialogue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogue\ITemplateParameter.cs" />
+    <Compile Include="Dialogue\TemplateParameterCursorPosition.xaml.cs">
+      <DependentUpon>TemplateParameterCursorPosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Loader\EntityDefinition.cs" />
+    <Compile Include="Loader\Loadable.cs" />
     <Compile Include="TextEdit\TextEditWindow.xaml.cs">
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialogue\LevelLoadDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogue\TemplateInstanceDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogue\TemplateParameterCursorPosition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,7 +107,7 @@
     <Compile Include="Movement\movement_system.cs" />
     <Compile Include="entity.cs" />
     <Compile Include="game_state.cs" />
-    <Compile Include="load_parser.cs" />
+    <Compile Include="Loader\LoadParser.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
