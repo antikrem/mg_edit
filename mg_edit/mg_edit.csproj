@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Loader\EntityDefinition.cs" />
     <Compile Include="Loader\Loadable.cs" />
+    <Compile Include="Loader\Script.cs" />
     <Compile Include="TextEdit\TextEditWindow.xaml.cs">
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
