@@ -294,19 +294,13 @@ namespace mg_edit.Loader
             this.targetFolder = targetFolder;
         }
 
-        // Returns true if the folder is valid
-        public bool IsValidConstruction()
-        {
-            return File.Exists(targetFolder + LOAD_TABLE_FILE);
-        }
-
         // Creates an instance of LoadParser
         // Takes targetFolder to search for load files
         // returns null on failure
         public static LoadParser CreateLevelLoaderFromFile(string targetFolder)
         {
             LoadParser loader = new LoadParser(targetFolder);
-            return loader.IsValidConstruction() ? loader : null;
+            return File.Exists(targetFolder + LOAD_TABLE_FILE) ? loader : null;
 
         } 
     }
