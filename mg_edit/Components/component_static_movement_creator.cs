@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using mg_edit.Movement;
 
-namespace mg_edit.Components
+namespace mg_edit.Loader
 {
     class ComponentStaticMovementCreator : ComponentCreator
     {
 
         // Static methods for updating entity
-        private static void AddPolarTurn(string[] parameters, Entity entity)
+        private static void AddPolarTurn(string[] parameters, EntityDefinition entDef)
         {
-            entity.GetMovementSystem().AddMovementCommand(
+            entDef.MovementSystem.AddMovementCommand(
                 Int32.Parse(parameters[0]),
                 new MovementPolarTurn(
                     Double.Parse(parameters[2]) / Int32.Parse(parameters[1]),
@@ -22,9 +22,9 @@ namespace mg_edit.Components
             );
         }
 
-        private static void AddPolarAccelerateTo(string[] parameters, Entity entity)
+        private static void AddPolarAccelerateTo(string[] parameters, EntityDefinition entDef)
         {
-            entity.GetMovementSystem().AddMovementCommand(
+            entDef.MovementSystem.AddMovementCommand(
                 Int32.Parse(parameters[0]),
                 new MovementPolarAccelerateTo(
                     Double.Parse(parameters[2]),
