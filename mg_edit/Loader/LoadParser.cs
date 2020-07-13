@@ -196,7 +196,7 @@ namespace mg_edit.Loader
 
 
             // Current Entity definition being worked on
-            EntityDefinition entityDefinition = null;
+            Loadable loadable = null;
 
             // Current component 
             ComponentCreator component = null;
@@ -218,14 +218,9 @@ namespace mg_edit.Loader
                 // Look for an ent declaration
                 else if (line.StartsWith("ent"))
                 {
-                    // Push current ents and clear list
-                    if (entityDefinition is object)
-                    {
-                        loadables.Add(entityDefinition);
-                    }
-
                     // Generate new entities
-                    entityDefinition = new EntityDefinition(cycles);
+                    loadable = new EntityDefinition(cycles);
+                    loadables.Add(loadable);
 
                 }
 
@@ -236,7 +231,7 @@ namespace mg_edit.Loader
                     if (component is Object)
                     {
                         string[] parameters = line.Split(' ').Skip(1).ToArray();
-                        component.Initialise(parameters, entityDefinition);
+                        component.Initialise(parameters, (EntityDefinition)loadable);
                     }
                 }
                 
@@ -245,13 +240,13 @@ namespace mg_edit.Loader
                 {
                     if (component is Object)
                     {
-                        component.UpdateEntity(line, entityDefinition);
+                        component.UpdateEntity(line, (EntityDefinition)loadable);
                     }
                 }
 
             }
 
-            loadables.Add(entityDefinition);
+
             EvaluateEntities();
         }
 
