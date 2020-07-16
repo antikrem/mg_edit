@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using mg_edit.TextEdit;
+using mg_edit.Loader;
+
 
 namespace mg_edit
 {
@@ -68,27 +69,14 @@ namespace mg_edit
             // Load entities
             Loader.LoadLevel();
 
-            // Load entities
-            this.enemies = Loader.GetEntities();
-            this.UpdateAllEntities();
-
-            // Set level length
-            this.levelLength = Loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
-
             // Sucessfully loaded
-            return true;
+            return this.ReloadLevel();
             
         }
 
         // Reloads the level with just the updated level body
-        public bool ReloadLevel(string loadLoadTable)
+        public bool ReloadLevel()
         {
-            // Set load table body
-            Loader.LoadTableBody = loadLoadTable;
-
-            // Load updated level
-            Loader.LoadLevel();
-
             // Load entities
             this.enemies = Loader.GetEntities();
             this.UpdateAllEntities();
@@ -113,6 +101,12 @@ namespace mg_edit
             }
 
             return instance;
+        }
+
+        // Gets the current load parser
+        static public LoadParser GetLevel()
+        {
+            return GameState.Get().Loader;
         }
 
         // Updates all entities
