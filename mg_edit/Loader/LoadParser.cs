@@ -257,9 +257,6 @@ namespace mg_edit.Loader
                     ((Script)loadable).Extend(line.Substring(2));
                 }
             }
-
-
-            EvaluateEntities();
         }
 
         // Evaluates from existing definitions into list of entities
@@ -279,6 +276,12 @@ namespace mg_edit.Loader
         public List<Entity> GetEntities()
         {
             return entities;
+        }
+
+        // Returns all loadables
+        public List<Loadable> GetLoadables()
+        {
+            return loadables;
         }
 
         // Returns length of level

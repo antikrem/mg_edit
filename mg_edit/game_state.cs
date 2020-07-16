@@ -78,6 +78,7 @@ namespace mg_edit
         public bool ReloadLevel()
         {
             // Load entities
+            Loader.EvaluateEntities();
             this.enemies = Loader.GetEntities();
             this.UpdateAllEntities();
 
