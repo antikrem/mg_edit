@@ -69,6 +69,14 @@
     <Compile Include="Loader\EntityDefinition.cs" />
     <Compile Include="Loader\Loadable.cs" />
     <Compile Include="Loader\Script.cs" />
+    <Compile Include="Loader\TemplateInstance.cs" />
+    <Compile Include="TextEdit\ILoadablePanel.cs" />
+    <Compile Include="TextEdit\EntityDefinitionPanel.xaml.cs">
+      <DependentUpon>EntityDefinitionPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextEdit\ScriptLoadPanel.xaml.cs">
+      <DependentUpon>ScriptLoadPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextEdit\TextEditWindow.xaml.cs">
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
@@ -113,6 +121,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TextEdit\EntityDefinitionPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TextEdit\ScriptLoadPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TextEdit\TextEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

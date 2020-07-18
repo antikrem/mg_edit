@@ -28,7 +28,7 @@ namespace mg_edit.Loader
         // Map of templates
         private readonly Dictionary<string, string> templates = new Dictionary<string, string>();
 
-        // Map of template name 
+        // Map of template PARAMETERS 
         private readonly Dictionary<string, List<string>> templateParameters = new Dictionary<string, List<string>>();
 
         // Check if string is trivial
@@ -117,6 +117,7 @@ namespace mg_edit.Loader
             {
                 body = body.Replace("%" + i.ToString(), vec[i]);
             }
+            body = body + line + "\n";
 
             return body;
         }
@@ -255,6 +256,20 @@ namespace mg_edit.Loader
                         loadables.Add(loadable);
                     }
                     ((Script)loadable).Extend(line.Substring(2));
+                }
+
+                // Add a template
+                else if (line.StartsWith("#"))
+                {
+                    // Look up template
+                    string templateName = line.Substring(1).Split(' ')[0];
+                    List<string> parameters = line.Substring(1).Split(' ').Skip(1).ToList();
+
+                    if (templates.ContainsKey(templateName))
+                    {
+                        ((EntityDefinition)loadable).AddTemplate(templateName, parameters);
+                    }
+                    
                 }
             }
         }

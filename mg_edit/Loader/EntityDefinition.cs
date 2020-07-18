@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using mg_edit.Movement;
+using mg_edit.TextEdit;
 
 namespace mg_edit.Loader
 {
@@ -15,13 +16,24 @@ namespace mg_edit.Loader
         public MovementSystem MovementSystem { get; }
 
         // List of instances of this definition
-        private List<Entity> Instances { get; }
+        public List<Entity> Instances { get; }
+
+        // List of templates
+        private List<TemplateInstance> Templates { get; }
 
         public EntityDefinition(List<int> SpawningCycles)
         {
             MovementSystem = new MovementSystem();
             Instances = new List<Entity>();
+            Templates = new List<TemplateInstance>();
+
             this.SpawningCycles = SpawningCycles;
+        }
+
+        // Add a template
+        public void AddTemplate(string templateName, List<string> parameters)
+        {
+            Templates.Add(new TemplateInstance(templateName, parameters));
         }
 
         // Returns all instances of this definition
@@ -30,6 +42,11 @@ namespace mg_edit.Loader
             Instances.Clear();
             SpawningCycles.ForEach( i => Instances.Add(new Entity(MovementSystem, i)) );
             return Instances;
+        }
+
+        protected override ILoadablePanel GenerateLoadPanel()
+        {
+            return new EntityDefinitionLoadPanel(this);
         }
     }
 }
