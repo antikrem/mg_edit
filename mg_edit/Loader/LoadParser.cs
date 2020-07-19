@@ -206,7 +206,7 @@ namespace mg_edit.Loader
                 var vec = line.Split(' ');
 
                 // Look for starting cycle 
-                if (line.StartsWith("@cycle"))
+                if (line.StartsWith("@cycle") || line.StartsWith("@immediate"))
                 {
                     // Clear old loadable
                     loadable = null;
