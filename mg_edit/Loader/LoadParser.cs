@@ -157,26 +157,6 @@ namespace mg_edit.Loader
             return loadTable;
         }
 
-        // Translates a component name to correct Component type
-        static private ComponentCreator TranslateToComponentType(string line)
-        {
-            string name = line.Substring(1).Split(' ')[0];
-            switch (name)
-            {
-                case "position":
-                    return new ComponentPositionCreator();
-
-                case "movement":
-                    return new ComponentMovementCreator();
-
-                case "staticMovement":
-                    return new ComponentStaticMovementCreator();
-
-                default:
-                    return null;
-            }
-        }
-
         // Load level's load table body to memory
         public void LoadLevelLoadTableFromFile()
         {
@@ -229,7 +209,7 @@ namespace mg_edit.Loader
                 // Sets flags on which component to update
                 else if (line.StartsWith("+"))
                 {
-                    component = TranslateToComponentType(line);
+                    component = ComponentCreator.TranslateToComponentType(line);
                     if (component is Object)
                     {
                         string[] parameters = line.Split(' ').Skip(1).ToArray();

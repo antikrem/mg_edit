@@ -50,5 +50,25 @@ namespace mg_edit.Loader
             
         }
 
+        // Translates a component name to correct Component type
+        static public ComponentCreator TranslateToComponentType(string line)
+        {
+            string name = line.Substring(1).Split(' ')[0];
+            switch (name)
+            {
+                case "position":
+                    return new ComponentPositionCreator();
+
+                case "movement":
+                    return new ComponentMovementCreator();
+
+                case "staticMovement":
+                    return new ComponentStaticMovementCreator();
+
+                default:
+                    return null;
+            }
+        }
+
     }
 }
