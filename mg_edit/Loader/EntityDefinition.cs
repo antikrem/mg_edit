@@ -21,19 +21,31 @@ namespace mg_edit.Loader
         // List of templates
         private List<TemplateInstance> Templates { get; }
 
+        // Map of component names to components
+        private Dictionary<string, ComponentCreator> Components { set; get; }
+
         public EntityDefinition(List<int> SpawningCycles)
         {
             MovementSystem = new MovementSystem();
             Instances = new List<Entity>();
             Templates = new List<TemplateInstance>();
+            Components = new Dictionary<string, ComponentCreator>();
 
             this.SpawningCycles = SpawningCycles;
         }
 
-        // Add a template
-        public void AddTemplate(string templateName, List<string> parameters)
+        // Add a template, if the template contains an existing component, remove it 
+        public void AddTemplate(LoadParser parser, string templateName, List<string> parameters)
         {
-            Templates.Add(new TemplateInstance(templateName, parameters));
+            var template = new TemplateInstance(templateName, parameters);
+            Templates.Add(template);
+
+            string body = parser.Templates[templateName];
+
+            Components = Components
+                .Where(entry => !body.Contains(entry.Key))
+                .ToDictionary(kv => kv.Key, kv => kv.Value);
+
         }
 
         // Returns all instances of this definition
@@ -49,16 +61,23 @@ namespace mg_edit.Loader
             return new EntityDefinitionLoadPanel(this);
         }
 
+        // Adds component
+        public void AddComponent(string componentName, ComponentCreator component)
+        {
+            Components["+" + componentName] = component;
+        }
+
         // Creates a script save for this
         public override string ConstructSaveDirective()
         {
-            string body = "";
+            List<string> body = new List<string>();
 
             // Add all templates
-            Templates.ForEach(x => body = body + x.ToString() + "\n");
-            return body;
+            Templates.ForEach(x => body.Add(x.ToString()));
+            
+            return string.Join("\n", body.ToArray()) + "\n";
         }
 
-       
+        
     }
 }

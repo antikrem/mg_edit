@@ -26,10 +26,10 @@ namespace mg_edit.Loader
         public string LoadTableBody { get; set; }
 
         // Map of templates
-        private readonly Dictionary<string, string> templates = new Dictionary<string, string>();
+        public readonly Dictionary<string, string> Templates = new Dictionary<string, string>();
 
         // Map of template PARAMETERS 
-        private readonly Dictionary<string, List<string>> templateParameters = new Dictionary<string, List<string>>();
+        public readonly Dictionary<string, List<string>> TemplateParameters = new Dictionary<string, List<string>>();
 
         // Check if string is trivial
         static bool IsTrivialString(string line)
@@ -51,12 +51,12 @@ namespace mg_edit.Loader
                     && lastLine[0] == '/' && lastLine[1] == '/'
                     && lastLine.Substring(2).Trim().StartsWith(PARAMETER_TOKEN))
                 {
-                    templateParameters[name] = new List<string>(lastLine.Substring(2).Trim().Split(' '));
-                    templateParameters[name].RemoveAt(0);
+                    TemplateParameters[name] = new List<string>(lastLine.Substring(2).Trim().Split(' '));
+                    TemplateParameters[name].RemoveAt(0);
 
                 }
 
-                templates[name] = contents;
+                Templates[name] = contents;
             }
         }
 
@@ -111,7 +111,7 @@ namespace mg_edit.Loader
         {
             var vec = line.Split(' ');
 
-            string body = this.templates[vec[0].Substring(1)];
+            string body = this.Templates[vec[0].Substring(1)];
 
             for (int i = 1; i < vec.Length; i++)
             {
@@ -209,11 +209,14 @@ namespace mg_edit.Loader
                 // Sets flags on which component to update
                 else if (line.StartsWith("+"))
                 {
-                    component = ComponentCreator.TranslateToComponentType(line);
+                    string name = line.Substring(1).Split(' ')[0];
+                    string[] parameters = line.Split(' ').Skip(1).ToArray();
+
+                    component = ComponentCreator.TranslateToComponentType(name);
                     if (component is Object)
                     {
-                        string[] parameters = line.Split(' ').Skip(1).ToArray();
                         component.Initialise(parameters, (EntityDefinition)loadable);
+                        ((EntityDefinition)loadable).AddComponent(name, component);
                     }
                 }
                 
@@ -245,9 +248,9 @@ namespace mg_edit.Loader
                     string templateName = line.Substring(1).Split(' ')[0];
                     List<string> parameters = line.Substring(1).Split(' ').Skip(1).ToList();
 
-                    if (templates.ContainsKey(templateName))
+                    if (Templates.ContainsKey(templateName))
                     {
-                        ((EntityDefinition)loadable).AddTemplate(templateName, parameters);
+                        ((EntityDefinition)loadable).AddTemplate(this, templateName, parameters);
                     }
                     
                 }
