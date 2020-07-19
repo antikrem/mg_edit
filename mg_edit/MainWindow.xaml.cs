@@ -268,11 +268,11 @@ namespace mg_edit
             this.textEditWindow.UpdateText(GameState.Get().LevelFolder);
         }
 
-        // Reloads level from a string
-        public void ReloadLevel(string loadLoadTable)
+        // Reloads level current loadables
+        public void ReloadLevel()
         {
             // Load from string
-            GameState.Get().ReloadLevel(loadLoadTable);
+            GameState.Get().ReloadLevel();
 
             // Draw level
             this.UpdateScroll(null, null);
