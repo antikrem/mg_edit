@@ -48,5 +48,17 @@ namespace mg_edit.Loader
         {
             return new EntityDefinitionLoadPanel(this);
         }
+
+        // Creates a script save for this
+        public override string ConstructSaveDirective()
+        {
+            string body = "";
+
+            // Add all templates
+            Templates.ForEach(x => body = body + x.ToString() + "\n");
+            return body;
+        }
+
+       
     }
 }

@@ -274,6 +274,43 @@ namespace mg_edit.Loader
             }
         }
 
+        // Create a cycle directive for this 
+        private string ConstructCycleDirective(Loadable loadable)
+        {
+            if (loadable.SpawningCycles.Count > 0)
+            {
+                string line = "@cycle ";
+                loadable.SpawningCycles.ForEach(x => line = line + x.ToString() + " ");
+                return line + "\n";
+            }
+            else
+            {
+                return "@immediate\n";
+            }
+        }
+
+        // Save level to file
+        public void SaveLevel()
+        {
+            string levelBody = "";
+            
+            foreach (var loadable in loadables)
+            {
+                // Add cycle for loadable
+                levelBody = levelBody + ConstructCycleDirective(loadable);
+
+                // Save each loadable
+                levelBody = levelBody + loadable.ConstructSaveDirective();
+
+                // New line between each loadable
+                levelBody = levelBody + "\n";
+            }
+            levelBody.ToString();
+
+            File.WriteAllText(targetFolder + "save" + LOAD_TABLE_FILE, levelBody);
+            //File.WriteAllText(targetFolder + LOAD_TABLE_FILE, levelBody);
+        }
+
         // Evaluates from existing definitions into list of entities
         public void EvaluateEntities()
         {
@@ -305,12 +342,6 @@ namespace mg_edit.Loader
             int levelLength = 0;
             this.entities.ForEach(ent => levelLength = Math.Max(levelLength, ent.GetSpawningTick() + ent.GetLifetime()));
             return levelLength;
-        }
-
-        // Saves level to internal load file
-        public void SaveLevel()
-        {
-            File.WriteAllText(targetFolder + LOAD_TABLE_FILE, LoadTableBody);
         }
 
         // Constructor sets the target folder

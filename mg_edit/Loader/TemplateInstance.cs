@@ -27,5 +27,11 @@ namespace mg_edit.Loader
             this.Parameters = parameters;
         }
 
+        public override string ToString()
+        {
+            string parameters = "";
+            Parameters.ForEach(x => parameters = parameters + " " + x);
+            return "#" + Name + parameters;
+        }
     }
 }
