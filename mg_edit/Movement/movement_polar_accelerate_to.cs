@@ -37,5 +37,13 @@ namespace mg_edit.Movement
                 movementState.SpeedChange = 0;
             }
         }
+
+        public override string ComposeSaveDefinition(int cycle)
+        {
+            return "->add_polar_accelerate_to(" + cycle.ToString()
+                + ", " + duration.ToString()
+                + ", " + endingSpeed.ToString()
+                + ")";
+        }
     }
 }

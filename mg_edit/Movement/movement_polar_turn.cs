@@ -16,7 +16,7 @@ namespace mg_edit.Movement
         {
             this.rate = rate;
             this.duration = duration;
-        } 
+        }
 
         // Check tick is within duration
         public override bool IsExecuting(int tick)
@@ -35,6 +35,14 @@ namespace mg_edit.Movement
             {
                 movementState.AngleChange = 0;
             }
+        }
+
+        public override string ComposeSaveDefinition(int cycle)
+        {
+            return "->add_polar_turn(" + cycle.ToString() 
+                + ", " + duration.ToString()
+                + ", " + (rate * duration).ToString()
+                + ")";
         }
     }
 }

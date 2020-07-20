@@ -42,7 +42,12 @@ namespace mg_edit.Loader
 
         public override string ComposeSaveDirective(EntityDefinition entDef)
         {
-            return "+staticMovement";
+            string body = "+staticMovement";
+
+            entDef.MovementSystem.MovementCommands.AsList()
+                .ForEach(x => body = body + "\n" + x.Item2.ComposeSaveDefinition(x.Item1));
+
+            return body;
         }
     }
 }

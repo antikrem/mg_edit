@@ -18,5 +18,8 @@ namespace mg_edit.Movement
         // Takes current position and movement system
         // Updates movement system with this tick of a MovementQuanta's derived functionality
         public abstract void UpdateExecution(int tick, MovementState movementState);
+
+        // Returns a string representing this movement quanta for save
+        abstract public string ComposeSaveDefinition(int cycle);
     }
 }
