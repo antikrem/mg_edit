@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mg_edit.Loader
 {
-    class ComponentPositionCreator : ComponentCreator
+    class ComponentPosition : Component
     {
         // Sets position
         override public void Initialise(string[] parameters, EntityDefinition entDef)
@@ -14,7 +14,7 @@ namespace mg_edit.Loader
             entDef.MovementSystem.GetStartingState().Position = (Int32.Parse(parameters[0]), Int32.Parse(parameters[1]));
         }
 
-        public ComponentPositionCreator()
+        public ComponentPosition()
         {
             
         }

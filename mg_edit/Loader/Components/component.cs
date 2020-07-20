@@ -10,7 +10,7 @@ using mg_edit.Movement;
 namespace mg_edit.Loader
 {
     // Base class used to represent a Component
-    abstract class ComponentCreator
+    abstract class Component
     {
         // Look up for correct string handler
         private Dictionary<string, (int, Delegate)> lookup = new Dictionary<string, (int, Delegate)>();
@@ -51,18 +51,18 @@ namespace mg_edit.Loader
         }
 
         // Translates a component name to correct Component type
-        static public ComponentCreator TranslateToComponentType(string name)
+        static public Component TranslateToComponentType(string name)
         {
             switch (name)
             {
                 case "position":
-                    return new ComponentPositionCreator();
+                    return new ComponentPosition();
 
                 case "movement":
-                    return new ComponentMovementCreator();
+                    return new ComponentMovement();
 
                 case "staticMovement":
-                    return new ComponentStaticMovementCreator();
+                    return new ComponentStaticMovement();
 
                 default:
                     return null;

@@ -7,7 +7,7 @@ using mg_edit.Movement;
 
 namespace mg_edit.Loader
 {
-    class ComponentStaticMovementCreator : ComponentCreator
+    class ComponentStaticMovement : Component
     {
 
         // Static methods for updating entity
@@ -33,7 +33,7 @@ namespace mg_edit.Loader
             );
         }
 
-        public ComponentStaticMovementCreator()
+        public ComponentStaticMovement()
         {
             AddFunction("add_polar_turn", AddPolarTurn, 3);
             AddFunction("add_polar_accelerate_to", AddPolarAccelerateTo, 3);
