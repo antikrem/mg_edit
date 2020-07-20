@@ -179,7 +179,7 @@ namespace mg_edit.Loader
             Loadable loadable = null;
 
             // Current component 
-            ComponentCreator component = null;
+            Component component = null;
 
             foreach (string line in loadTable)
             {
@@ -212,7 +212,7 @@ namespace mg_edit.Loader
                     string name = line.Substring(1).Split(' ')[0];
                     string[] parameters = line.Split(' ').Skip(1).ToArray();
 
-                    component = ComponentCreator.TranslateToComponentType(name);
+                    component = Component.TranslateToComponentType(name);
                     if (component is Object)
                     {
                         component.Initialise(parameters, (EntityDefinition)loadable);

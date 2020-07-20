@@ -22,14 +22,14 @@ namespace mg_edit.Loader
         private List<TemplateInstance> Templates { get; }
 
         // Map of component names to components
-        private Dictionary<string, ComponentCreator> Components { set; get; }
+        private Dictionary<string, Component> Components { set; get; }
 
         public EntityDefinition(List<int> SpawningCycles)
         {
             MovementSystem = new MovementSystem();
             Instances = new List<Entity>();
             Templates = new List<TemplateInstance>();
-            Components = new Dictionary<string, ComponentCreator>();
+            Components = new Dictionary<string, Component>();
 
             this.SpawningCycles = SpawningCycles;
         }
@@ -62,7 +62,7 @@ namespace mg_edit.Loader
         }
 
         // Adds component
-        public void AddComponent(string componentName, ComponentCreator component)
+        public void AddComponent(string componentName, Component component)
         {
             Components["+" + componentName] = component;
         }
