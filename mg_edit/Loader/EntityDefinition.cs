@@ -13,24 +13,19 @@ namespace mg_edit.Loader
     class EntityDefinition : Loadable
     {
         // Movement object to control movement state
-        public MovementSystem MovementSystem { get; }
+        public MovementSystem MovementSystem { get; } = new MovementSystem();
 
         // List of instances of this definition
-        public List<Entity> Instances { get; }
+        public List<Entity> Instances { get; } = new List<Entity>();
 
         // List of templates
-        private List<TemplateInstance> Templates { get; }
+        private List<TemplateInstance> Templates { get; } = new List<TemplateInstance>();
 
         // Map of component names to components
-        private Dictionary<string, Component> Components { set; get; }
+        private Dictionary<string, Component> Components { set; get; } = new Dictionary<string, Component>();
 
         public EntityDefinition(List<int> SpawningCycles)
         {
-            MovementSystem = new MovementSystem();
-            Instances = new List<Entity>();
-            Templates = new List<TemplateInstance>();
-            Components = new Dictionary<string, Component>();
-
             this.SpawningCycles = SpawningCycles;
         }
 
