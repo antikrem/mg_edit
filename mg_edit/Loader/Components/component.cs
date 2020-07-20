@@ -64,6 +64,9 @@ namespace mg_edit.Loader
                 case "staticMovement":
                     return new ComponentStaticMovement();
 
+                case "bulletMaster":
+                    return new ComponentBulletMaster();
+
                 default:
                     return null;
             }
