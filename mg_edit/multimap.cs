@@ -37,5 +37,21 @@ namespace mg_edit
             }
             return internalMap[key];
         }
+
+        // Returns a list of key to value
+        public List<(Key, Value)> AsList()
+        {
+            List<(Key, Value)> list = new List<(Key, Value)>();
+
+            foreach (var kv in internalMap)
+            {
+                foreach (var v in kv.Value)
+                {
+                    list.Add((kv.Key, v));
+                }
+            }
+            
+            return list;
+        }
     }
 }
