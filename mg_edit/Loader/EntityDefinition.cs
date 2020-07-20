@@ -74,7 +74,12 @@ namespace mg_edit.Loader
 
             // Add all templates
             Templates.ForEach(x => body.Add(x.ToString()));
-            
+
+            // Add extra components
+            foreach(var x in Components.Values) {
+                body.Add(x.ComposeSaveDirective(this));
+            }
+
             return string.Join("\n", body.ToArray()) + "\n";
         }
 

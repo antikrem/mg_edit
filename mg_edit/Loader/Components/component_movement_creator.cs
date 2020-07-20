@@ -60,6 +60,9 @@ namespace mg_edit.Loader
 
         }
 
-        
+        public override string ComposeSaveDirective(EntityDefinition entDef)
+        {
+            return "+movement";
+        }
     }
 }

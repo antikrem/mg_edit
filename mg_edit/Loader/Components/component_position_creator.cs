@@ -19,6 +19,10 @@ namespace mg_edit.Loader
             
         }
 
-
+        public override string ComposeSaveDirective(EntityDefinition entDef)
+        {
+            var startingPosition = entDef.MovementSystem.GetStartingState().Position;
+            return "+postion " + startingPosition.Item1.ToString() + " " + startingPosition.Item2.ToString() + " 0";
+        }
     }
 }

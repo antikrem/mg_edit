@@ -69,5 +69,7 @@ namespace mg_edit.Loader
             }
         }
 
+        // Returns string representation of this component for saving
+        abstract public string ComposeSaveDirective(EntityDefinition entDef);
     }
 }
