@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using mg_edit.Dialogue;
+using mg_edit.Loader;
 
 namespace mg_edit.TextEdit
 {
@@ -31,9 +32,7 @@ namespace mg_edit.TextEdit
         // Updates this text editor video with a given text file
         public void UpdateText(string filepath)
         {
-            LevelTextBox.Clear();
             string contents = File.ReadAllText(filepath + LoadParser.LOAD_TABLE_FILE);
-            LevelTextBox.AppendText(contents);
         }
 
         // Handle to reload the level
@@ -42,7 +41,7 @@ namespace mg_edit.TextEdit
             // Check if a loader exists 
             if (GameState.Get().Loader is object)
             {
-                mainWindow.ReloadLevel(LevelTextBox.Text);
+                mainWindow.ReloadLevel();
             }
             else
             {
@@ -64,6 +63,8 @@ namespace mg_edit.TextEdit
                 GameState.Get().LevelFolder = levelLoadDialogue.Path;
                 mainWindow.LoadLevel();
             }
+
+            this.DrawLoadablePanels();
         }
 
         // Handle to save current file
@@ -86,6 +87,18 @@ namespace mg_edit.TextEdit
         public void ReenableAddTemplateButton()
         {
             AddTemplateButton.IsEnabled = true;
+        }
+
+        // Takes all loadables and displays loadable panels
+        public void DrawLoadablePanels()
+        {
+            LoadablePanels.Children.Clear();
+            LoadParser level = GameState.GetLevel();
+
+            foreach (Loadable loadable in level.GetLoadables())
+            {
+                LoadablePanels.Children.Add((UIElement)loadable.GetLoadablePanel());
+            }
         }
 
     }

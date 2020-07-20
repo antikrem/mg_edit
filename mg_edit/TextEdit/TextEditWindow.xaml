@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mg_edit.TextEdit"
         mc:Ignorable="d"
-        Title="Level Load Table" Height="615" Width="800">
+        Title="Level Load Table" Height="615" Width="650">
     <Grid>
-        <Grid Height="160" VerticalAlignment="Top" Margin="0,0">
+        <Grid VerticalAlignment="Stretch" Margin="0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400*"/>
                 <ColumnDefinition Width="100*"/>
@@ -16,19 +16,18 @@
                 <ColumnDefinition Width="100*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <DockPanel 
-                Grid.Column="0" Grid.Row="0" Background="Black" LastChildFill ="True"
+                Grid.Column="0" Grid.Row="0" LastChildFill ="True" 
                 Grid.RowSpan="3">
                 <ListBox x:Name="ActiveListBox" 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Stretch"
-                Background="Red" 
-                Width="{Binding ActualWidth, ElementName=parentElementName}"
                 Margin="0 0 20 0"/>
             </DockPanel>
 
@@ -38,13 +37,28 @@
 
             <Button x:Name ="AddTemplateButton" Grid.Column="1" Grid.Row="1" Content="Add Template" Click="AddTemplate" Grid.ColumnSpan="2"/>
             <Button Grid.Column="3" Grid.Row="1" Content="Modify Template" Click="ReloadLevel" Grid.ColumnSpan="2"/>
+
+
+
+            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                          Grid.ColumnSpan="5" Grid.Row="3" Grid.Column="0" RenderTransformOrigin="0.5,0.5">
+                <ScrollViewer.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.534"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="2.991"/>
+                    </TransformGroup>
+                </ScrollViewer.RenderTransform>
+                <StackPanel x:Name = "LoadablePanels" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            Grid.RowSpan="2">
+                    <Label Content="Label" HorizontalAlignment="Left"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+
         </Grid>
-
-
-        <TextBox x:Name="LevelTextBox" 
-                 Margin="0,160,0,0"
-                 VerticalScrollBarVisibility="Visible"
-                 />
 
     </Grid>
 </Window>
