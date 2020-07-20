@@ -14,6 +14,9 @@ namespace mg_edit.Loader
         // Name of bullet master
         private int Delay { get; set; } = 0;
 
+        // Additional parameters
+        private string[] AdditionalParameters { get; set; } = null;
+
         // Sets position
         override public void Initialise(string[] parameters, EntityDefinition entDef)
         {
@@ -21,6 +24,10 @@ namespace mg_edit.Loader
             if (parameters.Length > 1)
             {
                 Delay = Int32.Parse(parameters[1]);
+            }
+            if (parameters.Length > 2)
+            {
+                AdditionalParameters = parameters.Skip(2).ToArray();
             }
         }
 
@@ -31,7 +38,15 @@ namespace mg_edit.Loader
 
         public override string ComposeSaveDirective(EntityDefinition entDef)
         {
-            return "+bulletMaster " + Name + (Delay != 0 ? " " + Delay.ToString() : "");
+            string body = "+bulletMaster " + Name;
+
+            body = body + (Delay != 0 ? " " + Delay.ToString() : "");
+
+            if (!(AdditionalParameters is null))
+            {
+                body = body + " " + string.Join(" ", AdditionalParameters);
+            }
+            return body;
         }
     }
 }
