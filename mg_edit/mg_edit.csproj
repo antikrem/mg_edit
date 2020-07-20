@@ -100,10 +100,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Loader\Components\component_creator.cs" />
-    <Compile Include="Loader\Components\component_movement_creator.cs" />
-    <Compile Include="Loader\Components\component_position_creator.cs" />
-    <Compile Include="Loader\Components\component_static_movement_creator.cs" />
+    <Compile Include="Loader\Components\component.cs" />
+    <Compile Include="Loader\Components\component_movement.cs" />
+    <Compile Include="Loader\Components\component_position.cs" />
+    <Compile Include="Loader\Components\component_static_movement.cs" />
     <Compile Include="Dialogue\LevelLoadDialogue.xaml.cs">
       <DependentUpon>LevelLoadDialogue.xaml</DependentUpon>
     </Compile>
