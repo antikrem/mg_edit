@@ -11,7 +11,7 @@ namespace mg_edit.Loader
         // Sets position
         override public void Initialise(string[] parameters, EntityDefinition entDef)
         {
-            entDef.MovementSystem.GetStartingState().Position = (Int32.Parse(parameters[0]), Int32.Parse(parameters[1]));
+            entDef.MovementSystem.GetStartingState().Position = (double.Parse(parameters[0]), double.Parse(parameters[1]));
         }
 
         public ComponentPosition()
