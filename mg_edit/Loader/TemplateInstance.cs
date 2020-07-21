@@ -27,7 +27,8 @@ namespace mg_edit.Loader
             this.Parameters = parameters;
         }
 
-        public override string ToString()
+        // Returns a string save representation
+        public string ComposeSaveDirective()
         {
             string parameters = "";
             Parameters.ForEach(x => parameters = parameters + " " + x);

@@ -68,7 +68,7 @@ namespace mg_edit.Loader
             List<string> body = new List<string>();
 
             // Add all templates
-            Templates.ForEach(x => body.Add(x.ToString()));
+            Templates.ForEach(x => body.Add(x.ComposeSaveDirective()));
 
             // Add extra components
             foreach(var x in Components.Values) {
@@ -78,6 +78,7 @@ namespace mg_edit.Loader
             return string.Join("\n", body.ToArray()) + "\n";
         }
 
-        
+        // Reload this entity for templates
+
     }
 }
