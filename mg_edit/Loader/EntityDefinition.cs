@@ -78,7 +78,42 @@ namespace mg_edit.Loader
             return string.Join("\n", body.ToArray()) + "\n";
         }
 
-        // Reload this entity for templates
+        // Reload this entity from templates
+        // Modyfying components is instant
+        public void Reload(LoadParser level)
+        {
+            foreach (var template in Templates)
+            {
+                string[] body = template.GetSubbedTemplate(level).Split('\n'); ;
 
+                // Current component 
+                Component component = null;
+
+                foreach (var line in body)
+                {
+                    if (line.StartsWith("+"))
+                    {
+                        string name = line.Substring(1).Split(' ')[0];
+                        string[] parameters = line.Split(' ').Skip(1).ToArray();
+
+                        component = Component.TranslateToComponentType(name);
+                        if (component is Object)
+                        {
+                            component.Initialise(parameters, this);
+                            this.AddComponent(name, component);
+                        }
+                    }
+
+                    // Conduct update to component
+                    else if (line.StartsWith("->") && (component is Object))
+                    {
+                        component.UpdateEntity(line, this);
+                    }
+
+
+                }
+
+            }
+        }
     }
 }

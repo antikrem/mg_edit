@@ -27,6 +27,19 @@ namespace mg_edit.Loader
             this.Parameters = parameters;
         }
 
+        // Return substituted template
+        public string GetSubbedTemplate(LoadParser parser)
+        {
+            string body = parser.Templates[Name];
+
+            for (int i = 1; i <= Parameters.Count; i++)
+            {
+                body = body.Replace("%" + i.ToString(), Parameters[i-1]);
+            }
+
+            return body;
+        }
+
         // Returns a string save representation
         public string ComposeSaveDirective()
         {
