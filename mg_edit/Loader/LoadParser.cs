@@ -26,10 +26,7 @@ namespace mg_edit.Loader
         public string LoadTableBody { get; set; }
 
         // Map of templates
-        public readonly Dictionary<string, string> Templates = new Dictionary<string, string>();
-
-        // Map of template PARAMETERS 
-        public readonly Dictionary<string, List<string>> TemplateParameters = new Dictionary<string, List<string>>();
+        public readonly Dictionary<string, Template> Templates = new Dictionary<string, Template>();
 
         // Check if string is trivial
         static bool IsTrivialString(string line)
@@ -51,12 +48,14 @@ namespace mg_edit.Loader
                     && lastLine[0] == '/' && lastLine[1] == '/'
                     && lastLine.Substring(2).Trim().StartsWith(PARAMETER_TOKEN))
                 {
-                    TemplateParameters[name] = new List<string>(lastLine.Substring(2).Trim().Split(' '));
-                    TemplateParameters[name].RemoveAt(0);
-
+                    var templateParameters = new List<string>(lastLine.Substring(2).Trim().Split(' '));
+                    templateParameters.RemoveAt(0);
+                    Templates[name] = new Template(name, contents, templateParameters);
                 }
-
-                Templates[name] = contents;
+                else
+                {
+                    Templates[name] = new Template(name, contents);
+                }
             }
         }
 
@@ -106,22 +105,6 @@ namespace mg_edit.Loader
 
         }
 
-        // Expands a template line
-        private string ExpandTemplate(string line)
-        {
-            var vec = line.Split(' ');
-
-            string body = this.Templates[vec[0].Substring(1)];
-
-            for (int i = 1; i < vec.Length; i++)
-            {
-                body = body.Replace("%" + i.ToString(), vec[i]);
-            }
-            body = body + line + "\n";
-
-            return body;
-        }
-
         // Loads level's load table as string, with all comments removed and templates expanded
         public string GetExpandedLevelLoadTable()
         {
@@ -145,7 +128,8 @@ namespace mg_edit.Loader
                 }
                 else if (ln[0] == '#')
                 {
-                    loadTable = loadTable + this.ExpandTemplate(ln) + "\n";
+                    string templateName = ln.Split(' ')[0].Substring(1);
+                    loadTable = loadTable + Templates[templateName].ExpandTemplate(ln) + "\n";
                 }
                 else
                 {
@@ -250,7 +234,8 @@ namespace mg_edit.Loader
 
                     if (Templates.ContainsKey(templateName))
                     {
-                        ((EntityDefinition)loadable).AddTemplate(this, templateName, parameters);
+                        var template = Templates[templateName];
+                        ((EntityDefinition)loadable).AddTemplate(template, parameters);
                     }
                     
                 }

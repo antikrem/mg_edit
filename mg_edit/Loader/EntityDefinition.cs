@@ -19,7 +19,7 @@ namespace mg_edit.Loader
         public List<Entity> Instances { get; } = new List<Entity>();
 
         // List of templates
-        private List<TemplateInstance> Templates { get; } = new List<TemplateInstance>();
+        public List<TemplateInstance> Templates { get; } = new List<TemplateInstance>();
 
         // Map of component names to components
         private Dictionary<string, Component> Components { set; get; } = new Dictionary<string, Component>();
@@ -30,12 +30,12 @@ namespace mg_edit.Loader
         }
 
         // Add a template, if the template contains an existing component, remove it 
-        public void AddTemplate(LoadParser parser, string templateName, List<string> parameters)
+        public void AddTemplate(Template template, List<string> parameters)
         {
-            var template = new TemplateInstance(templateName, parameters);
-            Templates.Add(template);
+            var templateInstance = new TemplateInstance(template, parameters);
+            Templates.Add(templateInstance);
 
-            string body = parser.Templates[templateName];
+            string body = templateInstance.Template.Contents;
 
             Components = Components
                 .Where(entry => !body.Contains(entry.Key))
@@ -84,7 +84,7 @@ namespace mg_edit.Loader
         {
             foreach (var template in Templates)
             {
-                string[] body = template.GetSubbedTemplate(level).Split('\n'); ;
+                string[] body = template.GetSubbedTemplate().Split('\n'); ;
 
                 // Current component 
                 Component component = null;

@@ -8,29 +8,29 @@ namespace mg_edit.Loader
 {
     public class TemplateInstance
     {
-        // Name of template this references
-        public string Name { get; }
+        // Reference to template
+        public Template Template { get; }
 
         // String of parameters
         public List<string> Parameters { set; get; }
 
         // Construct with name
-        public TemplateInstance(string name)
+        public TemplateInstance(Template template)
         {
-            this.Name = name;
+            this.Template = template;
         }
 
         // Construct with name and parameters
-        public TemplateInstance(string name, List<string> parameters)
+        public TemplateInstance(Template template, List<string> parameters)
         {
-            this.Name = name;
+            this.Template = template;
             this.Parameters = parameters;
         }
 
         // Return substituted template
-        public string GetSubbedTemplate(LoadParser parser)
+        public string GetSubbedTemplate()
         {
-            string body = parser.Templates[Name];
+            string body = Template.Contents;
 
             for (int i = 1; i <= Parameters.Count; i++)
             {
@@ -45,7 +45,7 @@ namespace mg_edit.Loader
         {
             string parameters = "";
             Parameters.ForEach(x => parameters = parameters + " " + x);
-            return "#" + Name + parameters;
+            return "#" + Template.Name + parameters;
         }
     }
 }

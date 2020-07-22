@@ -63,12 +63,17 @@
       <DependentUpon>TemplateInstanceDialogue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogue\ITemplateParameter.cs" />
+    <Compile Include="Dialogue\TemplatePanel.xaml.cs">
+      <DependentUpon>TemplatePanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogue\TemplateParameterCursorPosition.xaml.cs">
       <DependentUpon>TemplateParameterCursorPosition.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Loader\Components\component_bullet_master.cs" />
     <Compile Include="Loader\EntityDefinition.cs" />
     <Compile Include="Loader\Loadable.cs" />
     <Compile Include="Loader\Script.cs" />
+    <Compile Include="Loader\Template.cs" />
     <Compile Include="Loader\TemplateInstance.cs" />
     <Compile Include="TextEdit\ILoadablePanel.cs" />
     <Compile Include="TextEdit\EntityDefinitionPanel.xaml.cs">
@@ -85,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogue\TemplateInstanceDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogue\TemplatePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
