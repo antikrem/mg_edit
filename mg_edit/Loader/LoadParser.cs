@@ -6,7 +6,7 @@ using System.Linq;
 namespace mg_edit.Loader
 {
     // Parser for a level 
-    class LoadParser
+    public class LoadParser
     {
         public const string TEMPLATE_FILE = "template_table.txt";
         public const string LOAD_TABLE_FILE = "load_table.txt";

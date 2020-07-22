@@ -9,7 +9,7 @@ namespace mg_edit.Movement
     // Represents the state of mvoement
     // Which is all parameters of movement at a given position
     // No invariants
-    class MovementState
+    public class MovementState
     {
         // Position
         public (double, double) Position

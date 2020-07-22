@@ -8,7 +8,7 @@ namespace mg_edit.Movement
 {
 
     // Base class for a movement command
-    abstract class MovementQuanta
+    public abstract class MovementQuanta
     {
         public int StartingTick { set; get; }
 

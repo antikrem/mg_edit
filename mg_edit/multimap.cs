@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mg_edit
 {
-    class MultiMap<Key, Value>
+    public class MultiMap<Key, Value>
     {
         // Internal hashmap that is the backbone
         private Dictionary<Key, List<Value>> internalMap = new Dictionary<Key, List<Value>>();

@@ -12,7 +12,7 @@ using System.Windows.Media;
 namespace mg_edit
 {
     // Represents an enemy entity in the game
-    class Entity
+    public class Entity
     {
         // Spawning tick
         private int spawningTick = 0;

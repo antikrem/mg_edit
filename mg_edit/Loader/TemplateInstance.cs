@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mg_edit.Loader
 {
-    class TemplateInstance
+    public class TemplateInstance
     {
         // Name of template this references
         public string Name { get; }
