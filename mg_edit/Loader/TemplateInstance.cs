@@ -33,6 +33,12 @@ namespace mg_edit.Loader
             this.Parameters[position] = parameter;
         }
 
+        // Get parameter
+        public string GetParameter(int position)
+        {
+            return Parameters[position];
+        }
+
         // Return substituted template
         public string GetSubbedTemplate()
         {
