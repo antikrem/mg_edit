@@ -59,14 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Dialogue\TemplateInstanceDialogue.xaml.cs">
-      <DependentUpon>TemplateInstanceDialogue.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogue\ITemplateParameter.cs" />
-    <Compile Include="Dialogue\TemplatePanel.xaml.cs">
+    <Compile Include="TextEdit\TemplatePanelParameter\ITemplateParameter.cs" />
+    <Compile Include="TextEdit\TemplatePanel.xaml.cs">
       <DependentUpon>TemplatePanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogue\TemplateParameterCursorPosition.xaml.cs">
+    <Compile Include="TextEdit\TemplatePanelParameter\TemplateParameterCursorPosition.xaml.cs">
       <DependentUpon>TemplateParameterCursorPosition.xaml</DependentUpon>
     </Compile>
     <Compile Include="Loader\Components\component_bullet_master.cs" />
@@ -89,15 +86,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogue\TemplateInstanceDialogue.xaml">
+    <Page Include="TextEdit\TemplatePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogue\TemplatePanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogue\TemplateParameterCursorPosition.xaml">
+    <Page Include="TextEdit\TemplatePanelParameter\TemplateParameterCursorPosition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
