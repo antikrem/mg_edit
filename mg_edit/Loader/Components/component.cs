@@ -10,7 +10,7 @@ using mg_edit.Movement;
 namespace mg_edit.Loader
 {
     // Base class used to represent a Component
-    abstract class Component
+    public abstract class Component
     {
         // Look up for correct string handler
         private Dictionary<string, (int, Delegate)> lookup = new Dictionary<string, (int, Delegate)>();

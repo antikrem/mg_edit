@@ -10,7 +10,7 @@ using mg_edit.TextEdit;
 namespace mg_edit.Loader
 {
     // Full definition of an entity loaded from script
-    class EntityDefinition : Loadable
+    public class EntityDefinition : Loadable
     {
         // Movement object to control movement state
         public MovementSystem MovementSystem { get; } = new MovementSystem();
@@ -80,7 +80,7 @@ namespace mg_edit.Loader
 
         // Reload this entity from templates
         // Modyfying components is instant
-        public void Reload(LoadParser level)
+        public void Reload()
         {
             foreach (var template in Templates)
             {
