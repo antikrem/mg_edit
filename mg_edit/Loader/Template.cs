@@ -14,8 +14,11 @@ namespace mg_edit.Loader
         // Content of unsubbed template
         public string Contents { get; }
 
-        // List of parameters
+        // List of parameter names
         public List<string> ParameterNames { get; }
+
+        // List of parameter types
+        public List<string> ParameterTypes { get; }
 
         public Template(string name, string contents)
         {
@@ -23,11 +26,19 @@ namespace mg_edit.Loader
             Contents = contents;
         }
 
-        public Template(string name, string contents, List<string> parameterNames)
+        public Template(string name, string contents, List<string> parameters)
         {
             Name = name;
             Contents = contents;
-            ParameterNames = parameterNames;
+            
+            ParameterNames = new List<string>();
+            ParameterTypes = new List<string>();
+
+            foreach (var parameter in parameters)
+            {
+                ParameterTypes.Add(parameter.Split(':')[0]);
+                ParameterNames.Add(parameter.Split(':')[1]);
+            }
         }
 
         // Returns an expansion of this Template given a saved line

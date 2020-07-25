@@ -287,7 +287,7 @@ namespace mg_edit.Loader
             {
                 if (loadable is EntityDefinition)
                 {
-                    ((EntityDefinition)loadable).Reload(this);
+                    ((EntityDefinition)loadable).Reload();
                     entities.AddRange(((EntityDefinition)loadable).GetEntities());
                 }
             }
