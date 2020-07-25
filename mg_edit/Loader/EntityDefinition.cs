@@ -84,7 +84,7 @@ namespace mg_edit.Loader
         {
             foreach (var template in Templates)
             {
-                string[] body = template.GetSubbedTemplate().Split('\n'); ;
+                string[] body = template.GetSubbedTemplate().Split('\n');
 
                 // Current component 
                 Component component = null;
