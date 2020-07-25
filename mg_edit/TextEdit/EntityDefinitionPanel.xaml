@@ -16,14 +16,20 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        
-        <Label Content="Script" 
+
+        <StackPanel x:Name="TimingsPanel" 
+                     HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                     Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        </StackPanel>
+
+        <StackPanel  x:Name="Panels" Orientation="Horizontal"
+                     HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                     Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+        </StackPanel>
+
+        <Label Content="Entity" 
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Grid.Row="0" Grid.Column="0"/>
-        <TextBox  x:Name = "ScriptBody" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  TextWrapping="Wrap" 
-                  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
-                  Text="TextBox"/>
 
 
 

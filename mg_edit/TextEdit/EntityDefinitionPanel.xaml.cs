@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using mg_edit.Loader;
+using mg_edit.TextEdit.TemplatePanelParameter;
 
 namespace mg_edit.TextEdit
 {
@@ -22,15 +23,28 @@ namespace mg_edit.TextEdit
     /// </summary>
     public partial class EntityDefinitionLoadPanel : UserControl, ILoadablePanel
     {
-        private Loadable loadable;
+        private EntityDefinition entDef;
 
         public EntityDefinitionLoadPanel(Loadable entDef)
         {
             InitializeComponent();
 
             // Initialise
-            this.loadable = entDef;
-            ScriptBody.Text = "Hello";
+            this.entDef = (EntityDefinition)entDef;
+
+            // Add labels for timings
+            foreach (int cycle in entDef.SpawningCycles)
+            {
+                Label label = new Label();
+                label.Content = cycle.ToString();
+                TimingsPanel.Children.Add(label);
+            }
+
+            // Add labels for templates
+            foreach (var template in this.entDef.Templates)
+            {
+                Panels.Children.Add(new TemplatePanel(this.entDef, template));
+            }
         }
     }
 }
