@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.IO;
 using mg_edit.Dialogue;
 using mg_edit.Loader;
+using mg_edit.TextEdit.TemplatePanelParameter;
 
 namespace mg_edit.TextEdit
 {
@@ -77,10 +78,10 @@ namespace mg_edit.TextEdit
         // Handle to begin adding template dialogue
         public void AddTemplate(object sender, RoutedEventArgs e)
         {
-            // Shoe dialogue
-            var templateInstancer = new TemplateInstanceDialogue(this);
-            AddTemplateButton.IsEnabled = false;
-            templateInstancer.Show();
+            // Show dialogue
+            //var templateInstancer = new TemplateInstanceDialogue(this);
+           // AddTemplateButton.IsEnabled = false;
+            //templateInstancer.Show();
         }
 
         // Renables add template button

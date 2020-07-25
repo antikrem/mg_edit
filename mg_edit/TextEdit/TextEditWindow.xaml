@@ -52,7 +52,6 @@
                 </ScrollViewer.RenderTransform>
                 <StackPanel x:Name = "LoadablePanels" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                             Grid.RowSpan="2">
-                    <Label Content="Label" HorizontalAlignment="Left"/>
 
                 </StackPanel>
             </ScrollViewer>
