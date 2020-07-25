@@ -96,6 +96,11 @@ namespace mg_edit.TextEdit
             LoadablePanels.Children.Clear();
             LoadParser level = GameState.GetLevel();
 
+            if (level is null)
+            {
+                return;
+            }
+
             foreach (Loadable loadable in level.GetLoadables())
             {
                 LoadablePanels.Children.Add((UIElement)loadable.GetLoadablePanel());
