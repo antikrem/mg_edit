@@ -23,8 +23,6 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
     /// </summary>
     public partial class TemplateParameterCursorPosition : UserControl, ITemplateParameter
     {
-        private (double, double) posFromView = (0, 0);
-
         private EntityDefinition ent;
         private TemplateInstance template;
         int firstTarget;
@@ -34,21 +32,19 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
             InitializeComponent();
         }
 
-        public void UpdateCursorPosition((double, double) position)
-        {
-            posFromView = position;
-        }
-
         public void UpdateFromView(object sender, RoutedEventArgs e)
         {
-            TextboxXPosition.Text = posFromView.Item1.ToString();
-            TextboxYPosition.Text = posFromView.Item2.ToString();
+            TextboxXPosition.Text = GameState.Get().CursorPosition.Item1.ToString();
+            TextboxYPosition.Text = GameState.Get().CursorPosition.Item2.ToString();
+            UpdatePosition(null, null);
         }
 
         public void UpdatePosition(object sender, RoutedEventArgs e)
         {
             template.SetParameter(firstTarget, TextboxXPosition.Text);
             template.SetParameter(firstTarget+1, TextboxYPosition.Text);
+
+            ent.Reload();
         }
 
         public void InitialiseTemplate(string name, EntityDefinition ent, TemplateInstance template, int firstTarget)
@@ -57,11 +53,19 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
 
             this.ent = ent;
             this.template = template;
+
             this.firstTarget = firstTarget;
+            TextboxXPosition.Text = template.GetParameter(firstTarget);
+            TextboxYPosition.Text = template.GetParameter(firstTarget+1);
 
             UpdatePosition(null, null);
 
             ent.Reload();
+        }
+
+        public int GetParameterCount()
+        {
+            return 2;
         }
     }
 }

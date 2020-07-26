@@ -8,13 +8,12 @@ using mg_edit.Loader;
 
 namespace mg_edit.TextEdit.TemplatePanelParameter
 {
-    interface ITemplateParameter
+    public interface ITemplateParameter
     {
-        // Method called when cursor position is updated
-        void UpdateCursorPosition((double, double) position);
-
         // Method called to set the name, Entity and 
         void InitialiseTemplate(string name, EntityDefinition ent, TemplateInstance template, int target);
 
+        // Returns the number of parameters associated with this panel
+        int GetParameterCount();
     }
 }

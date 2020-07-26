@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="mg_edit.TextEdit.TemplatePanelParameter.TemplatePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:mg_edit.Dialogue"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400">
+    <Grid x:Name="GridBody">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Label x:Name="Title"
+               Content="" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Grid.Row="0" Grid.Column="0"/>
+        <StackPanel x:Name="TemplateStackPanel"
+                    Grid.Row="1" 
+                    VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+
+
+    </Grid>
+</UserControl>

@@ -79,6 +79,9 @@
     <Compile Include="TextEdit\ScriptLoadPanel.xaml.cs">
       <DependentUpon>ScriptLoadPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextEdit\TemplatePanelParameter\TemplateParameterDefault.xaml.cs">
+      <DependentUpon>TemplateParameterDefault.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextEdit\TextEditWindow.xaml.cs">
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TextEdit\ScriptLoadPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\TemplatePanelParameter\TemplateParameterDefault.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

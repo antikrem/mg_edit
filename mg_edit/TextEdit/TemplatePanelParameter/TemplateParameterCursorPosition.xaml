@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:mg_edit.Dialogue"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300"
              Background="Aqua">
@@ -31,19 +30,19 @@
                Grid.Row="0" Grid.Column="1"
                HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
 
-        <TextBlock x:Name="TextboxXPosition"
-                   Grid.Row="0" Grid.Column="2"
-                   Margin="4,0,0,0" 
-                   Text="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="TextboxXPosition"
+                 Grid.Row="0" Grid.Column="2"
+                 Margin="4,0,0,0" 
+                 Text="0" VerticalAlignment="Center"/>
 
         <Label Content="Y:" 
                Grid.Row="0" Grid.Column="3"
                HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
 
-        <TextBlock  x:Name="TextboxYPosition"
-                   Grid.Row="0" Grid.Column="4"
-                   Margin="4,0,0,0" 
-                   Text="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="TextboxYPosition"
+                 Grid.Row="0" Grid.Column="4"
+                 Margin="4,0,0,0" 
+                 Text="0" VerticalAlignment="Center"/>
         
         <Button Grid.Column="5" Content="From View" 
                 HorizontalAlignment="Stretch" 
