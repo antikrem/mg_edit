@@ -59,8 +59,6 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
             TextboxYPosition.Text = template.GetParameter(firstTarget+1);
 
             UpdatePosition(null, null);
-
-            ent.Reload();
         }
 
         public int GetParameterCount()

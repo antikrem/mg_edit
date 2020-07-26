@@ -40,8 +40,6 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
 
             this.firstTarget = firstTarget;
             ValueBox.Text = template.GetParameter(firstTarget);
-
-            ent.Reload();
         }
 
         public int GetParameterCount()
