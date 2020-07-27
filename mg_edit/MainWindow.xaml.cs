@@ -52,7 +52,7 @@ namespace mg_edit
             // Applies a linear mapping from canvas space to gamespace
             return (
                     (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_WIDTH)) * (pos.Item1 - CenterCanvas.Width / 2) / CenterCanvas.Width,
-                    (2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_HEIGHT)) * (pos.Item2 - CenterCanvas.Height / 2) / CenterCanvas.Height
+                    -(2 * (GameState.GAMESPACE_PADDING + GameState.GAMESPACE_HEIGHT)) * (pos.Item2 - CenterCanvas.Height / 2) / CenterCanvas.Height
                 );
         }
 
@@ -157,7 +157,8 @@ namespace mg_edit
 
         // Computes difference in current entities, 
         // Deletes stuff thats not drawn, draws new stuff
-        public void UpdateEntityView()
+        // Forces redraw of lines when true
+        public void UpdateEntityView(bool force = false)
         {
             HashSet<Entity> toDraw = new HashSet<Entity>(GameState.Get().GetActiveEntities());
             HashSet<Entity> toRemove = new HashSet<Entity>(drawnEntities);
@@ -174,6 +175,12 @@ namespace mg_edit
             if (toDraw.Count + toRemove.Count > 0)
             {
                 RedrawActiveList();
+            }
+
+            // Redraw lines if forced
+            if (force)
+            {
+                GameState.Get().GetActiveEntities().ForEach( ent => { UndrawEntity(ent); DrawEntity(ent); } );
             }
 
             // Update markers
@@ -289,7 +296,7 @@ namespace mg_edit
         public MainWindow()
         {
             // Initialise application
-            GameState.Get();
+            GameState.Get().MainWindow = this;
 
             InitializeComponent();
 

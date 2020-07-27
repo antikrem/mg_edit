@@ -44,7 +44,10 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
             template.SetParameter(firstTarget, TextboxXPosition.Text);
             template.SetParameter(firstTarget+1, TextboxYPosition.Text);
 
-            ent.Reload();
+            ent.ReloadTemplates();
+            ent.ReloadMovement();
+
+            GameState.Get().MainWindow.UpdateEntityView(true);
         }
 
         public void InitialiseTemplate(string name, EntityDefinition ent, TemplateInstance template, int firstTarget)

@@ -40,7 +40,6 @@ namespace mg_edit.Loader
             Components = Components
                 .Where(entry => !body.Contains(entry.Key))
                 .ToDictionary(kv => kv.Key, kv => kv.Value);
-
         }
 
         // Returns all instances of this definition
@@ -78,10 +77,20 @@ namespace mg_edit.Loader
             return string.Join("\n", body.ToArray()) + "\n";
         }
 
+        // Reloads all entities attached to this definition
+        public void ReloadMovement()
+        {
+            foreach (Entity entity in Instances)
+            {
+                entity.UpdatePositions();
+            }
+        }
+
         // Reload this entity from templates
         // Modyfying components is instant
-        public void Reload()
+        public void ReloadTemplates()
         {
+            // Reload form each template
             foreach (var template in Templates)
             {
                 string[] body = template.GetSubbedTemplate().Split('\n');
@@ -115,5 +124,7 @@ namespace mg_edit.Loader
 
             }
         }
+
+
     }
 }

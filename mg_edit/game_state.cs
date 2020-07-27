@@ -11,6 +11,8 @@ namespace mg_edit
     {
         static private GameState instance = null;
 
+        public MainWindow MainWindow { get; set; }
+
         // Static gamespace size, gamespace is origin centered 
         static public double GAMESPACE_WIDTH = 960;
         static public double GAMESPACE_HEIGHT = 540;
@@ -80,7 +82,6 @@ namespace mg_edit
             // Load entities
             Loader.EvaluateEntities();
             this.enemies = Loader.GetEntities();
-            this.UpdateAllEntities();
 
             // Set level length
             this.levelLength = Loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
@@ -108,12 +109,6 @@ namespace mg_edit
         static public LoadParser GetLevel()
         {
             return GameState.Get().Loader;
-        }
-
-        // Updates all entities
-        public void UpdateAllEntities()
-        {
-            enemies.ForEach(enemy => enemy.UpdatePositions());
         }
 
         // Gets total level length

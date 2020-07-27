@@ -14,7 +14,7 @@ namespace mg_edit.Loader
         public const string PARAMETER_TOKEN = "PARAMETERS";
 
         // All loadables from the file
-        List<Loadable> loadables = new List<Loadable>();
+        public List<Loadable> Loadables { get; set; } = new List<Loadable>();
 
         // Entity instances created from loadables
         readonly List<Entity> entities = new List<Entity>();
@@ -151,7 +151,7 @@ namespace mg_edit.Loader
         public void LoadLevel()
         {
             // Reset loadables
-            loadables.Clear();
+            Loadables.Clear();
 
             // Get level's load table
             var loadTable = GetExpandedLevelLoadTable().Split('\n');
@@ -186,7 +186,7 @@ namespace mg_edit.Loader
                 {
                     // Generate new entities
                     loadable = new EntityDefinition(cycles);
-                    loadables.Add(loadable);
+                    Loadables.Add(loadable);
 
                 }
 
@@ -220,7 +220,7 @@ namespace mg_edit.Loader
                     if (!(loadable is Script))
                     {
                         loadable = new Script(cycles);
-                        loadables.Add(loadable);
+                        Loadables.Add(loadable);
                     }
                     ((Script)loadable).Extend(line.Substring(2));
                 }
@@ -240,6 +240,8 @@ namespace mg_edit.Loader
                     
                 }
             }
+
+            EvaluateEntities();
         }
 
         // Create a cycle directive for this 
@@ -262,7 +264,7 @@ namespace mg_edit.Loader
         {
             string levelBody = "";
             
-            foreach (var loadable in loadables)
+            foreach (var loadable in Loadables)
             {
                 // Add cycle for loadable
                 levelBody = levelBody + ConstructCycleDirective(loadable);
@@ -283,11 +285,12 @@ namespace mg_edit.Loader
         public void EvaluateEntities()
         {
             entities.Clear();
-            foreach (Loadable loadable in loadables)
+            foreach (Loadable loadable in Loadables)
             {
                 if (loadable is EntityDefinition)
                 {
-                    ((EntityDefinition)loadable).Reload();
+                    ((EntityDefinition)loadable).ReloadTemplates();
+                    ((EntityDefinition)loadable).ReloadMovement();
                     entities.AddRange(((EntityDefinition)loadable).GetEntities());
                 }
             }
@@ -302,7 +305,7 @@ namespace mg_edit.Loader
         // Returns all loadables
         public List<Loadable> GetLoadables()
         {
-            return loadables;
+            return Loadables;
         }
 
         // Returns length of level
