@@ -119,8 +119,12 @@ namespace mg_edit.Loader
                         component.UpdateEntity(line, this);
                     }
 
-
                 }
+
+                // Remove components if they are a part of a template
+                Components = Components
+                .Where(entry => !String.Join(" ", body).Contains(entry.Key))
+                .ToDictionary(kv => kv.Key, kv => kv.Value);
 
             }
         }
