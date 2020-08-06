@@ -20,6 +20,6 @@ namespace mg_edit.Movement
         public abstract void UpdateExecution(int tick, MovementState movementState);
 
         // Returns a string representing this movement quanta for save
-        abstract public string ComposeSaveDefinition(int cycle);
+        abstract public string ComposeSaveDefinition();
     }
 }

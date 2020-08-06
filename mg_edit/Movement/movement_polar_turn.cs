@@ -37,9 +37,9 @@ namespace mg_edit.Movement
             }
         }
 
-        public override string ComposeSaveDefinition(int cycle)
+        public override string ComposeSaveDefinition()
         {
-            return "->add_polar_turn(" + cycle.ToString() 
+            return "->add_polar_turn(" + StartingTick.ToString() 
                 + ", " + duration.ToString()
                 + ", " + (rate * duration).ToString()
                 + ")";

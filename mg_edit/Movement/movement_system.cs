@@ -15,8 +15,8 @@ namespace mg_edit.Movement
         // Starting state of player
         private MovementState startingState = new MovementState();
 
-        // Multimap storing all static movement commands
-        public MultiMap<int, MovementQuanta> MovementCommands { get; } = new MultiMap<int, MovementQuanta>();
+        // List containing all static movement commands
+        public List<MovementQuanta> MovementCommands { get; } = new List<MovementQuanta>();
 
         // List of currently active movement commands
         private List<MovementQuanta> activeQuanta = new List<MovementQuanta>();
@@ -31,7 +31,8 @@ namespace mg_edit.Movement
         // Adds a new polar command at given tick
         public void AddMovementCommand(int key, MovementQuanta command)
         {
-            MovementCommands.Add(key, command);
+            command.StartingTick = key;
+            MovementCommands.Add(command);
         }
 
         // Computes all positions and returns
@@ -53,12 +54,15 @@ namespace mg_edit.Movement
             {
 
                 // Update active quanta
-                if (MovementCommands.Has(tick))
-                {
-                    MovementCommands.Get(tick).ForEach(
-                        quanta => { activeQuanta.Add(quanta); quanta.StartingTick = tick; }
+                MovementCommands.ForEach(
+                        quanta => {
+                                if (quanta.StartingTick == tick)
+                                {
+                                    activeQuanta.Add(quanta);
+                                }
+                                
+                            }
                     );
-                }
 
                 // Updates against static quanta
                 activeQuanta.ForEach(quanta => quanta.UpdateExecution(tick - quanta.StartingTick, movementState));

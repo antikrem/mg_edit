@@ -44,8 +44,8 @@ namespace mg_edit.Loader
         {
             string body = "+staticMovement";
 
-            entDef.MovementSystem.MovementCommands.AsList()
-                .ForEach(x => body = body + "\n" + x.Item2.ComposeSaveDefinition(x.Item1));
+            entDef.MovementSystem.MovementCommands
+                .ForEach(x => body = body + "\n" + x.ComposeSaveDefinition());
 
             return body;
         }
