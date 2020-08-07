@@ -14,7 +14,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TimingsPanel" 
@@ -24,7 +24,7 @@
 
         <StackPanel  x:Name="Panels" Orientation="Horizontal"
                      HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                     Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+                     Grid.Row="1" Grid.Column="1">
         </StackPanel>
 
         <Label Content="Entity" 
