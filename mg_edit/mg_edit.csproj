@@ -59,6 +59,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TextEdit\MovementPanel.xaml.cs">
+      <DependentUpon>MovementPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextEdit\MovementPanels\IMovementPanel.cs" />
+    <Compile Include="TextEdit\MovementPanels\MovementPolarAccelerateToPanel.xaml.cs">
+      <DependentUpon>MovementPolarAccelerateToPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextEdit\MovementPanels\MovementPolarTurnPanel.xaml.cs">
+      <DependentUpon>MovementPolarTurnPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextEdit\TemplatePanelParameter\ITemplateParameter.cs" />
     <Compile Include="TextEdit\TemplatePanel.xaml.cs">
       <DependentUpon>TemplatePanel.xaml</DependentUpon>
@@ -86,6 +96,18 @@
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialogue\LevelLoadDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\MovementPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\MovementPanels\MovementPolarAccelerateToPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\MovementPanels\MovementPolarTurnPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
