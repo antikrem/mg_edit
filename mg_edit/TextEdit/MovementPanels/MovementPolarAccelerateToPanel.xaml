@@ -17,29 +17,31 @@
             <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Tick" 
+        <Label Content="AccelTo" 
                Grid.Column="0"/>
+        <Label Content="Tick" 
+               Grid.Column="1"/>
         <TextBox x:Name="TickBox"
                  HorizontalAlignment="Stretch" 
                  Text="TextBlock" 
                  VerticalAlignment="Top"
-                 Grid.Column="1"/>
+                 Grid.Column="2"/>
 
         <Label Content="Duration" 
-               Grid.Column="2"/>
+               Grid.Column="3"/>
         <TextBox x:Name="DurationBox"
                  HorizontalAlignment="Stretch" 
                  Text="TextBlock" 
                  VerticalAlignment="Top"
-                 Grid.Column="3"/>
+                 Grid.Column="4"/>
 
         <Label Content="EndSpeed" 
-               Grid.Column="4"/>
+               Grid.Column="5"/>
         <TextBox x:Name="EndSpeed"
                  HorizontalAlignment="Stretch" 
                  Text="TextBlock" 
                  VerticalAlignment="Top"
-                 Grid.Column="5"/>
+                 Grid.Column="6"/>
 
 
     </Grid>

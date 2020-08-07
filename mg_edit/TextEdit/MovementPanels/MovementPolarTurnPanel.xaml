@@ -17,7 +17,7 @@
             <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="PolarTurn" 
+        <Label Content="Turn" 
                Grid.Column="0"/>
         <Label Content="Tick" 
                Grid.Column="1"/>
