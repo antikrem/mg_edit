@@ -40,6 +40,13 @@ namespace mg_edit.TextEdit
                 TimingsPanel.Children.Add(label);
             }
 
+            // Add movement panel
+            if (this.entDef.MovementSystem is object)
+            {
+                Panels.Children.Add(new MovementPanel(this.entDef));
+            }
+
+
             // Add labels for templates
             foreach (var template in this.entDef.Templates)
             {
