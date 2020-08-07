@@ -8,20 +8,20 @@ namespace mg_edit.Movement
 {
     class MovementPolarAccelerateTo : MovementQuanta
     {
-        private readonly int duration;
-        private readonly double endingSpeed;
+        public int Duration { get; set; }
+        public double EndingSpeed { get; set; }
 
         // Constructor for a MovementPolarTurn
         public MovementPolarAccelerateTo(double endingSpeed, int duration)
         {
-            this.endingSpeed = endingSpeed;
-            this.duration = duration;
+            this.EndingSpeed = endingSpeed;
+            this.Duration = duration;
         }
 
         // Check tick is within duration
         public override bool IsExecuting(int tick)
         {
-            return tick <= duration;
+            return tick <= Duration;
         }
 
         // Update movement system parameters
@@ -29,10 +29,10 @@ namespace mg_edit.Movement
         {
             if (tick == 0)
             {
-                double rate = (endingSpeed - movementState.Speed) / duration;
+                double rate = (EndingSpeed - movementState.Speed) / Duration;
                 movementState.SpeedChange = rate;
             }
-            else if (tick  == duration)
+            else if (tick  == Duration)
             {
                 movementState.SpeedChange = 0;
             }
@@ -41,8 +41,8 @@ namespace mg_edit.Movement
         public override string ComposeSaveDefinition()
         {
             return "->add_polar_accelerate_to(" + StartingTick.ToString()
-                + ", " + duration.ToString()
-                + ", " + endingSpeed.ToString()
+                + ", " + Duration.ToString()
+                + ", " + EndingSpeed.ToString()
                 + ")";
         }
     }
