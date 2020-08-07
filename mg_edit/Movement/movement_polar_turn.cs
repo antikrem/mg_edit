@@ -8,20 +8,20 @@ namespace mg_edit.Movement
 {
     class MovementPolarTurn : MovementQuanta
     {
-        private readonly double rate;
-        private readonly int duration;
+        public double Rate;
+        public int Duration;
 
         // Constructor for a MovementPolarTurn
         public MovementPolarTurn(double rate, int duration)
         {
-            this.rate = rate;
-            this.duration = duration;
+            this.Rate = rate;
+            this.Duration = duration;
         }
 
         // Check tick is within duration
         public override bool IsExecuting(int tick)
         {
-            return tick <= duration;
+            return tick <= Duration;
         }
 
         // Update movement system parameters
@@ -29,9 +29,9 @@ namespace mg_edit.Movement
         {
             if (tick == 0)
             {
-                movementState.AngleChange = rate;
+                movementState.AngleChange = Rate;
             }
-            else if (tick == duration)
+            else if (tick == Duration)
             {
                 movementState.AngleChange = 0;
             }
@@ -40,8 +40,8 @@ namespace mg_edit.Movement
         public override string ComposeSaveDefinition()
         {
             return "->add_polar_turn(" + StartingTick.ToString() 
-                + ", " + duration.ToString()
-                + ", " + (rate * duration).ToString()
+                + ", " + Duration.ToString()
+                + ", " + (Rate * Duration).ToString()
                 + ")";
         }
     }
