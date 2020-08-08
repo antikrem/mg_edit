@@ -41,7 +41,7 @@ namespace mg_edit.Movement
         {
             return "->add_polar_turn(" + StartingTick.ToString() 
                 + ", " + Duration.ToString()
-                + ", " + (Total * Duration).ToString()
+                + ", " + Total.ToString()
                 + ")";
         }
     }
