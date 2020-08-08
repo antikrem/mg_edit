@@ -71,7 +71,6 @@ namespace mg_edit.TextEdit
         // Handle to save current file
         public void SaveLevel(object sender, RoutedEventArgs e)
         {
-            ReloadLevel(null, null);
             GameState.Get().Loader.SaveLevel();
         }
 
