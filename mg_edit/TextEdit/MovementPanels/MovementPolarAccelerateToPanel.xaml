@@ -23,23 +23,20 @@
                Grid.Column="1"/>
         <TextBox x:Name="TickBox"
                  HorizontalAlignment="Stretch" 
-                 Text="TextBlock" 
                  VerticalAlignment="Top"
                  Grid.Column="2"/>
 
         <Label Content="Duration" 
                Grid.Column="3"/>
         <TextBox x:Name="DurationBox"
-                 HorizontalAlignment="Stretch" 
-                 Text="TextBlock" 
+                 HorizontalAlignment="Stretch"
                  VerticalAlignment="Top"
                  Grid.Column="4"/>
 
         <Label Content="EndSpeed" 
                Grid.Column="5"/>
         <TextBox x:Name="EndSpeed"
-                 HorizontalAlignment="Stretch" 
-                 Text="TextBlock" 
+                 HorizontalAlignment="Stretch"
                  VerticalAlignment="Top"
                  Grid.Column="6"/>
 

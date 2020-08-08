@@ -23,7 +23,6 @@
                Grid.Column="1"/>
         <TextBox x:Name="TickBox"
                  HorizontalAlignment="Stretch" 
-                 Text="TextBlock" 
                  VerticalAlignment="Top"
                  Grid.Column="2"/>
 
@@ -31,15 +30,13 @@
                Grid.Column="3"/>
         <TextBox x:Name="DurationBox"
                  HorizontalAlignment="Stretch" 
-                 Text="TextBlock" 
                  VerticalAlignment="Top"
                  Grid.Column="4"/>
 
         <Label Content="Angle" 
                Grid.Column="5"/>
-        <TextBox x:Name="RateBox"
+        <TextBox x:Name="TotalBox"
                  HorizontalAlignment="Stretch" 
-                 Text="TextBlock" 
                  VerticalAlignment="Top"
                  Grid.Column="6"/>
 
