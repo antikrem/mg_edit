@@ -35,7 +35,23 @@ namespace mg_edit.TextEdit.MovementPanels
             // Populate entries
             TickBox.Text = this.command.StartingTick.ToString();
             DurationBox.Text = this.command.Duration.ToString();
-            RateBox.Text = (this.command.Rate * this.command.Duration).ToString();
+            TotalBox.Text = this.command.Total.ToString();
+
+            TickBox.TextChanged += UpdateCommand;
+            DurationBox.TextChanged += UpdateCommand;
+            TotalBox.TextChanged += UpdateCommand;
+        }
+
+        // Push updates to movementcommander and redraw
+        public void UpdateCommand(object sender, RoutedEventArgs e)
+        {
+            this.command.StartingTick = int.Parse(TickBox.Text);
+            this.command.Duration = int.Parse(DurationBox.Text);
+            this.command.Total = double.Parse(TotalBox.Text);
+
+            entity.ReloadMovement();
+
+            GameState.Get().MainWindow.UpdateEntityView(true);
         }
 
         public void SetInternalEntityDefinition(EntityDefinition ent)

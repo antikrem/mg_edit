@@ -36,6 +36,22 @@ namespace mg_edit.TextEdit.MovementPanels
             TickBox.Text = this.command.StartingTick.ToString();
             DurationBox.Text = this.command.Duration.ToString();
             EndSpeed.Text = this.command.EndingSpeed.ToString();
+
+            TickBox.TextChanged += UpdateCommand;
+            DurationBox.TextChanged += UpdateCommand;
+            EndSpeed.TextChanged += UpdateCommand;
+        }
+
+        // Push updates to movementcommander and redraw
+        public void UpdateCommand(object sender, RoutedEventArgs e)
+        {
+            this.command.StartingTick = int.Parse(TickBox.Text);
+            this.command.Duration = int.Parse(DurationBox.Text);
+            this.command.EndingSpeed = double.Parse(EndSpeed.Text);
+
+            entity.ReloadMovement();
+
+            GameState.Get().MainWindow.UpdateEntityView(true);
         }
 
         public void SetInternalEntityDefinition(EntityDefinition ent)
