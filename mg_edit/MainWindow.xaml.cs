@@ -217,6 +217,7 @@ namespace mg_edit
                 );
 
             position = TranslateToGameSpace(position);
+            position = ((int)position.Item1, (int)position.Item2);
 
             CursorLabel.Content = "(" + position.Item1.ToString() + ", " + position.Item2.ToString() + ")";
         
