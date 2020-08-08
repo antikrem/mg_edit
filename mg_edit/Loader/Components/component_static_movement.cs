@@ -16,7 +16,7 @@ namespace mg_edit.Loader
             entDef.MovementSystem.AddMovementCommand(
                 Int32.Parse(parameters[0]),
                 new MovementPolarTurn(
-                    Double.Parse(parameters[2]) / Int32.Parse(parameters[1]),
+                    Double.Parse(parameters[2]),
                     Int32.Parse(parameters[1])
                 )
             );
