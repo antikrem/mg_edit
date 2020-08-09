@@ -40,6 +40,13 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
 
             this.firstTarget = firstTarget;
             ValueBox.Text = template.GetParameter(firstTarget);
+
+            ValueBox.TextChanged += Update;
+        }
+
+        public void Update(object sender, RoutedEventArgs e)
+        {
+            template.SetParameter(firstTarget, ValueBox.Text);
         }
 
         public int GetParameterCount()
