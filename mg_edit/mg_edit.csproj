@@ -69,6 +69,9 @@
     <Compile Include="TextEdit\MovementPanels\MovementPolarTurnPanel.xaml.cs">
       <DependentUpon>MovementPolarTurnPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextEdit\NewMovementCommandWindow.xaml.cs">
+      <DependentUpon>NewMovementCommandWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextEdit\TemplatePanelParameter\ITemplateParameter.cs" />
     <Compile Include="TextEdit\TemplatePanel.xaml.cs">
       <DependentUpon>TemplatePanel.xaml</DependentUpon>
@@ -108,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextEdit\MovementPanels\MovementPolarTurnPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\NewMovementCommandWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

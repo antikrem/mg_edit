@@ -1,0 +1,15 @@
+﻿<Window x:Class="mg_edit.TextEdit.NewMovementCommandWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mg_edit.TextEdit"
+        mc:Ignorable="d"
+        Title="NewMovementCommandWindow" Height="120" Width="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="250*"/>
+        </Grid.ColumnDefinitions>
+    </Grid>
+</Window>
