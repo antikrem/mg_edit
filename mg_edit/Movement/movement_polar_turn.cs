@@ -11,6 +11,12 @@ namespace mg_edit.Movement
         public double Total;
         public int Duration;
 
+        public MovementPolarTurn()
+        {
+            this.Total = 0;
+            this.Duration = 0;
+        }
+
         // Constructor for a MovementPolarTurn
         public MovementPolarTurn(double rate, int duration)
         {
