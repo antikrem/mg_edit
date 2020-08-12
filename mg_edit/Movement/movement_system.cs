@@ -72,6 +72,11 @@ namespace mg_edit.Movement
                 // Delete all executed quanta
                 activeQuanta.RemoveAll(quanta => !quanta.IsExecuting(tick - quanta.StartingTick));
 
+                // On NaN, end early
+                if (double.IsNaN(movementState.Position.Item1) || double.IsNaN(movementState.Position.Item2)) {
+                    return positions;
+                }
+
                 positions.Add(movementState.Position);
             }
 
