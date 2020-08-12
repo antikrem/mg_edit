@@ -5,11 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mg_edit.TextEdit"
         mc:Ignorable="d"
-        Title="NewMovementCommandWindow" Height="120" Width="350">
-    <Grid>
+        Title="NewMovementCommandWindow" Height="150" Width="340">
+    <Grid x:Name="BodyGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="250*"/>
         </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Command:"
+               Grid.Column="0"/>
+
+        <Label Content="Command:"
+               />
+        <ComboBox x:Name="CommandDropDown"
+                  SelectionChanged ="CommandDropDown_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                  Grid.Column="1"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="2">
+            <Button x:Name="AddButton"
+                    Content="Add" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Width="75"
+                    Click="AddButton_Click"
+                />
+            <Button x:Name="CancelButton"
+                    Content="Cancel" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Width="75"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="2"
+                    Click="CancelButton_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

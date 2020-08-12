@@ -23,6 +23,8 @@ namespace mg_edit.TextEdit
     /// </summary>
     public partial class MovementPanel : UserControl
     {
+        EntityDefinition entity;
+
         static private IMovementPanel CreateMovementPanel(MovementQuanta command)
         {
             if (command is MovementPolarAccelerateTo)
@@ -40,17 +42,37 @@ namespace mg_edit.TextEdit
                 
         }
 
+        // Redraw movement panel
+        public void Redraw()
+        {
+            MovementStackPanel.Children.Clear();
+            // Draw each panel
+            foreach (MovementQuanta mov in entity.MovementSystem.MovementCommands)
+            {
+                IMovementPanel panel = CreateMovementPanel(mov);
+                panel.SetInternalEntityDefinition(entity);
+                MovementStackPanel.Children.Add((UserControl)panel);
+            }
+        }
+
         public MovementPanel(EntityDefinition entityDefinition)
         {
             InitializeComponent();
 
-            // Draw each panel
-            foreach (MovementQuanta mov in entityDefinition.MovementSystem.MovementCommands)
-            {
-                IMovementPanel panel = CreateMovementPanel(mov);
-                panel.SetInternalEntityDefinition(entityDefinition);
-                MovementStackPanel.Children.Add((UserControl)panel);
-            }
+            this.entity = entityDefinition;
+
+            Redraw();
+        }
+
+        // Open command window
+        public void AddCommand_Click(object sender, RoutedEventArgs e)
+        {
+            NewMovementCommandWindow window = new NewMovementCommandWindow(entity);
+            window.ShowDialog();
+
+            
+            Redraw();
+
         }
     }
 }
