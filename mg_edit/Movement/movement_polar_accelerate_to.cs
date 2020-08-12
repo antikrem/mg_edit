@@ -15,7 +15,7 @@ namespace mg_edit.Movement
         {
             StartingTick = 0;
             this.EndingSpeed = 0;
-            this.Duration = 0;
+            this.Duration = 1;
         }
 
         // Constructor for a MovementPolarTurn

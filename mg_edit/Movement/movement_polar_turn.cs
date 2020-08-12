@@ -14,7 +14,7 @@ namespace mg_edit.Movement
         public MovementPolarTurn()
         {
             this.Total = 0;
-            this.Duration = 0;
+            this.Duration = 1;
         }
 
         // Constructor for a MovementPolarTurn
