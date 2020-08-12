@@ -49,9 +49,12 @@ namespace mg_edit.TextEdit.MovementPanels
             this.command.Duration = int.Parse(DurationBox.Text);
             this.command.EndingSpeed = double.Parse(EndSpeed.Text);
 
-            entity.ReloadMovement();
+            if (entity is object) {
+                entity.ReloadMovement();
 
-            GameState.Get().MainWindow.UpdateEntityView(true);
+                GameState.Get().MainWindow.UpdateEntityView(true);
+            }
+            
         }
 
         public void SetInternalEntityDefinition(EntityDefinition ent)

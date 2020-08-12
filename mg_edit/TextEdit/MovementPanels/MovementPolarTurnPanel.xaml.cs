@@ -49,8 +49,8 @@ namespace mg_edit.TextEdit.MovementPanels
             this.command.Duration = int.Parse(DurationBox.Text);
             this.command.Total = double.Parse(TotalBox.Text);
 
-            entity.ReloadMovement();
 
+            entity.ReloadMovement();
             GameState.Get().MainWindow.UpdateEntityView(true);
         }
 
