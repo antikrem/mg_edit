@@ -16,7 +16,7 @@ using mg_edit.Loader;
 using mg_edit.TextEdit.MovementPanels;
 using mg_edit.Movement;
 
-namespace mg_edit.TextEdit
+namespace mg_edit.TextEdit.NewDialogue
 {
     /// <summary>
     /// Interaction logic for NewMovementCommandWindow.xaml

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using mg_edit.Loader;
 using mg_edit.Movement;
 using mg_edit.TextEdit.MovementPanels;
+using mg_edit.TextEdit.NewDialogue;
 
 namespace mg_edit.TextEdit
 {
