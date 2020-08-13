@@ -20,9 +20,6 @@ namespace mg_edit
         // Movement object reflected from Definition
         MovementSystem movementSystem = new MovementSystem();
 
-        // List of points specifying position
-        private List<(double, double)> positions = new List<(double, double)>();
-
         // List of lines drawn into center canvas
         private List<Line> drawnLines = new List<Line>();
 
@@ -58,17 +55,10 @@ namespace mg_edit
             return movementSystem.GetStartingState();
         }
 
-        // Computes all positions this entity takes
-        public List<(double, double)> UpdatePositions()
-        {
-            positions = movementSystem.GetPositions();
-            return positions;
-        }
-
         // Gets all positions for entity
         public List<(double, double)> GetPositions()
         {
-            return positions;
+            return movementSystem.Positions;
         }
 
         // Gets position at a given tick 
@@ -76,7 +66,7 @@ namespace mg_edit
         public (double, double) GetPosition(int tick)
         {
             // Gets position, bit fuzzy on edges
-            return positions[Math.Max(0, tick - spawningTick - 1)];
+            return movementSystem.Positions[Math.Max(0, tick - spawningTick - 1)];
         }
 
         // Set spawning tick
@@ -94,7 +84,7 @@ namespace mg_edit
         // Returns how many ticks this entity is alive for
         public int GetLifetime()
         {
-            return this.positions.Count;
+            return this.movementSystem.Positions.Count;
         }
 
         // Drawing related functions

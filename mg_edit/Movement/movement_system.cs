@@ -21,6 +21,8 @@ namespace mg_edit.Movement
         // List of currently active movement commands
         private List<MovementQuanta> activeQuanta = new List<MovementQuanta>();
 
+        // List of points specifying position
+        public List<(double, double)> Positions { get; } = new List<(double, double)>();
 
         // Returns reference to starting state of movement system
         public MovementState GetStartingState()
@@ -35,17 +37,16 @@ namespace mg_edit.Movement
             MovementCommands.Add(command);
         }
 
-        // Computes all positions and returns
-        public List<(double, double)> GetPositions() {
-            // List of positions per tick, starting at 0
-            List<(double, double)> positions = new List<(double, double)>();
-
+        // Calculates positions
+        public void UpdatePositions()
+        {
             // Reset state
             activeQuanta.Clear();
+            Positions.Clear();
             MovementState movementState = new MovementState(startingState);
 
             // Set starting position
-            positions.Add(movementState.Position);
+            Positions.Add(movementState.Position);
 
             // Iterate while in gamepace and below tick max
             for (int tick = 0;
@@ -56,12 +57,12 @@ namespace mg_edit.Movement
                 // Update active quanta
                 MovementCommands.ForEach(
                         quanta => {
-                                if (quanta.StartingTick == tick)
-                                {
-                                    activeQuanta.Add(quanta);
-                                }
-                                
+                            if (quanta.StartingTick == tick)
+                            {
+                                activeQuanta.Add(quanta);
                             }
+
+                        }
                     );
 
                 // Updates against static quanta
@@ -73,14 +74,16 @@ namespace mg_edit.Movement
                 activeQuanta.RemoveAll(quanta => !quanta.IsExecuting(tick - quanta.StartingTick));
 
                 // On NaN, end early
-                if (double.IsNaN(movementState.Position.Item1) || double.IsNaN(movementState.Position.Item2)) {
-                    return positions;
+                if (double.IsNaN(movementState.Position.Item1) || double.IsNaN(movementState.Position.Item2))
+                {
+                    return;
                 }
 
-                positions.Add(movementState.Position);
+                Positions.Add(movementState.Position);
             }
 
-            return positions;
+            return;
         }
+        
     }
 }

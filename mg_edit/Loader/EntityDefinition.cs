@@ -80,10 +80,7 @@ namespace mg_edit.Loader
         // Reloads all entities attached to this definition
         public void ReloadMovement()
         {
-            foreach (Entity entity in Instances)
-            {
-                entity.UpdatePositions();
-            }
+            MovementSystem.UpdatePositions();
         }
 
         // Reload this entity from templates
