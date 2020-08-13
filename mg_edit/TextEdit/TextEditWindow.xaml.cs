@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.IO;
 using mg_edit.Dialogue;
 using mg_edit.Loader;
+using mg_edit.TextEdit.NewDialogue;
 using mg_edit.TextEdit.TemplatePanelParameter;
 
 namespace mg_edit.TextEdit
@@ -79,7 +80,7 @@ namespace mg_edit.TextEdit
         {
             // Show dialogue
             //var templateInstancer = new TemplateInstanceDialogue(this);
-           // AddTemplateButton.IsEnabled = false;
+            // AddTemplateButton.IsEnabled = false;
             //templateInstancer.Show();
         }
 
@@ -106,5 +107,16 @@ namespace mg_edit.TextEdit
             }
         }
 
+        public void AddScript_Click(object sender, RoutedEventArgs e)
+        {
+            NewScript window = new NewScript();
+            window.ShowDialog();
+
+            if (window.ScriptLoadable is object)
+            {
+                GameState.GetLevel().AddLoadable(window.ScriptLoadable);
+                DrawLoadablePanels();
+            }
+        }
     }
 }

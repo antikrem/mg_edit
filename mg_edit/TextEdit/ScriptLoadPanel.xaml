@@ -26,10 +26,10 @@
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Grid.Row="0" Grid.Column="0"/>
         
-        <TextBox  x:Name = "ScriptBody" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  TextWrapping="Wrap" 
-                  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
-                  Text="TextBox"/>
+        <TextBox x:Name = "ScriptBody" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 TextWrapping="Wrap" 
+                 Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                 Text="TextBox"/>
         
     </Grid>
 </UserControl>

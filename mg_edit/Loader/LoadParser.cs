@@ -316,6 +316,12 @@ namespace mg_edit.Loader
             return levelLength;
         }
 
+        // Add new loadable to loadables
+        public void AddLoadable(Loadable loadable)
+        {
+            Loadables.Add(loadable);
+        }
+
         // Constructor sets the target folder
         private LoadParser(string targetFolder)
         {
@@ -331,5 +337,6 @@ namespace mg_edit.Loader
             return File.Exists(targetFolder + LOAD_TABLE_FILE) ? loader : null;
 
         } 
+
     }
 }
