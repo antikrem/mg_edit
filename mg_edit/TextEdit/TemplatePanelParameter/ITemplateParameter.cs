@@ -15,5 +15,8 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
 
         // Returns the number of parameters associated with this panel
         int GetParameterCount();
+
+        // Returns default parameters for this parameter
+        List<string> GetDefaultParameters();
     }
 }

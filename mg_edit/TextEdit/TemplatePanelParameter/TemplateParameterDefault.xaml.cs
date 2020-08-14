@@ -53,5 +53,10 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
         {
             return 1;
         }
+
+        public List<string> GetDefaultParameters()
+        {
+            return new List<string> { "" };
+        }
     }
 }
