@@ -74,7 +74,7 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
 
         public List<string> GetDefaultParameters()
         {
-            return new List<string> { "0", "0" };
+            return new List<string> { GameState.Get().CursorPosition.Item1.ToString(), GameState.Get().CursorPosition.Item2.ToString() };
         }
     }
 }
