@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using mg_edit.TextEdit.TemplatePanelParameter;
+
 namespace mg_edit.Loader
 {
     public class TemplateInstance
@@ -18,6 +20,13 @@ namespace mg_edit.Loader
         public TemplateInstance(Template template)
         {
             this.Template = template;
+            this.Parameters = new List<string>();
+
+            foreach (string parameter in Template.ParameterTypes)
+            {
+                ITemplateParameter panel = TemplatePanel.CreateTemplateParameterPanel(parameter);
+                Parameters.AddRange(panel.GetDefaultParameters());
+            }
         }
 
         // Construct with name and parameters
