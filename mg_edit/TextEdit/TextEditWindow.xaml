@@ -35,7 +35,7 @@
             <Button Grid.Column="3" Grid.Row="0" Content="Load Level" Click="LoadLevel"/>
             <Button Grid.Column="4" Grid.Row="0" Content="Save Level" Click="SaveLevel"/>
 
-            <Button x:Name ="AddTemplateButton" Grid.Column="1" Grid.Row="1" Content="Add Template" Click="AddTemplate" Grid.ColumnSpan="2"/>
+            <Button x:Name ="AddEntityButton" Grid.Column="1" Grid.Row="1" Content="Add Entity" Click="AddEntity_Click" Grid.ColumnSpan="2"/>
             <Button Grid.Column="3" Grid.Row="1" Content="Add Script" Click="AddScript_Click" Grid.ColumnSpan="2"/>
 
 

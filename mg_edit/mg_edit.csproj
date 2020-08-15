@@ -59,6 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\IIntComparison.cs" />
+    <Compile Include="Helper\IntComparison.cs" />
     <Compile Include="TextEdit\MovementPanel.xaml.cs">
       <DependentUpon>MovementPanel.xaml</DependentUpon>
     </Compile>
@@ -68,6 +70,9 @@
     </Compile>
     <Compile Include="TextEdit\MovementPanels\MovementPolarTurnPanel.xaml.cs">
       <DependentUpon>MovementPolarTurnPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextEdit\NewDialogue\NewEntity.xaml.cs">
+      <DependentUpon>NewEntity.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextEdit\NewDialogue\NewMovementCommandWindow.xaml.cs">
       <DependentUpon>NewMovementCommandWindow.xaml</DependentUpon>
@@ -114,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextEdit\MovementPanels\MovementPolarTurnPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\NewDialogue\NewEntity.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

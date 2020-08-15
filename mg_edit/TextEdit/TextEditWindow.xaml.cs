@@ -75,21 +75,6 @@ namespace mg_edit.TextEdit
             GameState.Get().Loader.SaveLevel();
         }
 
-        // Handle to begin adding template dialogue
-        public void AddTemplate(object sender, RoutedEventArgs e)
-        {
-            // Show dialogue
-            //var templateInstancer = new TemplateInstanceDialogue(this);
-            // AddTemplateButton.IsEnabled = false;
-            //templateInstancer.Show();
-        }
-
-        // Renables add template button
-        public void ReenableAddTemplateButton()
-        {
-            AddTemplateButton.IsEnabled = true;
-        }
-
         // Takes all loadables and displays loadable panels
         public void DrawLoadablePanels()
         {
@@ -101,9 +86,24 @@ namespace mg_edit.TextEdit
                 return;
             }
 
-            foreach (Loadable loadable in level.GetLoadables())
+            foreach (Loadable loadable in level.Loadables)
             {
                 LoadablePanels.Children.Add((UIElement)loadable.GetLoadablePanel());
+            }
+        }
+
+        // Handle to begin adding template dialogue
+        public void AddEntity_Click(object sender, RoutedEventArgs e)
+        {
+            // Show dialogue
+            NewEntity window = new NewEntity();
+            window.ShowDialog();
+
+            if (window.Entity is object)
+            {
+                GameState.GetLevel().AddLoadable(window.Entity);
+                DrawLoadablePanels();
+                GameState.Get().ReloadLevel();
             }
         }
 
