@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 using mg_edit.TextEdit;
 
+using mg_edit.Helper;
+
 namespace mg_edit.Loader
 {
     // Interface for objects that can be in a load table
-    abstract public class Loadable : IComparer<Loadable>
+    abstract public class Loadable
     {
         // An associated double referenced LoadablePanel
         ILoadablePanel LoadPanel = null;
@@ -41,15 +43,17 @@ namespace mg_edit.Loader
         // Returns smallest spawning cycle or zero
         public int GetLowestSpawnCycle()
         {
-            return SpawningCycles.Min();
+            try
+            {
+                return SpawningCycles.Min();
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         // Returns string representation for saving
         public abstract string ConstructSaveDirective();
-
-        public int Compare(Loadable x, Loadable y)
-        {
-            return x.GetLowestSpawnCycle() - y.GetLowestSpawnCycle();
-        }
     }
 }
