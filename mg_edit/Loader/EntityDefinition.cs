@@ -42,6 +42,18 @@ namespace mg_edit.Loader
                 .ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
+        // Adds a build template instance
+        public void AddTemplate(TemplateInstance instance)
+        {
+            Templates.Add(instance);
+
+            string body = instance.Template.Contents;
+
+            Components = Components
+                .Where(entry => !body.Contains(entry.Key))
+                .ToDictionary(kv => kv.Key, kv => kv.Value);
+        }
+
         // Returns all instances of this definition
         public List<Entity> GetEntities()
         {
