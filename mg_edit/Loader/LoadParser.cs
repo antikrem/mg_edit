@@ -302,12 +302,6 @@ namespace mg_edit.Loader
             return entities;
         }
 
-        // Returns all loadables
-        public List<Loadable> GetLoadables()
-        {
-            return Loadables;
-        }
-
         // Returns length of level
         public int GetLevelLength()
         {
