@@ -14,37 +14,49 @@ namespace mg_edit.Loader
         // Set cartesian speed of entity
         private static void SetPolarSpeed(string[] parameters, EntityDefinition entDef)
         {
-            entDef.MovementSystem.GetStartingState().Speed = double.Parse(parameters[0]);
+            double value = 0;
+            double.TryParse(parameters[0], out value);
+            entDef.MovementSystem.GetStartingState().Speed = value;
         }
 
         // Set cartesian angle of entity
         private static void SetPolarAngle(string[] parameters, EntityDefinition entDef)
         {
-            entDef.MovementSystem.GetStartingState().Angle = double.Parse(parameters[0]);
+            double value = 0;
+            double.TryParse(parameters[0], out value);
+            entDef.MovementSystem.GetStartingState().Angle = value;
         }
 
         // Set cartesian speed change of entity
         private static void SetPolarSpeedChange(string[] parameters, EntityDefinition entDef)
         {
-            entDef.MovementSystem.GetStartingState().SpeedChange = double.Parse(parameters[0]);
+            double value = 0;
+            double.TryParse(parameters[0], out value);
+            entDef.MovementSystem.GetStartingState().SpeedChange = value;
         }
 
         // Set cartesian angle change of entity
         private static void SetPolarAngleChange(string[] parameters, EntityDefinition entDef)
         {
-            entDef.MovementSystem.GetStartingState().AngleChange = double.Parse(parameters[0]);
+            double value = 0;
+            double.TryParse(parameters[0], out value);
+            entDef.MovementSystem.GetStartingState().AngleChange = value;
         }
 
         // Set cartesian speed cap of entity
         private static void SetPolarSpeedCap(string[] parameters, EntityDefinition entDef)
         {
-            entDef.MovementSystem.GetStartingState().SpeedCap = double.Parse(parameters[0]);
+            double value = 0;
+            double.TryParse(parameters[0], out value);
+            entDef.MovementSystem.GetStartingState().SpeedCap = value;
         }
 
         // Set cartesian angle cap of entity
         private static void SetPolarAngleCap(string[] parameters, EntityDefinition entDef)
         {
-            entDef.MovementSystem.GetStartingState().AngleCap = double.Parse(parameters[0]);
+            double value = 0;
+            double.TryParse(parameters[0], out value);
+            entDef.MovementSystem.GetStartingState().AngleCap = value;
         }
 
         public ComponentMovement()
