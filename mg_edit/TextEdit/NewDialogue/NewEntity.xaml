@@ -11,9 +11,11 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="90"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
@@ -28,16 +30,24 @@
                   Grid.Row="0" Grid.Column="1"/>
         <StackPanel x:Name="TemplatePanels"
                     HorizontalAlignment="Left" 
-                    Grid.ColumnSpan="3" 
+                    Grid.ColumnSpan="4" 
                     VerticalAlignment="Top"
-                    Grid.Row="1" Grid.Column="0"
+                    Grid.Row="2" Grid.Column="0"
                     Orientation="Horizontal"/>
-        <Button Grid.Column="2" 
+        <Button Grid.Column="3" 
                 Content="Export"
                 Click="Export_Click"
-                HorizontalAlignment="Right" VerticalAlignment="Center" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
                 Width="75"/>
-
+        <Label Content="Timings:" 
+               HorizontalAlignment="Left" VerticalAlignment="Center"
+               Grid.Row="1" Grid.Column="0"/>
+        <StackPanel x:Name="TimingsPanel"
+                    HorizontalAlignment="Left" 
+                    Grid.ColumnSpan="3" 
+                    VerticalAlignment="Top"
+                    Grid.Row="1" Grid.Column="1"
+                    Orientation="Horizontal"/>
 
     </Grid>
 </Window>

@@ -39,6 +39,12 @@ namespace mg_edit.TextEdit.NewDialogue
             {
                 TemplateComboBox.Items.Add(entry.Key);
             }
+
+            Label label = new Label()
+            {
+                Content = GameState.Get().Tick.ToString()
+            };
+            TimingsPanel.Children.Add(label);
         }
 
         public void TemplateComboBox_SelectionChanged(object sender, RoutedEventArgs e)
