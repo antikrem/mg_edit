@@ -11,7 +11,7 @@ using mg_edit.Helper;
 namespace mg_edit.Loader
 {
     // Interface for objects that can be in a load table
-    abstract public class Loadable
+    abstract public class Loadable : IIntComparator
     {
         // An associated double referenced LoadablePanel
         ILoadablePanel LoadPanel = null;
@@ -55,5 +55,10 @@ namespace mg_edit.Loader
 
         // Returns string representation for saving
         public abstract string ConstructSaveDirective();
+
+        public int Value()
+        {
+            return GetLowestSpawnCycle();
+        }
     }
 }

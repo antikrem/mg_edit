@@ -16,6 +16,7 @@ using mg_edit.Dialogue;
 using mg_edit.Loader;
 using mg_edit.TextEdit.NewDialogue;
 using mg_edit.TextEdit.TemplatePanelParameter;
+using mg_edit.Helper;
 
 namespace mg_edit.TextEdit
 {
@@ -85,6 +86,8 @@ namespace mg_edit.TextEdit
             {
                 return;
             }
+
+            IntComparison.QSort(level.Loadables);
 
             foreach (Loadable loadable in level.Loadables)
             {

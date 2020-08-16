@@ -59,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helper\IIntComparison.cs" />
+    <Compile Include="Helper\IIntComparator.cs" />
     <Compile Include="Helper\IntComparison.cs" />
     <Compile Include="TextEdit\MovementPanel.xaml.cs">
       <DependentUpon>MovementPanel.xaml</DependentUpon>
