@@ -10,7 +10,7 @@ namespace mg_edit.Movement
     public class MovementSystem
     {
         // A hard cap on number of positions, to avoid infinite loops
-        private const int MAXIMUM_POSITION_COUNT = 100000;
+        private const int MAXIMUM_POSITION_COUNT = 10000;
 
         // Starting state of player
         private MovementState startingState = new MovementState();
