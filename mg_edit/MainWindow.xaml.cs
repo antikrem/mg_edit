@@ -310,6 +310,7 @@ namespace mg_edit
             // Create side text editor
             this.Show();
             this.textEditWindow = new TextEditWindow(this);
+            GameState.Get().TextEditWindow = textEditWindow;
             this.textEditWindow.Show();
         }
     }

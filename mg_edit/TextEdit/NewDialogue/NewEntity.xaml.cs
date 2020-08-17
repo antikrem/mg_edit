@@ -22,18 +22,14 @@ namespace mg_edit.TextEdit.NewDialogue
     /// </summary>
     public partial class NewEntity : Window
     {
-
-        // In devlopement entity definition
-        EntityDefinition inDev;
-
         // Exported completed ent def
-        public EntityDefinition Entity {get; set;}
+        private EntityDefinition entity;
 
         public NewEntity()
         {
             InitializeComponent();
 
-            inDev = new EntityDefinition(new List<int> { GameState.Get().Tick });
+            entity = new EntityDefinition(new List<int> { GameState.Get().Tick });
 
             foreach (KeyValuePair<string, Template> entry in GameState.GetLevel().Templates)
             {
@@ -45,6 +41,11 @@ namespace mg_edit.TextEdit.NewDialogue
                 Content = GameState.Get().Tick.ToString()
             };
             TimingsPanel.Children.Add(label);
+
+
+            GameState.GetLevel().AddLoadable(entity);
+            GameState.Get().ReloadLevel();
+            GameState.Get().TextEditWindow.DrawLoadablePanels();
         }
 
         public void TemplateComboBox_SelectionChanged(object sender, RoutedEventArgs e)
@@ -52,19 +53,26 @@ namespace mg_edit.TextEdit.NewDialogue
             Template template = GameState.GetLevel().Templates[TemplateComboBox.SelectedValue.ToString()];
             TemplateInstance instance = new TemplateInstance(template);
 
-            inDev.AddTemplate(instance);
+            entity.AddTemplate(instance);
 
-            inDev.ReloadTemplates();
-            inDev.ReloadMovement();
+            entity.ReloadTemplates();
+            entity.ReloadMovement();
 
-            TemplatePanel panel = new TemplatePanel(inDev, instance);
+            TemplatePanel panel = new TemplatePanel(entity, instance);
             TemplatePanels.Children.Add(panel);
+
+            entity.ForceNewPanel = true;
+            GameState.Get().ReloadLevel();
+            GameState.Get().TextEditWindow.DrawLoadablePanels();
         }
 
         public void Export_Click(object sender, RoutedEventArgs e)
         {
-            Entity = inDev;
+            entity.ForceNewPanel = true;
+            GameState.Get().ReloadLevel();
+            GameState.Get().TextEditWindow.DrawLoadablePanels();
             this.Close();
+;
         }
     }
 }

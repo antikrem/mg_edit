@@ -100,14 +100,8 @@ namespace mg_edit.TextEdit
         {
             // Show dialogue
             NewEntity window = new NewEntity();
-            window.ShowDialog();
-
-            if (window.Entity is object)
-            {
-                GameState.GetLevel().AddLoadable(window.Entity);
-                DrawLoadablePanels();
-                GameState.Get().ReloadLevel();
-            }
+            window.Owner = this;
+            window.Show();
         }
 
         public void AddScript_Click(object sender, RoutedEventArgs e)

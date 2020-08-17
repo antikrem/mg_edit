@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using mg_edit.Loader;
 
+using mg_edit.TextEdit;
+
 
 namespace mg_edit
 {
@@ -12,6 +14,7 @@ namespace mg_edit
         static private GameState instance = null;
 
         public MainWindow MainWindow { get; set; }
+        public TextEditWindow TextEditWindow { get; set; }
 
         // Static gamespace size, gamespace is origin centered 
         static public double GAMESPACE_WIDTH = 960;

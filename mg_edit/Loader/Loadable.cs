@@ -16,6 +16,9 @@ namespace mg_edit.Loader
         // An associated double referenced LoadablePanel
         ILoadablePanel LoadPanel = null;
 
+        // If set to true, next load panel draw will force a new pane
+        public bool ForceNewPanel { set; get; } = false;
+
         // Internal list of spawning cycles
         private List<int> _spawningCycles = null;
 
@@ -32,9 +35,10 @@ namespace mg_edit.Loader
         // Function that converts a Loadable into a LoadablePanel
         public ILoadablePanel GetLoadablePanel()
         {
-            if (LoadPanel is null)
+            if (LoadPanel is null || ForceNewPanel)
             {
                 LoadPanel = this.GenerateLoadPanel();
+                ForceNewPanel = false;
             }
 
             return LoadPanel;
