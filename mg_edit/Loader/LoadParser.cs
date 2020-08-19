@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+using mg_edit.Helper;
+
 namespace mg_edit.Loader
 {
     // Parser for a level 
@@ -10,6 +12,7 @@ namespace mg_edit.Loader
     {
         public const string TEMPLATE_FILE = "template_table.txt";
         public const string LOAD_TABLE_FILE = "load_table.txt";
+        public const string BACKUP_FOLDER = "backup/";
 
         public const string PARAMETER_TOKEN = "PARAMETERS";
 
@@ -320,6 +323,15 @@ namespace mg_edit.Loader
         private LoadParser(string targetFolder)
         {
             this.targetFolder = targetFolder;
+
+            // Make back up
+            if (File.Exists(targetFolder + LOAD_TABLE_FILE))
+            {
+                string dt = DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '_');
+                string path = BACKUP_FOLDER + targetFolder + dt;
+                FileExtension.CreateFolderPath(path);
+                File.Copy(targetFolder + LOAD_TABLE_FILE, path + "/" + LOAD_TABLE_FILE);
+            }
         }
 
         // Creates an instance of LoadParser
