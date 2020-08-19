@@ -280,8 +280,7 @@ namespace mg_edit.Loader
             }
             levelBody.ToString();
 
-            File.WriteAllText(targetFolder + "save" + LOAD_TABLE_FILE, levelBody);
-            //File.WriteAllText(targetFolder + LOAD_TABLE_FILE, levelBody);
+            File.WriteAllText(targetFolder +  LOAD_TABLE_FILE, levelBody);
         }
 
         // Evaluates from existing definitions into list of entities
