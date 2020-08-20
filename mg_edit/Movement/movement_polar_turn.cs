@@ -11,8 +11,9 @@ namespace mg_edit.Movement
         public double Total;
         public int Duration;
 
-        public MovementPolarTurn()
+        public MovementPolarTurn(int startingTick)
         {
+            this.StartingTick = startingTick;
             this.Total = 0;
             this.Duration = 1;
         }

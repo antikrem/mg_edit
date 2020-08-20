@@ -38,20 +38,24 @@ namespace mg_edit.TextEdit.NewDialogue
         void CommandDropDown_SelectionChanged(object sender, RoutedEventArgs e)
         {
             UserControl panel;
+            int tick = Math.Max(0, GameState.Get().Tick - entity.SpawningCycles[0]);
 
             switch ((string)CommandDropDown.SelectedItem)
             {
                 case "AccelerateTo":
-                    command = new MovementPolarAccelerateTo();
+                    command = new MovementPolarAccelerateTo(tick);
                     panel = new MovementPolarAccelerateToPanel(command);
                     break;
                 case "Turn":
-                    command = new MovementPolarTurn();
+                    command = new MovementPolarTurn(tick);
                     panel = new MovementPolarTurnPanel(command);
                     break;
                 default:
                     return;
             }
+
+            ((IMovementPanel)panel).SetInternalEntityDefinition(entity);
+            entity.MovementSystem.AddMovementCommand(tick, command);
 
             Grid.SetRow(panel, 1);
             Grid.SetColumn(panel, 0);
@@ -60,9 +64,7 @@ namespace mg_edit.TextEdit.NewDialogue
         }
 
         void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            entity.MovementSystem.MovementCommands.Add(command);
-            
+        {           
             entity.ReloadMovement();
             GameState.Get().MainWindow.UpdateEntityView(true);
             this.Close();

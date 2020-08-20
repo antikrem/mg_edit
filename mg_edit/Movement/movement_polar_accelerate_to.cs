@@ -11,9 +11,9 @@ namespace mg_edit.Movement
         public int Duration { get; set; }
         public double EndingSpeed { get; set; }
 
-        public MovementPolarAccelerateTo()
+        public MovementPolarAccelerateTo(int startingTick)
         {
-            StartingTick = 0;
+            this.StartingTick = startingTick;
             this.EndingSpeed = 0;
             this.Duration = 1;
         }
