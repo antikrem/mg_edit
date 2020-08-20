@@ -45,9 +45,10 @@ namespace mg_edit.TextEdit.MovementPanels
         // Push updates to movementcommander and redraw
         public void UpdateCommand(object sender, RoutedEventArgs e)
         {
-            this.command.StartingTick = int.Parse(TickBox.Text);
-            this.command.Duration = int.Parse(DurationBox.Text);
-            this.command.Total = double.Parse(TotalBox.Text);
+            int.TryParse(TickBox.Text, out int value);
+            this.command.StartingTick = value;
+            int.TryParse(DurationBox.Text, out this.command.Duration);
+            double.TryParse(TotalBox.Text, out this.command.Total);
 
 
             entity.ReloadMovement();
