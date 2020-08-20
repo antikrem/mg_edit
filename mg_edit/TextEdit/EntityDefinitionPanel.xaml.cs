@@ -53,5 +53,13 @@ namespace mg_edit.TextEdit
                 Panels.Children.Add(new TemplatePanel(this.entDef, template));
             }
         }
+
+        // Deletes this definition
+        public void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            GameState.GetLevel().Loadables.Remove(entDef);
+            GameState.Get().TextEditWindow.DrawLoadablePanels();
+            GameState.Get().ReloadLevel();
+        }
     }
 }

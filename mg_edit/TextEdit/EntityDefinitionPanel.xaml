@@ -10,6 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -31,7 +32,9 @@
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Grid.Row="0" Grid.Column="0"/>
 
-
+        <Button Click="Delete_Click"
+                Grid.Column="2" Content="X" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
     </Grid>
 </UserControl>
