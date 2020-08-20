@@ -21,6 +21,9 @@ namespace mg_edit
         // Seek length of minor scroll
         private const double MINOR_SCROLL_WIDTH = 500;
 
+        // Strength of scroll
+        private const int SCROLL_TICK = 20;
+
         // Side window used as text editor
         private TextEditWindow textEditWindow;
 
@@ -261,6 +264,19 @@ namespace mg_edit
 
             LevelMasterScroll.Value = major / GameState.Get().GetLevelTotalLength();
             LevelMinorScroll.Value = minor / MINOR_SCROLL_WIDTH;
+        }
+
+        // Handles mouse wheel scrolling
+        public void MouseWheelUpdate(object sender, MouseWheelEventArgs e)
+        {
+            GameState.Get().Tick -= SCROLL_TICK * e.Delta / Math.Abs(e.Delta);
+            GameState.Get().Tick = Math.Max(GameState.Get().Tick, 0);
+            GameState.Get().Tick = Math.Min(GameState.Get().Tick, GameState.GetLevel().GetLevelLength());
+            TickLabel.Content = GameState.Get().Tick;
+
+            UpdateEntityView();
+
+            ResetShuffle(null, null);
         }
 
         // Loads level from GameState's load table

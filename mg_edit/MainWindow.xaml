@@ -9,7 +9,8 @@
         Height="1080" Width="1920"
         WindowState="Maximized"
         WindowStyle="None"
-        Closing="HandleClose">
+        Closing="HandleClose"
+        MouseWheel="MouseWheelUpdate">
     <Grid>
         <Label x:Name="CursorLabel" 
             Content="(0,0)" 
@@ -58,7 +59,8 @@
             Panel.ZIndex="1">
             <ListBox 
                 Height="1080" Width="1920"
-                MouseDown="UpdateCanvasCursorClick"/>
+                MouseDown="UpdateCanvasCursorClick"
+                MouseWheel="MouseWheelUpdate"/>
 
         </Canvas>
 
