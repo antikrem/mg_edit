@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mg_edit.TextEdit.NewDialogue"
         mc:Ignorable="d"
-        Title="NewEntity" Height="380" Width="620">
+        Title="NewEntity" Height="380" Width="620"
+        Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>

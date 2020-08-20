@@ -22,6 +22,8 @@ namespace mg_edit.TextEdit.NewDialogue
     /// </summary>
     public partial class NewEntity : Window
     {
+        private bool badClose = true;
+
         // Exported completed ent def
         private EntityDefinition entity;
 
@@ -71,8 +73,21 @@ namespace mg_edit.TextEdit.NewDialogue
             entity.ForceNewPanel = true;
             GameState.Get().ReloadLevel();
             GameState.Get().TextEditWindow.DrawLoadablePanels();
+
+            badClose = false;
+
             this.Close();
-;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (badClose)
+            {
+                GameState.GetLevel().Loadables.Remove(entity);
+
+                GameState.Get().ReloadLevel();
+                GameState.Get().TextEditWindow.DrawLoadablePanels();
+            }
         }
     }
 }
