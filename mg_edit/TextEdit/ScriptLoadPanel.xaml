@@ -10,6 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -28,8 +29,11 @@
         
         <TextBox x:Name = "ScriptBody" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  TextWrapping="Wrap" 
-                 Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                 Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"
                  Text="TextBox"/>
-        
+
+        <Button Click="Delete_Click"
+                Grid.Column="2" Content="X" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>

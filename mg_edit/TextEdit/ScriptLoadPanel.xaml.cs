@@ -40,5 +40,13 @@ namespace mg_edit.TextEdit
                 TimingsPanel.Children.Add(label);
             }
         }
+
+        // Deletes this definition
+        public void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            GameState.GetLevel().Loadables.Remove(loadable);
+            GameState.Get().TextEditWindow.DrawLoadablePanels();
+            GameState.Get().ReloadLevel();
+        }
     }
 }
