@@ -54,12 +54,11 @@ namespace mg_edit.Loader
                 .ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
-        // Returns all instances of this definition
-        public List<Entity> GetEntities()
+        // Regenerates all entities
+        public void RegenerateEntities()
         {
             Instances.Clear();
-            SpawningCycles.ForEach( i => Instances.Add(new Entity(MovementSystem, i)) );
-            return Instances;
+            SpawningCycles.ForEach(i => Instances.Add(new Entity(MovementSystem, i)));
         }
 
         protected override ILoadablePanel GenerateLoadPanel()
