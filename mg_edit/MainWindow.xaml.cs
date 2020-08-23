@@ -320,9 +320,6 @@ namespace mg_edit
             // Set up guidelines
             this.DrawGuideLines();
 
-            // Draw all entities that are currently active and visible
-            this.UpdateEntityView();
-
             // Create side text editor
             this.Show();
             this.textEditWindow = new TextEditWindow(this);
