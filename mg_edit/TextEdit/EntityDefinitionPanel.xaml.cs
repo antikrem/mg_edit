@@ -25,6 +25,24 @@ namespace mg_edit.TextEdit
     {
         private EntityDefinition entDef;
 
+        // Draw timings panel
+        private void DrawTimingsPanel()
+        {
+            // Add labels for timings
+            foreach (int cycle in entDef.SpawningCycles)
+            {
+                Label label = new Label();
+                label.Content = cycle.ToString();
+                label.MouseDown += TimingsPanelChildren_Click;
+                TimingsPanel.Children.Add(label);
+            }
+
+            Label plusLabel = new Label();
+            plusLabel.Content = "+";
+            plusLabel.MouseDown += TimingsPanelChildren_Click;
+            TimingsPanel.Children.Add(plusLabel);
+        }
+
         public EntityDefinitionLoadPanel(Loadable entDef)
         {
             InitializeComponent();
@@ -32,13 +50,7 @@ namespace mg_edit.TextEdit
             // Initialise
             this.entDef = (EntityDefinition)entDef;
 
-            // Add labels for timings
-            foreach (int cycle in entDef.SpawningCycles)
-            {
-                Label label = new Label();
-                label.Content = cycle.ToString();
-                TimingsPanel.Children.Add(label);
-            }
+            DrawTimingsPanel();
 
             // Add movement panel
             if (this.entDef.MovementSystem is object)
@@ -57,9 +69,39 @@ namespace mg_edit.TextEdit
         // Deletes this definition
         public void Delete_Click(object sender, RoutedEventArgs e)
         {
-            GameState.GetLevel().Loadables.Remove(entDef);
+            GameState.GetLevel().RemoveLoadable(entDef);
+
             GameState.Get().TextEditWindow.DrawLoadablePanels();
-            GameState.Get().ReloadLevel();
+
+            GameState.Get().MainWindow.UpdateEntityView(true);
+        }
+
+        // Deletes a label
+        public void TimingsPanelChildren_Click(object sender, RoutedEventArgs e)
+        {
+            Label label = (Label)sender;
+            int cycle = 0;
+            if (int.TryParse(label.Content.ToString(), out cycle))
+            {
+                entDef.SpawningCycles.Remove(cycle);
+                TimingsPanel.Children.Remove(label);
+                if (entDef.SpawningCycles.Count > 0)
+                {
+                    GameState.Get().ReloadEntity(entDef);
+                }
+                else
+                {
+                    GameState.GetLevel().RemoveLoadable(entDef);
+                    GameState.Get().TextEditWindow.DrawLoadablePanels();
+                }
+                GameState.Get().MainWindow.UpdateEntityView(true);
+
+            }
+            else
+            {
+
+            }
+            
         }
     }
 }
