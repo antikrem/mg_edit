@@ -293,9 +293,23 @@ namespace mg_edit.Loader
                 {
                     ((EntityDefinition)loadable).ReloadTemplates();
                     ((EntityDefinition)loadable).ReloadMovement();
-                    entities.AddRange(((EntityDefinition)loadable).GetEntities());
+                    ((EntityDefinition)loadable).RegenerateEntities();
+                    entities.AddRange(((EntityDefinition)loadable).Instances);
                 }
             }
+        }
+
+        // Reloads a single entity definition
+        public void EvaluateEntity(EntityDefinition ent)
+        {
+            foreach (var enemy in ent.Instances)
+            {
+                this.entities.Remove(enemy);
+            }
+            ent.ReloadTemplates();
+            ent.ReloadMovement();
+            ent.RegenerateEntities();
+            entities.AddRange(ent.Instances);
         }
 
         // Return loaded entities
@@ -316,6 +330,23 @@ namespace mg_edit.Loader
         public void AddLoadable(Loadable loadable)
         {
             Loadables.Add(loadable);
+        }
+
+        // Remove a loadable 
+        public void RemoveLoadable(Loadable loadable)
+        {
+            Loadables.Remove(loadable);
+
+            if (loadable is EntityDefinition)
+            {
+                EntityDefinition ent = (EntityDefinition)loadable;
+                // Remove existing elements
+                foreach (var enemy in ent.Instances)
+                {
+                    this.entities.Remove(enemy);
+                }
+
+            }
         }
 
         // Constructor sets the target folder
