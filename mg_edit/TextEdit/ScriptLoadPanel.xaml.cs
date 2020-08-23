@@ -44,9 +44,8 @@ namespace mg_edit.TextEdit
         // Deletes this definition
         public void Delete_Click(object sender, RoutedEventArgs e)
         {
-            GameState.GetLevel().Loadables.Remove(loadable);
+            GameState.GetLevel().RemoveLoadable(loadable);
             GameState.Get().TextEditWindow.DrawLoadablePanels();
-            GameState.Get().ReloadLevel();
         }
     }
 }

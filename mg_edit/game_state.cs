@@ -39,9 +39,6 @@ namespace mg_edit
         // Last load parser
         public LoadParser Loader { get; set; } = null;
 
-        // List of current enemies
-        private List<Entity> enemies = new List<Entity>();
-
         // Returns if this position is in the played game state 
         public static bool IsInGameSpace((double, double) position)
         {
@@ -84,7 +81,18 @@ namespace mg_edit
         {
             // Load entities
             Loader.EvaluateEntities();
-            this.enemies = Loader.GetEntities();
+  
+            // Set level length
+            this.levelLength = Loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
+
+            return true;
+        }
+
+        // Reload a single entity definition
+        public bool ReloadEntity(EntityDefinition ent)
+        {
+            // Load entity
+            Loader.EvaluateEntity(ent);
 
             // Set level length
             this.levelLength = Loader.GetLevelLength() + LEVEL_LENGTH_PADDING;
@@ -125,7 +133,7 @@ namespace mg_edit
         {
             var visibleEnemies = new List<Entity>();
 
-            foreach (var enemy in enemies)
+            foreach (var enemy in Loader.GetEntities())
             {
                 if (enemy.GetSpawningTick() <= this.Tick &&
                     this.Tick <= enemy.GetSpawningTick() + enemy.GetLifetime())

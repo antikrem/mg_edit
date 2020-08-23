@@ -46,7 +46,7 @@ namespace mg_edit.TextEdit.NewDialogue
 
 
             GameState.GetLevel().AddLoadable(entity);
-            GameState.Get().ReloadLevel();
+            GameState.Get().ReloadEntity(entity);
             GameState.Get().TextEditWindow.DrawLoadablePanels();
         }
 
@@ -64,14 +64,14 @@ namespace mg_edit.TextEdit.NewDialogue
             TemplatePanels.Children.Add(panel);
 
             entity.ForceNewPanel = true;
-            GameState.Get().ReloadLevel();
+            GameState.Get().ReloadEntity(entity);
             GameState.Get().TextEditWindow.DrawLoadablePanels();
         }
 
         public void Export_Click(object sender, RoutedEventArgs e)
         {
             entity.ForceNewPanel = true;
-            GameState.Get().ReloadLevel();
+            GameState.Get().ReloadEntity(entity);
             GameState.Get().TextEditWindow.DrawLoadablePanels();
 
             badClose = false;
@@ -83,9 +83,8 @@ namespace mg_edit.TextEdit.NewDialogue
         {
             if (badClose)
             {
-                GameState.GetLevel().Loadables.Remove(entity);
+                GameState.GetLevel().RemoveLoadable(entity);
 
-                GameState.Get().ReloadLevel();
                 GameState.Get().TextEditWindow.DrawLoadablePanels();
             }
         }
