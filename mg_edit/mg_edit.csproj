@@ -81,6 +81,9 @@
     <Compile Include="TextEdit\NewDialogue\NewScript.xaml.cs">
       <DependentUpon>NewScript.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextEdit\NewDialogue\NewSpawningCycle.xaml.cs">
+      <DependentUpon>NewSpawningCycle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextEdit\TemplatePanelParameter\ITemplateParameter.cs" />
     <Compile Include="TextEdit\TemplatePanel.xaml.cs">
       <DependentUpon>TemplatePanel.xaml</DependentUpon>
@@ -132,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextEdit\NewDialogue\NewScript.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\NewDialogue\NewSpawningCycle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
