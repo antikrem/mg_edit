@@ -40,16 +40,9 @@
 
 
 
-            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.ColumnSpan="5" Grid.Row="3" Grid.Column="0" RenderTransformOrigin="0.5,0.5">
-                <ScrollViewer.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0.534"/>
-                        <RotateTransform/>
-                        <TranslateTransform Y="2.991"/>
-                    </TransformGroup>
-                </ScrollViewer.RenderTransform>
+            <ScrollViewer x:Name="LoadableScroll"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                          Grid.ColumnSpan="5" Grid.Row="3" Grid.Column="0">
                 <StackPanel x:Name = "LoadablePanels" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                             Grid.RowSpan="2">
 
