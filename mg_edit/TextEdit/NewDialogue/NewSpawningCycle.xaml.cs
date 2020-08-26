@@ -19,9 +19,33 @@ namespace mg_edit.TextEdit.NewDialogue
     /// </summary>
     public partial class NewSpawningCycle : Window
     {
+        int _cycle = -1;
+        public int Cycle
+        {
+            get
+            {
+                return _cycle;
+            }
+            set
+            {
+                _cycle = value;
+            }
+        }
+
         public NewSpawningCycle()
         {
             InitializeComponent();
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            int.TryParse(CycleBox.Text, out _cycle);
+            this.Close();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

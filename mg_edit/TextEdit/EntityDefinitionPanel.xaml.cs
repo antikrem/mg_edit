@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using mg_edit.Loader;
 using mg_edit.TextEdit.TemplatePanelParameter;
+using mg_edit.TextEdit.NewDialogue;
 
 namespace mg_edit.TextEdit
 {
@@ -28,6 +29,8 @@ namespace mg_edit.TextEdit
         // Draw timings panel
         private void DrawTimingsPanel()
         {
+            TimingsPanel.Children.Clear();
+
             // Add labels for timings
             foreach (int cycle in entDef.SpawningCycles)
             {
@@ -99,7 +102,19 @@ namespace mg_edit.TextEdit
             }
             else
             {
+                NewSpawningCycle window = new NewSpawningCycle();
+                window.ShowDialog();
 
+                if (window.Cycle >= 0)
+                {
+                    entDef.SpawningCycles.Add(window.Cycle);
+                    entDef.SpawningCycles.Sort();
+
+                    GameState.Get().ReloadEntity(entDef);
+                    GameState.Get().MainWindow.UpdateEntityView(true);
+
+                    DrawTimingsPanel();
+                }
             }
             
         }

@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mg_edit.TextEdit.NewDialogue"
         mc:Ignorable="d"
-        Title="NewSpawningCycle" Height="70" Width="500">
+        Title="NewSpawningCycle" Height="60" Width="400">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="70"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="CycleBox" Height="23" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+        <Button Click="Add_Click"
+                Content="Add" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Grid.Column="1"/>
+        <Button Click="Close_Click"
+                Content="Cancel" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Grid.Column="2"/>
 
     </Grid>
 </Window>
