@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogue\ShiftLevelDialogue.xaml.cs">
+      <DependentUpon>ShiftLevelDialogue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\FileExtension.cs" />
     <Compile Include="Helper\IIntComparator.cs" />
     <Compile Include="Helper\IntComparison.cs" />
@@ -111,6 +114,10 @@
       <DependentUpon>TextEditWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialogue\LevelLoadDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogue\ShiftLevelDialogue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

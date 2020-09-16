@@ -115,5 +115,11 @@ namespace mg_edit.TextEdit
                 DrawLoadablePanels();
             }
         }
+
+        public void Shift_Click(object sender, RoutedEventArgs e)
+        {
+            ShiftLevelDialogue window = new ShiftLevelDialogue();
+            window.ShowDialog();
+        }
     }
 }

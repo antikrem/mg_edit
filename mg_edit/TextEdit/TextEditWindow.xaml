@@ -38,14 +38,13 @@
             <Button x:Name ="AddEntityButton" Grid.Column="1" Grid.Row="1" Content="Add Entity" Click="AddEntity_Click" Grid.ColumnSpan="2"/>
             <Button Grid.Column="3" Grid.Row="1" Content="Add Script" Click="AddScript_Click" Grid.ColumnSpan="2"/>
 
-
+            <Button x:Name ="ShiftButton" Grid.Column="1" Grid.Row="2" Content="Shift" Click="Shift_Click"/>
 
             <ScrollViewer x:Name="LoadableScroll"
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                           Grid.ColumnSpan="5" Grid.Row="3" Grid.Column="0">
                 <StackPanel x:Name = "LoadablePanels" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                             Grid.RowSpan="2">
-
                 </StackPanel>
             </ScrollViewer>
 
