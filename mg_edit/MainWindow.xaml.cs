@@ -22,7 +22,7 @@ namespace mg_edit
         private const double MINOR_SCROLL_WIDTH = 500;
 
         // Strength of scroll
-        private const int SCROLL_TICK = 20;
+        private const int SCROLL_TICK = 10;
 
         // Side window used as text editor
         private TextEditWindow textEditWindow;
@@ -194,6 +194,12 @@ namespace mg_edit
                     ent.SetMarkerPosition(pos);
                 }
             );
+
+            // Scroll to end
+            foreach (var entity in toDraw)
+            {
+                GameState.Get().TextEditWindow.ScrollToLoadable(entity.Definition);
+            }
         }
 
         // Draw marker for user click

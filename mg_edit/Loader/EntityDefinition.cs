@@ -58,7 +58,7 @@ namespace mg_edit.Loader
         public void RegenerateEntities()
         {
             Instances.Clear();
-            SpawningCycles.ForEach(i => Instances.Add(new Entity(MovementSystem, i)));
+            SpawningCycles.ForEach(i => Instances.Add(new Entity(this, MovementSystem, i)));
         }
 
         protected override ILoadablePanel GenerateLoadPanel()

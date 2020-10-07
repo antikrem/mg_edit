@@ -17,6 +17,9 @@ namespace mg_edit
         // Spawning tick
         private int spawningTick = 0;
 
+        // Loadable that created this entity
+        public EntityDefinition Definition { get; }
+
         // Movement object reflected from Definition
         MovementSystem movementSystem = new MovementSystem();
 
@@ -37,8 +40,9 @@ namespace mg_edit
         };
 
         // Constructs from within an entity definition
-        public Entity(MovementSystem movementSystem, int spawningTick)
+        public Entity(EntityDefinition definition, MovementSystem movementSystem, int spawningTick)
         {
+            Definition = definition;
             this.movementSystem = movementSystem;
             this.spawningTick = spawningTick;
         }

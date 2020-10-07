@@ -95,6 +95,12 @@ namespace mg_edit.TextEdit
             }
         }
 
+        // Scroll to a given loadable
+        public void ScrollToLoadable(Loadable loadable)
+        {
+            ((FrameworkElement)loadable.GetLoadablePanel()).BringIntoView();
+        }
+
         // Handle to begin adding template dialogue
         public void AddEntity_Click(object sender, RoutedEventArgs e)
         {
