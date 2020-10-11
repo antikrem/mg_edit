@@ -23,6 +23,8 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
     public partial class TemplatePanel : UserControl
     {
 
+        private const int MAX_NAME_LENGTH = 10;
+
         // Returns the correct parameter panel for a given type
         static public ITemplateParameter CreateTemplateParameterPanel(string parameterType)
         {
@@ -46,7 +48,7 @@ namespace mg_edit.TextEdit.TemplatePanelParameter
         {
             InitializeComponent();
 
-            Title.Content = template.Template.Name.Replace("_", "__");
+            Title.Content = template.Template.Name.Replace("_", "__").Substring(0, MAX_NAME_LENGTH);
 
             if (template.Template.ParameterNames is null)
             {
