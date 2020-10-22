@@ -22,7 +22,7 @@ namespace mg_edit.Loader
         public List<TemplateInstance> Templates { get; } = new List<TemplateInstance>();
 
         // Map of component names to components
-        private Dictionary<string, Component> Components { set; get; } = new Dictionary<string, Component>();
+        public Dictionary<string, Component> Components { set; get; } = new Dictionary<string, Component>();
 
         public EntityDefinition(List<int> SpawningCycles)
         {
