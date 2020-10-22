@@ -9,10 +9,10 @@ namespace mg_edit.Loader
     class ComponentBulletMaster : Component
     {
         // Name of bullet master
-        private string Name { get; set; }
+        public string Name { get; set; } = "";
 
         // Name of bullet master
-        private int Delay { get; set; } = 0;
+        public int Delay { get; set; } = 0;
 
         // Additional parameters
         private string[] AdditionalParameters { get; set; } = null;
