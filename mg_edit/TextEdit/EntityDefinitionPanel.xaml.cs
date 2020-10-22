@@ -67,6 +67,11 @@ namespace mg_edit.TextEdit
             {
                 Panels.Children.Add(new TemplatePanel(this.entDef, template));
             }
+
+            // Add a bullet master template as needed
+            if (this.entDef.Components.ContainsKey("+bulletMaster")) {
+                Panels.Children.Add(new BulletMasterPanel(this.entDef));
+            }
         }
 
         // Deletes this definition
