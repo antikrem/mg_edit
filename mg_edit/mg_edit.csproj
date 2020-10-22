@@ -65,6 +65,9 @@
     <Compile Include="Helper\FileExtension.cs" />
     <Compile Include="Helper\IIntComparator.cs" />
     <Compile Include="Helper\IntComparison.cs" />
+    <Compile Include="TextEdit\BulletMasterPanel.xaml.cs">
+      <DependentUpon>BulletMasterPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextEdit\MovementPanel.xaml.cs">
       <DependentUpon>MovementPanel.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogue\ShiftLevelDialogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextEdit\BulletMasterPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
