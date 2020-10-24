@@ -23,14 +23,34 @@ namespace mg_edit.TextEdit
     public partial class BulletMasterPanel : UserControl
     {
 
+        EntityDefinition entityDefinition;
+
+        ComponentBulletMaster bulletMaster;
+
+        public void UpdateName(object sender, RoutedEventArgs e)
+        {
+            bulletMaster.Name = MasterNameTextBox.Text;
+        }
+
+        public void UpdateTimings(object sender, RoutedEventArgs e)
+        {
+            int cycle = 0;
+
+            int.TryParse(TimingsTextBox.Text, out cycle);
+
+            bulletMaster.Delay = cycle;
+        }
 
         public BulletMasterPanel(EntityDefinition entityDefinition)
         {
             InitializeComponent();
 
             this.MasterNameTextBox.Text = ((ComponentBulletMaster)entityDefinition.Components["+bulletMaster"]).Name;
-
             this.TimingsTextBox.Text = ((ComponentBulletMaster)entityDefinition.Components["+bulletMaster"]).Delay.ToString();
+
+            this.MasterNameTextBox.TextChanged += UpdateName;
+            this.TimingsTextBox.TextChanged += UpdateTimings;
+
         }
     }
 }
