@@ -45,8 +45,11 @@ namespace mg_edit.TextEdit
         {
             InitializeComponent();
 
-            this.MasterNameTextBox.Text = ((ComponentBulletMaster)entityDefinition.Components["+bulletMaster"]).Name;
-            this.TimingsTextBox.Text = ((ComponentBulletMaster)entityDefinition.Components["+bulletMaster"]).Delay.ToString();
+            this.entityDefinition = entityDefinition;
+            this.bulletMaster = (ComponentBulletMaster)this.entityDefinition.Components["+bulletMaster"];
+
+            this.MasterNameTextBox.Text = this.bulletMaster.Name;
+            this.TimingsTextBox.Text = this.bulletMaster.Delay.ToString();
 
             this.MasterNameTextBox.TextChanged += UpdateName;
             this.TimingsTextBox.TextChanged += UpdateTimings;
