@@ -65,6 +65,7 @@
     <Compile Include="Helper\FileExtension.cs" />
     <Compile Include="Helper\IIntComparator.cs" />
     <Compile Include="Helper\IntComparison.cs" />
+    <Compile Include="Loader\Components\InstanceableComponent.cs" />
     <Compile Include="TextEdit\BulletMasterPanel.xaml.cs">
       <DependentUpon>BulletMasterPanel.xaml</DependentUpon>
     </Compile>

@@ -13,15 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using mg_edit.Loader;
+using mg_edit.Loader.Components;
 using mg_edit.TextEdit.TemplatePanelParameter;
 
 namespace mg_edit.TextEdit.NewDialogue
 {
+
     /// <summary>
     /// Interaction logic for NewEntity.xaml
     /// </summary>
     public partial class NewEntity : Window
     {
+        // lookup for components
+        private Dictionary<string, Type> COMPONENT_LOOKUP = new Dictionary<string, Type>()
+        {
+            { "bulletMaster" , typeof(ComponentBulletMaster)}
+        };
+
         private bool badClose = true;
 
         // Exported completed ent def
@@ -33,9 +41,17 @@ namespace mg_edit.TextEdit.NewDialogue
 
             entity = new EntityDefinition(new List<int> { GameState.Get().Tick });
 
+
+            // Add templates
             foreach (KeyValuePair<string, Template> entry in GameState.GetLevel().Templates)
             {
                 TemplateComboBox.Items.Add(entry.Key);
+            }
+
+            // Add Components
+            foreach (KeyValuePair<string, Type> entry in COMPONENT_LOOKUP)
+            {
+                ComponentComboBox.Items.Add(entry.Key);
             }
 
             Label label = new Label()
@@ -62,6 +78,23 @@ namespace mg_edit.TextEdit.NewDialogue
 
             TemplatePanel panel = new TemplatePanel(entity, instance);
             TemplatePanels.Children.Add(panel);
+
+            entity.ForceNewPanel = true;
+            GameState.Get().ReloadEntity(entity);
+            GameState.Get().TextEditWindow.DrawLoadablePanels();
+        }
+
+        public void ComponentComboBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            string componentName = ComponentComboBox.SelectedValue.ToString();
+            Component component = (Component)Activator.CreateInstance(COMPONENT_LOOKUP[componentName]);
+
+            entity.AddComponent(componentName, component);
+
+            entity.ReloadTemplates();
+            entity.ReloadMovement();
+
+            TemplatePanels.Children.Add(((InstanceableComponent)component).GetPanel(entity));
 
             entity.ForceNewPanel = true;
             GameState.Get().ReloadEntity(entity);

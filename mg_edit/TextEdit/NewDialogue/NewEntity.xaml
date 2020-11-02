@@ -11,6 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="250*"/>
             <ColumnDefinition Width="90"/>
         </Grid.ColumnDefinitions>
@@ -29,13 +30,23 @@
                   SelectionChanged="TemplateComboBox_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                   Grid.Row="0" Grid.Column="1"/>
+
+        <Label Content="Add Component:" 
+               HorizontalAlignment="Left" VerticalAlignment="Center"
+               Grid.Row="0" Grid.Column="2"/>
+
+        <ComboBox x:Name="ComponentComboBox"
+                  SelectionChanged="ComponentComboBox_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                  Grid.Row="0" Grid.Column="3"/>
+
         <StackPanel x:Name="TemplatePanels"
                     HorizontalAlignment="Left" 
                     Grid.ColumnSpan="4" 
                     VerticalAlignment="Top"
                     Grid.Row="2" Grid.Column="0"
                     Orientation="Horizontal"/>
-        <Button Grid.Column="3" 
+        <Button Grid.Column="4" 
                 Content="Export"
                 Click="Export_Click"
                 HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -45,7 +56,7 @@
                Grid.Row="1" Grid.Column="0"/>
         <StackPanel x:Name="TimingsPanel"
                     HorizontalAlignment="Left" 
-                    Grid.ColumnSpan="3" 
+                    Grid.ColumnSpan="4" 
                     VerticalAlignment="Top"
                     Grid.Row="1" Grid.Column="1"
                     Orientation="Horizontal"/>
