@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using mg_edit.Loader.Components;
+using mg_edit.TextEdit;
 
 namespace mg_edit.Loader
 {
-    class ComponentBulletMaster : Component
+    class ComponentBulletMaster : Component, InstanceableComponent
     {
         // Name of bullet master
         public string Name { get; set; } = "";
@@ -47,6 +50,11 @@ namespace mg_edit.Loader
                 body = body + " " + string.Join(" ", AdditionalParameters);
             }
             return body;
+        }
+
+        public UserControl GetPanel(EntityDefinition entDef)
+        {
+            return new BulletMasterPanel(entDef);
         }
     }
 }
