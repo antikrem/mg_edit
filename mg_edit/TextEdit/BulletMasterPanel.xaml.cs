@@ -41,6 +41,18 @@ namespace mg_edit.TextEdit
             bulletMaster.Delay = cycle;
         }
 
+        public void UpdateAdditionalParameters(object sender, RoutedEventArgs e)
+        {
+            if (ParametersTextBox.Text == null)
+            {
+                bulletMaster.AdditionalParameters = null;
+            }
+            else
+            {
+                bulletMaster.AdditionalParameters = ParametersTextBox.Text.Split(',').Select(parameter => parameter.Trim()).ToArray();
+            }
+        }
+
         public BulletMasterPanel(EntityDefinition entityDefinition)
         {
             InitializeComponent();
@@ -50,9 +62,14 @@ namespace mg_edit.TextEdit
 
             this.MasterNameTextBox.Text = this.bulletMaster.Name;
             this.TimingsTextBox.Text = this.bulletMaster.Delay.ToString();
-
+            if (!(this.bulletMaster.AdditionalParameters is null))
+            {
+                this.ParametersTextBox.Text = String.Join(", ", this.bulletMaster.AdditionalParameters);
+            }
+            
             this.MasterNameTextBox.TextChanged += UpdateName;
             this.TimingsTextBox.TextChanged += UpdateTimings;
+            this.ParametersTextBox.TextChanged += UpdateAdditionalParameters;
 
         }
     }

@@ -18,7 +18,7 @@ namespace mg_edit.Loader
         public int Delay { get; set; } = 0;
 
         // Additional parameters
-        private string[] AdditionalParameters { get; set; } = null;
+        public string[] AdditionalParameters { get; set; } = null;
 
         // Sets position
         override public void Initialise(string[] parameters, EntityDefinition entDef)
