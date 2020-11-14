@@ -22,11 +22,15 @@ namespace mg_edit.Loader
             this.Template = template;
             this.Parameters = new List<string>();
 
-            foreach (string parameter in Template.ParameterTypes)
+            if (Template.ParameterTypes is object)
             {
-                ITemplateParameter panel = TemplatePanel.CreateTemplateParameterPanel(parameter);
-                Parameters.AddRange(panel.GetDefaultParameters());
+                foreach (string parameter in Template.ParameterTypes)
+                {
+                    ITemplateParameter panel = TemplatePanel.CreateTemplateParameterPanel(parameter);
+                    Parameters.AddRange(panel.GetDefaultParameters());
+                }
             }
+            
         }
 
         // Construct with name and parameters
